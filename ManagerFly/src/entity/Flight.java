@@ -1,12 +1,13 @@
 package entity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+
 
 public class Flight {
 
 	private final int flightNum;			//Primary key
-	private Date depatureTime;				//departure time and date
-	private Date LandingTime;				//landing time and date
+	private LocalDateTime depatureTime;				//departure time and date
+	private LocalDateTime landingTime;				//landing time and date
 	private String flightStatus;			//flight status {on time,  canclelled, delayed}
 	private  int depatureAirportID;			//Foreign key, depature airport id
 	private  int destinationAirportID;		//Foreign key, destination airport id
@@ -15,15 +16,15 @@ public class Flight {
 	private String coPilotID;				//Foreign key, co - pilot id
 	private String orderStatus;				//tickets order status {initialize, pre-sale, regular sale}
 	
-	//HEY AVIV
+	
 	//main constructor
-	public Flight(int flightNum, Date depatureTime, Date landingTime, String flightStatus, int depatureAirportID,
+	public Flight(int flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, String flightStatus, int depatureAirportID,
 			int destinationAirportID, String airPlaneTailNum, String cheifPilotID, String coPilotID,
 			String orderStatus) {
 		
 		this.flightNum = flightNum;
 		this.depatureTime = depatureTime;
-		LandingTime = landingTime;
+		this.landingTime = landingTime;
 		this.flightStatus = flightStatus;
 		this.depatureAirportID = depatureAirportID;
 		this.destinationAirportID = destinationAirportID;
@@ -40,23 +41,23 @@ public class Flight {
 	}
 
 	//getters and setters
-	public Date getDepatureTime() {
+	public LocalDateTime getDepatureTime() {
 		return depatureTime;
 	}
 
-	public void setDepatureTime(Date depatureTime) {
+	public void setDepatureTime(LocalDateTime depatureTime) {
 		
 		this.depatureTime = depatureTime;
 	}
 
-	public Date getLandingTime() {
+	public LocalDateTime getLandingTime() {
 		
-		return LandingTime;
+		return landingTime;
 	}
 
-	public void setLandingTime(Date landingTime) {
+	public void setLandingTime(LocalDateTime landingTime) {
 		
-		LandingTime = landingTime;
+		this.landingTime = landingTime;
 	}
 
 	public String getFlightStatus() {
@@ -164,7 +165,7 @@ public class Flight {
 	@Override
 	public String toString() {
 		
-		return "Flight [flightNum=" + flightNum + ", depatureTime=" + depatureTime + ", LandingTime=" + LandingTime
+		return "Flight [flightNum=" + flightNum + ", depatureTime=" + depatureTime + ", LandingTime=" + landingTime
 				+ ", flightStatus=" + flightStatus + ", depatureAirportID=" + depatureAirportID
 				+ ", destinationAirportID=" + destinationAirportID + ", airPlaneTailNum=" + airPlaneTailNum
 				+ ", cheifPilotID=" + cheifPilotID + ", coPilotID=" + coPilotID + ", orderStatus=" + orderStatus + "]";

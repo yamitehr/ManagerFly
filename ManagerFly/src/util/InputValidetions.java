@@ -1,8 +1,12 @@
 package util;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+
+
+
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.Month;
+
 
 public class InputValidetions {
 
@@ -49,38 +53,31 @@ public class InputValidetions {
 			return (dep == land) ? false: true;
 		}
 		//check that landing time is after departure time
-		public static boolean validateLandAferDep(Date dep, Date land) {
+		public static boolean validateLandAferDep(LocalDateTime dep, LocalDateTime land) {
 			
-			return (land.after(dep));
+			return (land.isAfter(dep));
 		}
 		
 		//check that departure date is at least 2 months after the flight create date in the system
-		public static boolean validateDepDate(Date dep) {
+		public static boolean validateDepDate(LocalDateTime dep){
 			
-			Date today = new Date();
-			if(dep.after(today)) {
-				
-				Calendar depDate = new GregorianCalendar(dep.getYear(), dep.getMonth(), dep.getDay());
-		        Calendar now = new GregorianCalendar();
-		        now.setTime(new Date());
-		        
-		        int yearsInBetween = depDate.get(Calendar.YEAR) 
-		                                - now.get(Calendar.YEAR);
-		        int monthsDiff = depDate.get(Calendar.MONTH) 
-		                                - now.get(Calendar.MONTH);
-		        long InMonths = yearsInBetween*12 + monthsDiff - 1;
-		        System.out.println(InMonths);
-		        if(InMonths >= 2)
-		        	return true;
-
+			LocalDateTime today = LocalDateTime.now();
+			if(dep.isAfter(today)) {
+				long daysBetween = Duration.between(today, dep).toDays();
+	            if(daysBetween >= 60) {        	
+	            	return true;
+	            }
 			}
+			
 			return false;
 		}
+		
+		// main method for testing
+		public static void main(String args[]){
+			 
+			LocalDateTime d = LocalDateTime.of(2022, 
+                    Month.JANUARY, 25, 19, 30, 40);
 			
-		public static void main(String args[]) {
-			 
-			Date d = new Date(2022, 1, 20, 13, 15, 40);
-			 
 			System.out.println(validateDepDate(d));
 		}
 		
