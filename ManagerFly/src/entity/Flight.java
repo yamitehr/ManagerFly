@@ -15,6 +15,7 @@ public class Flight {
 	private String coPilotID;				//Foreign key, co - pilot id
 	private String orderStatus;				//tickets order status {initialize, pre-sale, regular sale}
 	
+	//HEY AVIV
 	//main constructor
 	public Flight(int flightNum, Date depatureTime, Date landingTime, String flightStatus, int depatureAirportID,
 			int destinationAirportID, String airPlaneTailNum, String cheifPilotID, String coPilotID,
