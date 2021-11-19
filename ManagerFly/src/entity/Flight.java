@@ -8,7 +8,7 @@ public class Flight {
 	private final int flightNum;			//Primary key
 	private LocalDateTime depatureTime;				//departure time and date
 	private LocalDateTime landingTime;				//landing time and date
-	private String flightStatus;			//flight status {on time,  canclelled, delayed}
+	private String flightStatus;			//flight status {on time,  cancelled, delayed}
 	private  int depatureAirportID;			//Foreign key, depature airport id
 	private  int destinationAirportID;		//Foreign key, destination airport id
 	private  String airPlaneTailNum;		//Foreign key, airplane tail number of the flight
@@ -18,20 +18,18 @@ public class Flight {
 	
 	
 	//main constructor
-	public Flight(int flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, String flightStatus, int depatureAirportID,
-			int destinationAirportID, String airPlaneTailNum, String cheifPilotID, String coPilotID,
-			String orderStatus) {
+	public Flight(int flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, int depatureAirportID,
+			int destinationAirportID, String airPlaneTailNum, String cheifPilotID, String coPilotID) {
 		
 		this.flightNum = flightNum;
 		this.depatureTime = depatureTime;
 		this.landingTime = landingTime;
-		this.flightStatus = flightStatus;
+		//TODO: take default status from DB
 		this.depatureAirportID = depatureAirportID;
 		this.destinationAirportID = destinationAirportID;
 		this.airPlaneTailNum = airPlaneTailNum;
 		this.cheifPilotID = cheifPilotID;
 		this.coPilotID = coPilotID;
-		this.orderStatus = orderStatus;
 	}
 	
 	//partial constructor
