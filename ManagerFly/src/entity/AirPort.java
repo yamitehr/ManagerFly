@@ -8,9 +8,6 @@ public class AirPort {
 	private int timeZone;					//time zone in range of -12->12(int)
 	private boolean isOpen;					//is the airport is open due to Covid 19 pandemic
 	
-	public static final int MAX_CITY_CHARS = 40;		//max chars for the city field
-	public static final int MAX_COUNTRY_CHARS = 40;		//max chars for the country field
-	
 	//main constructor
 	public AirPort(int airportCode, String city, String country, int timeZone, boolean isOpen) {
 		

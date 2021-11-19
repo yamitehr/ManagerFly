@@ -5,8 +5,6 @@ public class AirPlane {
 	private final String tailNum;					//Primary key
 	private int attendantsNum;						//required number of air attendants for flight
 	
-	public static final int MAX_TAIL_NUM = 15;		//max chars of airplane tail number
-	
 	//main constructor
 	public AirPlane(String tailNum, int attendantsNum) {
 		

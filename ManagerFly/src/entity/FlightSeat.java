@@ -7,9 +7,7 @@ public class FlightSeat {
 	private String colNum;							//col number (1 char)
 	private String seatType;						//type {first class, business,tourists}
 	private String tailNum;					//Foreign key, this is the tail number of the plane that the seat belongs to  
-	
-	public static final int MAX_COL_NUM = 1;		//max chars for col number of the seat 
-
+	 
 	//main constructor
 	public FlightSeat(int seatID, int rowNum, String colNum, String seatType, String tailNum) {
 		
