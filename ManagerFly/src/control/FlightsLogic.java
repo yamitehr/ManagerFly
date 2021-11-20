@@ -40,7 +40,7 @@ public class FlightsLogic {
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
-					PreparedStatement stmt = conn.prepareStatement(Consts.SQL_SEL_EMPLOYEES);
+					PreparedStatement stmt = conn.prepareStatement(Consts.SQL_SEL_FLIGHT);
 					ResultSet rs = stmt.executeQuery()) {
 				while (rs.next()) {
 					int i = 1;
@@ -77,7 +77,7 @@ public class FlightsLogic {
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
-					CallableStatement stmt = conn.prepareCall(Consts.SQL_INS_EMPLOYEE)) {
+					CallableStatement stmt = conn.prepareCall(Consts.SQL_INS_FLIGHT)) {
 				
 				int i = 1;
 				Timestamp depatureTimeStamp = Timestamp.valueOf(depatureTime);
@@ -114,7 +114,7 @@ public class FlightsLogic {
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
-					CallableStatement stmt = conn.prepareCall(Consts.SQL_DEL_EMPLOYEE)) {
+					CallableStatement stmt = conn.prepareCall(Consts.SQL_DEL_FLIGHT)) {
 				
 				stmt.setLong(1, flightNum);
 				stmt.executeUpdate();
@@ -139,7 +139,7 @@ public class FlightsLogic {
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
-					CallableStatement stmt = conn.prepareCall(Consts.SQL_UPD_EMPLOYEE)) {
+					CallableStatement stmt = conn.prepareCall(Consts.SQL_UPD_FLIGHT)) {
 				int i = 1;
 
 				Timestamp depatureTimeStamp = Timestamp.valueOf(depatureTime);
