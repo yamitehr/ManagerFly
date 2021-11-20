@@ -11,7 +11,7 @@ public class Consts {
 	
 	protected static final String DB_FILEPATH = getDBPath();
 	public static final String CONN_STR = "jdbc:ucanaccess://" + DB_FILEPATH + ";COLUMNORDER=DISPLAY";
-	
+	public static final String JDBC_STR = "net.ucanaccess.jdbc.UcanaccessDriver";
 	/*----------------------------------------- CONSTS VALUES -----------------------------------------*/
 	
 	/**flight status's {"on time", "delayed", "canclelled"}
@@ -57,7 +57,7 @@ public class Consts {
 	
 	
 	/*----------------------------------------- REPORTS QUERIES -----------------------------------------*/
-	
+	public static final String SQL_SEL_BIGGEST_FLIGHTS = "{ call qryBiggestFlightsReport(?,?,?) }";
 	
 	
 	
