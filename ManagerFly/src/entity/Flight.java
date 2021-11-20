@@ -67,6 +67,24 @@ public class Flight {
 	}
 	
 	/**
+	 * biggestFlyReport constructor
+	 * @param flightNum
+	 * @param depatureTime
+	 * @param landingTime
+	 * @param flightStatus
+	 */
+	public Flight(int flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, String flightStatus ,AirPlane airPlane , AirPort dep, AirPort dest) {
+		
+		this.flightNum = flightNum;
+		this.depatureTime = depatureTime;
+		this.landingTime = landingTime;
+		this.flightStatus = flightStatus;
+		this.airPlaneTail = airPlane;
+		this.depatureAirport = dep;
+		this.destinationAirport = dest;
+	}
+	
+	/**
 	 * full parameters constructor
 	 * @param flightNum
 	 * @param depatureTime

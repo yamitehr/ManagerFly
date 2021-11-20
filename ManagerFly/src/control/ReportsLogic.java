@@ -35,65 +35,7 @@ public class ReportsLogic {
 		return _instance;
 	}
 	
-	/**
-	 * *****************************This is a test method***********************************<br>
-	 * The method select flights that occurred between 2 dates that the user gave, and contains at least
-	 * a given number of tourists seats.
-	 * @param seatsNum = the lower bound of tourists seats that the flight should contain. 
-	 * @param from	= the date which  the method start collect flights.
-	 * @param until = the date which  the method end collect flights.
-	 * @return a HashMap of flights as key ,and string List of city and country of the departure airport, 
-	 * and the landing airport.
-	 */
-	/*
-	public static HashMap<Flight, ArrayList<String>> BiggestFlightsReport(int seatsNum, Date from, Date until){
-		
-			HashMap<Flight, ArrayList<String>> toReturn = new HashMap<Flight, ArrayList<String>>();
-		try {
-			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
-					CallableStatement stmt = conn.prepareCall(Consts.SQL_SEL_BIGGEST_FLIGHTS)) {
-						int i = 1;
-						/*Timestamp depatureTimeStamp = Timestamp.valueOf(from);
-						Timestamp landingTimeStamp = Timestamp.valueOf(until);
-						stmt.setTimestamp(i++, depatureTimeStamp);
-						stmt.setTimestamp(i++, landingTimeStamp);*/
-						/*stmt.setDate(i++, new java.sql.Date(from.getTime()));
-						stmt.setDate(i++, new java.sql.Date(until.getTime()));
-						stmt.setInt(i++,seatsNum);
-						ResultSet rs = stmt.executeQuery();{	
-							while (rs.next()) 
-							{
-								i=1;
-								int flightID = rs.getInt(i++);
-								ArrayList<String> ar = new ArrayList<String>();
-								String deptCounty = rs.getString(i++);
-								String deptCity = rs.getString(i++);
-								String destCounty = rs.getString(i++);
-								String destCity = rs.getString(i++);
-								LocalDateTime depTime = rs.getDate(i++).toInstant()
-									      .atZone(ZoneId.systemDefault())
-									      .toLocalDateTime();
-								LocalDateTime arrTime = rs.getDate(i++).toInstant()
-									      .atZone(ZoneId.systemDefault())
-									      .toLocalDateTime();
-								String flightStatus = rs.getString(i++);
-								ar.add(deptCounty);ar.add(deptCity);
-								ar.add(destCounty);ar.add(destCity);
-								Flight f = new Flight(flightID, depTime, arrTime, flightStatus);
-								toReturn.put(f, ar);
-							}
-						}
-						
-						
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		return toReturn;
-	}*/
+	
 	/**
 	 * return a HashMap of planes and the number of tourists seats in them
 	 * @return
@@ -137,13 +79,7 @@ public class ReportsLogic {
 						int i = 1;	
 						String date1 = "#" + from.getMonthValue() + "/" + from.getDayOfMonth() + "/" + from.getYear() + "#";
 						String date2 = "#" + until.getMonthValue() + "/" + until.getDayOfMonth() + "/" + until.getYear() + "#";
-						/*stmt.setDate(i++, new java.sql.Date(from.getTime()));
-						stmt.setDate(i++, new java.sql.Date(until.getTime()));*/
-						String query = "SELECT FlightTbl.SerialNum, FlightTbl.AirPlaneTailNum, AirPortTbl.Country, AirPortTbl.City, AirPortTbl_1.Country, AirPortTbl_1.City, FlightTbl.DepatureTime, FlightTbl.LandingTime, FlightTbl.Status, AirPortTbl.airportCode, AirPortTbl_1.airportCode\r\n"
-								+ "FROM AirPortTbl INNER JOIN (AirPortTbl AS AirPortTbl_1 INNER JOIN FlightTbl ON AirPortTbl_1.airportCode = FlightTbl.DestinationAirportID) ON AirPortTbl.airportCode = FlightTbl.DepatureAirportID\r\n"
-								+ "WHERE (((FlightTbl.DepatureTime)>= " + date1 + "  And (FlightTbl.DepatureTime)<= " + date2 + ") AND ((FlightTbl.LandingTime)>= " + date1 + " And (FlightTbl.LandingTime)<= " + date2 + "))\r\n"
-								+ "GROUP BY FlightTbl.SerialNum, FlightTbl.AirPlaneTailNum, AirPortTbl.Country, AirPortTbl.City, AirPortTbl_1.Country, AirPortTbl_1.City, FlightTbl.DepatureTime, FlightTbl.LandingTime, FlightTbl.Status, AirPortTbl.airportCode, AirPortTbl_1.airportCode\r\n"
-								+ "ORDER BY AirPortTbl_1.Country DESC , AirPortTbl_1.City DESC , FlightTbl.DepatureTime DESC , FlightTbl.LandingTime DESC;";
+						String query = Consts.flightsInRangeQuery(date1, date2);
 						ResultSet rs = stmt.executeQuery(query);{	
 							while (rs.next()) 
 							{
@@ -181,13 +117,23 @@ public class ReportsLogic {
 		return toReturn;
 	}
 	
+	/**
+	 * *****************************This is a test method***********************************<br>
+	 * The method select flights that occurred between 2 dates that the user gave, and contains at least
+	 * a given number of tourists seats.
+	 * @param seatsNum = the lower bound of tourists seats that the flight should contain. 
+	 * @param from	= the date which  the method start collect flights.
+	 * @param until = the date which  the method end collect flights.
+	 * @return a HashMap of flights as key ,and string List of city and country of the departure airport, 
+	 * and the landing airport.
+	 */
 	public static ArrayList<Flight> BiggestFlights(int attenNum, LocalDate from, LocalDate until) {
 		
 		ArrayList<Flight> inRange = getFlightsInRange(from,until);
 		HashMap<AirPlane,Integer> pln = getSeatCntByPlane();
 		ArrayList<Flight> toReturn = new ArrayList<Flight>();
 		for(Flight f: inRange) {
-			if(pln.get(f.getAirPlane()) >= attenNum) {
+			if(pln.get(f.getAirPlaneTailNum()) >= attenNum) {
 				toReturn.add(f);
 			}
 		}
@@ -205,9 +151,9 @@ public class ReportsLogic {
 	         int count = entry.getValue();
 			 System.out.println("plane = " + f.getTailNum() + " seat count = " + count);
 		 }
-		 ArrayList<Flight> toReturn = BiggestFlights(5,from, until);
+		 ArrayList<Flight> toReturn = BiggestFlights(attNum,from, until);
 		 for(Flight f: toReturn) {
-			 System.out.println("flight num = " + f.getFlightNum() +  " from = " + f.getDepatureAirport().getCountry() + " " + f.getDepatureAirport().getCity() + " to = " + f.getDestinationAirport().getCountry() + " " + f.getDestinationAirport().getCity() + " ");
+			 System.out.println("flight num = " + f.getFlightNum() +  " from = " + f.getDepatureAirportID().getCountry() + " " + f.getDepatureAirportID().getCity() + " to = " + f.getDestinationAirportID().getCountry() + " " + f.getDestinationAirportID().getCity() + " DepTime = " + f.getDepatureTime() + " LandingTime = " + f.getLandingTime() + " FlightStatus = " + f.getFlightStatus());
 		 }
 		 
     }
