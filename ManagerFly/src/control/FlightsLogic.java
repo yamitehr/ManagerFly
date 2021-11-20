@@ -45,10 +45,10 @@ public class FlightsLogic {
 					int i = 1;
 					
 					int flightID = rs.getInt(i++);
-					LocalDateTime depTime = rs.getDate(i++).toInstant()
+					LocalDateTime depTime = rs.getTimestamp(i++).toInstant()
 						      .atZone(ZoneId.systemDefault())
 						      .toLocalDateTime();
-					LocalDateTime arrTime = rs.getDate(i++).toInstant()
+					LocalDateTime arrTime = rs.getTimestamp(i++).toInstant()
 						      .atZone(ZoneId.systemDefault())
 						      .toLocalDateTime();
 					
