@@ -57,7 +57,16 @@ public class Consts {
 	
 	
 	/*----------------------------------------- REPORTS QUERIES -----------------------------------------*/
-	public static final String SQL_SEL_BIGGEST_FLIGHTS = "call qryBiggestFlightsReport(?,?,?)";
+	/*-----------------------------------------for BiggestFlyReport--------------------------------------*/
+	/**
+	 * return a list of planes and the number of tourists seats in them  
+	 */
+	public static final String SQL_SEL_CNT_TSEAT_BY_PLANE = "SELECT AirPlaneTbl.TailNum, Count(FlightSeatTbl.ID) AS CountOfID\r\n"
+			+ "FROM AirPlaneTbl INNER JOIN FlightSeatTbl ON AirPlaneTbl.TailNum = FlightSeatTbl.TailNum\r\n"
+			+ "WHERE (((FlightSeatTbl.type) Like \"tourists\"))\r\n"
+			+ "GROUP BY AirPlaneTbl.TailNum;";
+	
+	/*-----------------------------------------------------------------------------------------------------*/		
 	
 	
 	

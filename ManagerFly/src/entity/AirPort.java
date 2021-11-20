@@ -23,6 +23,13 @@ public class AirPort {
 		
 		this.airportCode = airportCode;
 	}
+	
+	public AirPort(int airportCode, String city, String country) {
+		
+		this.airportCode = airportCode;
+		this.city = city;
+		this.country = country;
+	}
 
 	//getters and setters
 	public String getCity() {

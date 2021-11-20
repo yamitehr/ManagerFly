@@ -6,16 +6,16 @@ public class FlightSeat {
 	private int rowNum;								//row number
 	private String colNum;							//col number (1 char)
 	private String seatType;						//type {first class, business,tourists}
-	private String tailNum;					//Foreign key, this is the tail number of the plane that the seat belongs to  
+	private AirPlane plane;					//Foreign key, this is the tail number of the plane that the seat belongs to  
 	 
 	//main constructor
-	public FlightSeat(int seatID, int rowNum, String colNum, String seatType, String tailNum) {
+	public FlightSeat(int seatID, int rowNum, String colNum, String seatType, AirPlane plane) {
 		
 		this.seatID = seatID;
 		this.rowNum = rowNum;
 		this.colNum = colNum;
 		this.seatType = seatType;
-		this.tailNum = tailNum;
+		this.plane = plane;
 	}
 	
 	//partial constructor
@@ -59,14 +59,14 @@ public class FlightSeat {
 		return seatID;
 	}
 
-	public String getTailNum() {
+	public AirPlane getPlane() {
 		
-		return tailNum;
+		return this.plane;
 	}
 	
-	public void setTailNum(String getTailNum) {
+	public void setPlane(AirPlane plane) {
 		
-		this.tailNum = getTailNum;
+		this.plane = plane;
 	}
 	
 	//hash function
@@ -100,7 +100,7 @@ public class FlightSeat {
 	public String toString() {
 		
 		return "FlightSeat [seatID=" + seatID + ", rowNum=" + rowNum + ", colNum=" + colNum + ", seatType=" + seatType
-				+ ", tailNum=" + tailNum + "]";
+				+ ", plane=" + plane.getTailNum() + "]";
 	}
 	
 	
