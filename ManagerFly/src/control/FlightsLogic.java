@@ -12,6 +12,8 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 
+import entity.AirPlane;
+import entity.AirPort;
 import entity.Flight;
 import util.Consts;
 
@@ -29,12 +31,9 @@ public class FlightsLogic {
 	}
 
 	/**
-	 * fetches all employees from DB file.
-	 * @return ArrayList of employees.
+	 * fetches all flights from DB file.
+	 * @return ArrayList of flights.
 	 */
-	/*int flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, String flightStatus, int depatureAirportID,
-			int destinationAirportID, String airPlaneTailNum, String cheifPilotID, String coPilotID,
-			String orderStatus*/
 	public ArrayList<Flight> getFlights() {
 		ArrayList<Flight> results = new ArrayList<Flight>();
 		try {
@@ -65,7 +64,60 @@ public class FlightsLogic {
 		return results;
 	}
 	
-	/*----------------------------------------- ADD / REMOVE / UPDATE EMPLOYEE METHODS --------------------------------------------*/
+	//TODO: should we separate this to different controller?
+	
+	/**
+	 * fetches all airports from DB file.
+	 * @return ArrayList of airports.
+	 */
+	public ArrayList<AirPort> getAirports() {
+		ArrayList<AirPort> results = new ArrayList<AirPort>();
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+					PreparedStatement stmt = conn.prepareStatement(Consts.SQL_SEL_AIRPORT);
+					ResultSet rs = stmt.executeQuery()) {
+				while (rs.next()) {
+					int i = 1;
+					
+					results.add(new AirPort(rs.getInt(i++), rs.getString(i++), rs.getString(i++), rs.getInt(i++), rs.getBoolean(i++)));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return results;
+	}
+	//TODO: should we separate this to different controller?
+	
+		/**
+		 * fetches all airplanes from DB file.
+		 * @return ArrayList of airplanes.
+		 */
+		public ArrayList<AirPlane> getAirplanes() {
+			ArrayList<AirPlane> results = new ArrayList<AirPlane>();
+			try {
+				Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+				try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+						PreparedStatement stmt = conn.prepareStatement(Consts.SQL_SEL_AIRPLANE);
+						ResultSet rs = stmt.executeQuery()) {
+					while (rs.next()) {
+						int i = 1;
+						
+						results.add(new AirPlane(rs.getString(i++), rs.getInt(i++)));
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			return results;
+		}
+	
+	/*----------------------------------------- ADD / REMOVE / UPDATE FLIGHT METHODS --------------------------------------------*/
 
 	/**
 	 * Adding a new Employee with the parameters received from the form.
@@ -73,7 +125,7 @@ public class FlightsLogic {
      * @return 
 	 */
 	public boolean addFlight(int flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, int depatureAirportID,
-			int destinationAirportID, String airPlaneTailNum, String cheifPilotID, String coPilotID) {
+			int destinationAirportID, String airPlaneTailNum, String cheifPilotID, String coPilotID, String flightStatus, String orderStatus) {
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
@@ -89,8 +141,22 @@ public class FlightsLogic {
 				stmt.setInt(i++, depatureAirportID);
 				stmt.setInt(i++, destinationAirportID);
 				stmt.setString(i++, airPlaneTailNum);
-				stmt.setString(i++, cheifPilotID);
-				stmt.setString(i++, coPilotID);
+				if (cheifPilotID != null)
+					stmt.setString(i++, cheifPilotID);
+				else
+					stmt.setNull(i++, java.sql.Types.VARCHAR);
+				if (coPilotID != null)
+					stmt.setString(i++, coPilotID);
+				else
+					stmt.setNull(i++, java.sql.Types.VARCHAR);
+				if (flightStatus != null)
+					stmt.setString(i++, flightStatus);
+				else
+					stmt.setNull(i++, java.sql.Types.VARCHAR);
+				if (orderStatus != null)
+					stmt.setString(i++, orderStatus);
+				else
+					stmt.setNull(i++, java.sql.Types.VARCHAR);
 				
 				stmt.executeUpdate();
 				return true;
@@ -135,7 +201,7 @@ public class FlightsLogic {
      * @return 
 	 */
 	public boolean editFlight(int flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, int depatureAirportID,
-			int destinationAirportID, String airPlaneTailNum, String cheifPilotID, String coPilotID) {
+			int destinationAirportID, String airPlaneTailNum, String cheifPilotID, String coPilotID, String flightStatus, String orderStatus) {
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
@@ -151,8 +217,22 @@ public class FlightsLogic {
 				stmt.setInt(i++, depatureAirportID);
 				stmt.setInt(i++, destinationAirportID);
 				stmt.setString(i++, airPlaneTailNum);
-				stmt.setString(i++, cheifPilotID);
-				stmt.setString(i++, coPilotID);
+				if (cheifPilotID != null)
+					stmt.setString(i++, cheifPilotID);
+				else
+					stmt.setNull(i++, java.sql.Types.VARCHAR);
+				if (coPilotID != null)
+					stmt.setString(i++, coPilotID);
+				else
+					stmt.setNull(i++, java.sql.Types.VARCHAR);
+				if (flightStatus != null)
+					stmt.setString(i++, flightStatus);
+				else
+					stmt.setNull(i++, java.sql.Types.VARCHAR);
+				if (orderStatus != null)
+					stmt.setString(i++, orderStatus);
+				else
+					stmt.setNull(i++, java.sql.Types.VARCHAR);
 				
 				stmt.executeUpdate();
 				return true;

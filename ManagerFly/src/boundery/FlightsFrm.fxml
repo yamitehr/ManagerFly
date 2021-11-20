@@ -4,33 +4,29 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1430.0" style="-fx-background-color: white;" styleClass="addCustomerPane" stylesheets="@decoration.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddCustomerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="693.0" prefWidth="934.0" style="-fx-background-color: white;" styleClass="addCustomerPane" stylesheets="@decoration.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddCustomerController">
    <children>
-   <ImageView fitHeight="770.0" fitWidth="1430.0" opacity="0.4" pickOnBounds="true">
+   <ImageView fitHeight="595.0" fitWidth="624.0" layoutX="250.0" layoutY="30.0" opacity="0.4" pickOnBounds="true">
          <image>
             <Image url="@../../img/blend.jpg" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="326.0" layoutY="41.0" prefHeight="673.0" prefWidth="1114.0" stylesheets="@decoration.css">
+      <AnchorPane layoutX="42.0" layoutY="30.0" prefHeight="610.0" prefWidth="810.0" stylesheets="@decoration.css">
                <children>
       <Label layoutX="66.0" layoutY="31.0" styleClass="managerAllText" text="Flight number" />
       <Label layoutX="66.0" layoutY="69.0" styleClass="managerAllText" text="Departure Time" />
       <Label layoutX="67.0" layoutY="114.0" styleClass="managerAllText" text="Landing Time" />
       <TextField fx:id="flightNum" layoutX="193.0" layoutY="26.0" styleClass="textFields" stylesheets="@decoration.css" />
-      <DatePicker fx:id="departureTime" layoutX="193.0" layoutY="67.0" styleClass="textFields" stylesheets="@decoration.css" />
+      <DatePicker fx:id="departureDate" layoutX="193.0" layoutY="67.0" styleClass="textFields" stylesheets="@decoration.css" />
       <Label layoutX="69.0" layoutY="160.0" styleClass="managerAllText" text="Departure Airport" />
-      <ComboBox fx:id="departureAirports" layoutX="193.0" layoutY="152.0" maxHeight="33.0" prefHeight="33.0" prefWidth="160.0" styleClass="comboBox" stylesheets="@decoration.css" />
-      <Button fx:id="addCustomerBtn" layoutX="853.0" layoutY="52.0" mnemonicParsing="false" onAction="#addCustomer" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add">
+      <ComboBox fx:id="depAirports" layoutX="193.0" layoutY="152.0" maxHeight="33.0" prefHeight="33.0" prefWidth="160.0" styleClass="comboBox" stylesheets="@decoration.css" />
+      <Button fx:id="addFlight" layoutX="63.0" layoutY="353.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add">
                <graphic>
                   <ImageView fitHeight="22.5" fitWidth="22.5" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -38,69 +34,12 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-      <Pane layoutX="66.0" layoutY="308.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="401.0" prefWidth="1008.0" stylesheets="@decoration.css">
-         <children>
-            <Button fx:id="removeCustomerBtn" layoutY="320.0" mnemonicParsing="false" onAction="#removeCustomer" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
-            <Text fx:id="firstNameField" fill="#c88021" layoutX="273.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
-            <Text fx:id="sensitivitiesField" fill="#c88021" layoutX="285.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
-            <TableView fx:id="allCustomersTable" layoutY="32.0" prefHeight="278.0" prefWidth="756.0">
-               <columns>
-                  <TableColumn fx:id="customerIdCol" prefWidth="33.0" text="ID" />
-                  <TableColumn fx:id="customerNameCol" minWidth="0.0" prefWidth="115.0" text="Name" />
-                  <TableColumn fx:id="customerDobCol" prefWidth="110.0" text="DOB" />
-                  <TableColumn fx:id="customerGenderCol" prefWidth="76.0" text="Gender" />
-                  <TableColumn fx:id="neighberhoodCol" prefWidth="126.0" text="Neighberhood" />
-                  <TableColumn fx:id="sensitivitiesCol" prefWidth="104.0" text="Sensitivities" />
-                        <TableColumn fx:id="userNameCol" prefWidth="93.0" text="User Name" />
-                        <TableColumn fx:id="passwordCol" prefWidth="97.0" text="Password" />
-               </columns>
-            </TableView>
-            <Button layoutX="144.0" layoutY="320.0" mnemonicParsing="false" onAction="#editCustomer" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit">
-              <graphic>
-                <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="166.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../icons/edit-solid-2.png" />
-                     </image>
-                  </ImageView>
-                 </graphic>
-             </Button>
-                 <TextField fx:id="searchCustomerField" alignment="CENTER" prefWidth="148.0" promptText="Search By Id" />
-                  
-                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="11.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../icons/trash-alt-solid.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="566.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../icons/plus-square-solid.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="11.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../icons/search-solid.png" />
-                     </image>
-                  </ImageView>
-         </children>
-      </Pane>
-      <Button fx:id="editCustomerBtn" disable="true" layoutX="853.0" layoutY="111.0" mnemonicParsing="false" onAction="#setEditCustomer" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Save">
-               <graphic>
-                  <ImageView fitHeight="22.5" fitWidth="22.5" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../icons/save-solid.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-            <TextArea fx:id="messageToUser" editable="false" layoutX="814.0" layoutY="172.0" prefHeight="38.0" prefWidth="210.0" style="-fx-text-fill: Red;" />
-            <DatePicker fx:id="landingTime" layoutX="193.0" layoutY="110.0" styleClass="textFields" stylesheets="@decoration.css" />
+            <TextArea fx:id="messageToUser" editable="false" layoutX="63.0" layoutY="449.0" prefHeight="84.0" prefWidth="221.0" style="-fx-text-fill: Red;" />
+            <DatePicker fx:id="landingDate" layoutX="193.0" layoutY="110.0" styleClass="textFields" stylesheets="@decoration.css" />
             <Label layoutX="405.0" layoutY="160.0" styleClass="managerAllText" text="Destination Airport" />
-            <ComboBox fx:id="destinationAirPorts" layoutX="534.0" layoutY="152.0" maxHeight="33.0" prefHeight="33.0" prefWidth="160.0" styleClass="comboBox" stylesheets="@decoration.css" />
+            <ComboBox fx:id="arrAirports" layoutX="534.0" layoutY="152.0" maxHeight="33.0" prefHeight="33.0" prefWidth="160.0" styleClass="comboBox" stylesheets="@decoration.css" />
             <Label layoutX="69.0" layoutY="209.0" styleClass="managerAllText" text="Plane" />
             <ComboBox fx:id="planes" layoutX="193.0" layoutY="201.0" maxHeight="33.0" prefHeight="33.0" prefWidth="160.0" styleClass="comboBox" stylesheets="@decoration.css" />
-            <Label layoutX="68.0" layoutY="255.0" styleClass="managerAllText" text="Pilot1" />
-            <ComboBox fx:id="pilot1" layoutX="193.0" layoutY="247.0" maxHeight="33.0" prefHeight="33.0" prefWidth="160.0" styleClass="comboBox" stylesheets="@decoration.css" />
-            <Label layoutX="405.0" layoutY="255.0" styleClass="managerAllText" text="Pilot2" />
-            <ComboBox fx:id="pilot2" layoutX="490.0" layoutY="247.0" maxHeight="33.0" prefHeight="33.0" prefWidth="160.0" styleClass="comboBox" stylesheets="@decoration.css" />
       </children>
             </AnchorPane>
    </children>

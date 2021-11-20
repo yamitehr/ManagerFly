@@ -91,4 +91,10 @@ public class Consts {
 	public static final String SQL_DEL_FLIGHT = "{ call qryDelFlight(?) }";
 	public static final String SQL_INS_FLIGHT = "{ call qryInsFlight(?,?,?,?,?,?,?,?,?,?) }";
 	public static final String SQL_UPD_FLIGHT = "{ call qryUpdFlight(?,?,?,?,?,?,?,?,?,?,?) }";
+	
+	/*----------------------------------------- AIRPORTS QUERIES -----------------------------------------*/
+	public static final String SQL_SEL_AIRPORT = "SELECT * FROM AirPortTbl";
+	
+	/*----------------------------------------- AIRPLANES QUERIES -----------------------------------------*/
+	public static final String SQL_SEL_AIRPLANE = "SELECT * FROM AirPlaneTbl";
 }
