@@ -85,4 +85,10 @@ public class Consts {
 			return null;
 		}
 	}
+	
+	/*----------------------------------------- FLIGHTS QUERIES -----------------------------------------*/
+	public static final String SQL_SEL_FLIGHT = "SELECT * FROM FlightTbl";
+	public static final String SQL_DEL_FLIGHT = "{ call qryDelFlight(?) }";
+	public static final String SQL_INS_FLIGHT = "{ call qryInsFlight(?,?,?,?,?,?,?,?,?,?) }";
+	public static final String SQL_UPD_FLIGHT = "{ call qryUpdFlight(?,?,?,?,?,?,?,?,?,?,?) }";
 }
