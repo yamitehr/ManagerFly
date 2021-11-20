@@ -17,7 +17,17 @@ public class Flight {
 	private String orderStatus;				//tickets order status {initialize, pre-sale, regular sale}
 	
 	
-	//main constructor
+	/**
+	 * main constructor
+	 * @param flightNum
+	 * @param depatureTime
+	 * @param landingTime
+	 * @param depatureAirportID
+	 * @param destinationAirportID
+	 * @param airPlaneTailNum
+	 * @param cheifPilotID
+	 * @param coPilotID
+	 */
 	public Flight(int flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, int depatureAirportID,
 			int destinationAirportID, String airPlaneTailNum, String cheifPilotID, String coPilotID) {
 		
@@ -32,10 +42,57 @@ public class Flight {
 		this.coPilotID = coPilotID;
 	}
 	
-	//partial constructor
+	/**
+	 * partial constructor
+	 * @param flightNum
+	 */
 	public Flight(int flightNum) {
 		
 		this.flightNum = flightNum;
+	}
+
+	/**
+	 * biggestFlyReport constructor
+	 * @param flightNum
+	 * @param depatureTime
+	 * @param landingTime
+	 * @param flightStatus
+	 */
+	public Flight(int flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, String flightStatus) {
+		
+		this.flightNum = flightNum;
+		this.depatureTime = depatureTime;
+		this.landingTime = landingTime;
+		this.flightStatus = flightStatus;
+	}
+	
+	/**
+	 * full parameters constructor
+	 * @param flightNum
+	 * @param depatureTime
+	 * @param landingTime
+	 * @param flightStatus
+	 * @param depatureAirportID
+	 * @param destinationAirportID
+	 * @param airPlaneTailNum
+	 * @param cheifPilotID
+	 * @param coPilotID
+	 * @param orderStatus
+	 */
+	public Flight(int flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, String flightStatus,
+			int depatureAirportID, int destinationAirportID, String airPlaneTailNum, String cheifPilotID,
+			String coPilotID, String orderStatus) {
+		
+		this.flightNum = flightNum;
+		this.depatureTime = depatureTime;
+		this.landingTime = landingTime;
+		this.flightStatus = flightStatus;
+		this.depatureAirportID = depatureAirportID;
+		this.destinationAirportID = destinationAirportID;
+		this.airPlaneTailNum = airPlaneTailNum;
+		this.cheifPilotID = cheifPilotID;
+		this.coPilotID = coPilotID;
+		this.orderStatus = orderStatus;
 	}
 
 	//getters and setters

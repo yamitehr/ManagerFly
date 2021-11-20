@@ -129,7 +129,7 @@ public class FlightsLogic {
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
-					CallableStatement stmt = conn.prepareCall(Consts.SQL_INS_FLIGHT)) {
+					CallableStatement stmt = conn.prepareCall(Consts.SQL_INS_FLIGHT)){
 				
 				int i = 1;
 				Timestamp depatureTimeStamp = Timestamp.valueOf(depatureTime);
