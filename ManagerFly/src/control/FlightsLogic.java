@@ -45,15 +45,16 @@ public class FlightsLogic {
 					int i = 1;
 					
 					int flightID = rs.getInt(i++);
-					LocalDateTime depTime = rs.getDate(i++).toInstant()
+					LocalDateTime depTime = rs.getTimestamp(i++).toInstant()
 						      .atZone(ZoneId.systemDefault())
 						      .toLocalDateTime();
-					LocalDateTime arrTime = rs.getDate(i++).toInstant()
+					LocalDateTime arrTime = rs.getTimestamp(i++).toInstant()
 						      .atZone(ZoneId.systemDefault())
 						      .toLocalDateTime();
 					
 					
-					results.add(new Flight(flightID, depTime, arrTime, rs.getInt(i++), rs.getInt(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++)));
+					results.add(new Flight(flightID, depTime, arrTime, new AirPort(rs.getInt(i++)), new AirPort(rs.getInt(i++)),
+								new AirPlane(rs.getString(i++)), rs.getString(i++), rs.getString(i++)));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
