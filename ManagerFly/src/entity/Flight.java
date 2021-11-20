@@ -9,12 +9,12 @@ public class Flight {
 	private LocalDateTime depatureTime;				//departure time and date
 	private LocalDateTime landingTime;				//landing time and date
 	private String flightStatus;			//flight status {on time,  cancelled, delayed}
-	private  int depatureAirportID;			//Foreign key, depature airport id
-	private  int destinationAirportID;		//Foreign key, destination airport id
-	private  String airPlaneTailNum;		//Foreign key, airplane tail number of the flight
-	private String cheifPilotID;			//Foreign key, cheif pilot id
-	private String coPilotID;				//Foreign key, co - pilot id
-	private String orderStatus;				//tickets order status {initialize, pre-sale, regular sale}
+	private  AirPort depatureAirport;			//Foreign key, depature airport id
+	private  AirPort destinationAirport;		//Foreign key, destination airport id
+	private  AirPlane airPlaneTail;		//Foreign key, airplane tail number of the flight
+	private String cheifPilotID;			//TODO: change to object pilot
+	private String coPilotID;				//TODO: change to object pilot
+	private String orderStatus;				//TODO: change to enum {initialize, pre-sale, regular sale}
 	
 	
 	/**
@@ -28,16 +28,16 @@ public class Flight {
 	 * @param cheifPilotID
 	 * @param coPilotID
 	 */
-	public Flight(int flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, int depatureAirportID,
-			int destinationAirportID, String airPlaneTailNum, String cheifPilotID, String coPilotID) {
+	public Flight(int flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, AirPort depatureAirportID,
+			AirPort destinationAirportID, AirPlane airPlaneTailNum, String cheifPilotID, String coPilotID) {
 		
 		this.flightNum = flightNum;
 		this.depatureTime = depatureTime;
 		this.landingTime = landingTime;
 		//TODO: take default status from DB
-		this.depatureAirportID = depatureAirportID;
-		this.destinationAirportID = destinationAirportID;
-		this.airPlaneTailNum = airPlaneTailNum;
+		this.depatureAirport = depatureAirportID;
+		this.destinationAirport = destinationAirportID;
+		this.airPlaneTail = airPlaneTailNum;
 		this.cheifPilotID = cheifPilotID;
 		this.coPilotID = coPilotID;
 	}
@@ -80,16 +80,16 @@ public class Flight {
 	 * @param orderStatus
 	 */
 	public Flight(int flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, String flightStatus,
-			int depatureAirportID, int destinationAirportID, String airPlaneTailNum, String cheifPilotID,
+			AirPort depatureAirportID, AirPort destinationAirportID, AirPlane airPlaneTailNum, String cheifPilotID,
 			String coPilotID, String orderStatus) {
 		
 		this.flightNum = flightNum;
 		this.depatureTime = depatureTime;
 		this.landingTime = landingTime;
 		this.flightStatus = flightStatus;
-		this.depatureAirportID = depatureAirportID;
-		this.destinationAirportID = destinationAirportID;
-		this.airPlaneTailNum = airPlaneTailNum;
+		this.depatureAirport = depatureAirportID;
+		this.destinationAirport = destinationAirportID;
+		this.airPlaneTail = airPlaneTailNum;
 		this.cheifPilotID = cheifPilotID;
 		this.coPilotID = coPilotID;
 		this.orderStatus = orderStatus;
@@ -125,34 +125,34 @@ public class Flight {
 		this.flightStatus = flightStatus;
 	}
 
-	public int getDepatureAirportID() {
+	public AirPort getDepatureAirportID() {
 		
-		return depatureAirportID;
+		return depatureAirport;
 	}
 
-	public void setDepatureAirportID(int depatureAirportID) {
+	public void setDepatureAirportID(AirPort depatureAirportID) {
 		
-		this.depatureAirportID = depatureAirportID;
+		this.depatureAirport = depatureAirportID;
 	}
 
-	public int getDestinationAirportID() {
+	public AirPort getDestinationAirportID() {
 		
-		return destinationAirportID;
+		return destinationAirport;
 	}
 
-	public void setDestinationAirportID(int destinationAirportID) {
+	public void setDestinationAirportID(AirPort destinationAirportID) {
 		
-		this.destinationAirportID = destinationAirportID;
+		this.destinationAirport = destinationAirportID;
 	}
 
-	public String getAirPlaneTailNum() {
+	public AirPlane getAirPlaneTailNum() {
 		
-		return airPlaneTailNum;
+		return airPlaneTail;
 	}
 
-	public void setAirPlaneTailNum(String airPlaneTailNum) {
+	public void setAirPlaneTailNum(AirPlane airPlaneTailNum) {
 		
-		this.airPlaneTailNum = airPlaneTailNum;
+		this.airPlaneTail = airPlaneTailNum;
 	}
 
 	public String getCheifPilotID() {
@@ -221,8 +221,8 @@ public class Flight {
 	public String toString() {
 		
 		return "Flight [flightNum=" + flightNum + ", depatureTime=" + depatureTime + ", LandingTime=" + landingTime
-				+ ", flightStatus=" + flightStatus + ", depatureAirportID=" + depatureAirportID
-				+ ", destinationAirportID=" + destinationAirportID + ", airPlaneTailNum=" + airPlaneTailNum
+				+ ", flightStatus=" + flightStatus + ", depatureAirportID=" + depatureAirport
+				+ ", destinationAirportID=" + destinationAirport + ", airPlaneTailNum=" + airPlaneTail
 				+ ", cheifPilotID=" + cheifPilotID + ", coPilotID=" + coPilotID + ", orderStatus=" + orderStatus + "]";
 	}
 		

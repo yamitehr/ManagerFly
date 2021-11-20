@@ -53,7 +53,8 @@ public class FlightsLogic {
 						      .toLocalDateTime();
 					
 					
-					results.add(new Flight(flightID, depTime, arrTime, rs.getInt(i++), rs.getInt(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++)));
+					results.add(new Flight(flightID, depTime, arrTime, new AirPort(rs.getInt(i++)), new AirPort(rs.getInt(i++)),
+								new AirPlane(rs.getString(i++)), rs.getString(i++), rs.getString(i++)));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();

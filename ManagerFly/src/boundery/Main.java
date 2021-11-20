@@ -5,6 +5,10 @@
 package boundery;
 
 
+import java.time.LocalDateTime;
+import java.time.Month;
+
+import control.FlightsLogic;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +24,7 @@ public class Main extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		  
 		
-		Parent root = FXMLLoader.load(getClass().getResource(".fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("FlightsFrm.fxml"));
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("app.css").toExternalForm());	
 		primaryStage.setScene(scene);
@@ -34,7 +38,6 @@ public class Main extends Application{
 	
 	
 	public static void main(String args[]) {
-	 
 		launch(args);
 	}
 }
