@@ -80,6 +80,21 @@ public class Consts {
 				+ "ORDER BY AirPortTbl_1.Country DESC , AirPortTbl_1.City DESC , FlightTbl.DepatureTime DESC , FlightTbl.LandingTime DESC;";
 	}
 	
+	/**
+	 * String that present a query to return flights in range of to dates and that has ta list input amount of tourists seats
+	 * @param date1 = from date String
+	 * @param date2 = until date String
+	 * @param num = tourists seat
+	 * @return String that present a query
+	 */
+	public static  String qryBiggestFlightsStr(String date1, String date2, int num) {
+		
+		return "SELECT FlightTbl.SerialNum, AirPortTbl.Country, AirPortTbl.City, AirPortTbl_1.Country, AirPortTbl_1.City, FlightTbl.DepatureTime, FlightTbl.LandingTime, FlightTbl.Status\r\n"
+				+ "FROM AirPortTbl INNER JOIN (qryCntTouristsInPlane INNER JOIN (AirPortTbl AS AirPortTbl_1 INNER JOIN FlightTbl ON AirPortTbl_1.airportCode = FlightTbl.DestinationAirportID) ON qryCntTouristsInPlane.TailNum = FlightTbl.AirPlaneTailNum) ON AirPortTbl.airportCode = FlightTbl.DepatureAirportID\r\n"
+				+ "WHERE (((FlightTbl.DepatureTime)>= " + date1 + " And (FlightTbl.DepatureTime)<= " + date2 + " ) AND ((FlightTbl.LandingTime)>= " + date1 + " And (FlightTbl.LandingTime)<= " + date2 + " ) AND ((qryCntTouristsInPlane.CountOfID)>= " + num + " ))\r\n"
+				+ "GROUP BY FlightTbl.SerialNum, AirPortTbl.Country, AirPortTbl.City, AirPortTbl_1.Country, AirPortTbl_1.City, FlightTbl.DepatureTime, FlightTbl.LandingTime, FlightTbl.Status\r\n"
+				+ "ORDER BY AirPortTbl_1.Country DESC , AirPortTbl_1.City DESC , FlightTbl.DepatureTime DESC , FlightTbl.LandingTime DESC;";
+	} 
 	/*-----------------------------------------------------------------------------------------------------*/		
 	
 	

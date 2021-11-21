@@ -6,6 +6,11 @@ package boundery;
 
 
 
+import java.time.LocalDate;
+
+import javax.swing.JFrame;
+
+import control.ReportsLogic;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -15,12 +20,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import net.sf.jasperreports.functions.standard.ReportCategory;
 
 public class Main extends Application{
 
 	public void start(Stage primaryStage) throws Exception {
 		  
-		
 		Parent root = FXMLLoader.load(getClass().getResource("FlightsFrm.fxml"));
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("app.css").toExternalForm());	

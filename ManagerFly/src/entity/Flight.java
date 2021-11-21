@@ -1,6 +1,7 @@
 package entity;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 public class Flight {
@@ -242,6 +243,11 @@ public class Flight {
 				+ ", flightStatus=" + flightStatus + ", depatureAirportID=" + depatureAirport
 				+ ", destinationAirportID=" + destinationAirport + ", airPlaneTailNum=" + airPlaneTail
 				+ ", cheifPilotID=" + cheifPilotID + ", coPilotID=" + coPilotID + ", orderStatus=" + orderStatus + "]";
+	}
+	
+	public String toStringForReport() {
+		
+		return "flight num = " + this.getFlightNum() +  " from = " + this.getDepatureAirportID().getCountry() + " " + this.getDepatureAirportID().getCity() + " to = " + this.getDestinationAirportID().getCountry() + " " + this.getDestinationAirportID().getCity() + " DepTime = " + getDepatureTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + " LandingTime = " + getLandingTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + " FlightStatus = " + this.getFlightStatus() + "";
 	}
 		
 }
