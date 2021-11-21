@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -27,6 +28,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.swing.JRViewer;
 import util.Consts;
+import util.FlightForReport;
 
 public class ReportsLogic {
 
@@ -154,14 +156,24 @@ public class ReportsLogic {
 	 * @return a HashMap of flights as key ,and string List of city and country of the departure airport, 
 	 * and the landing airport.
 	 */
-	public static ArrayList<Flight> BiggestFlights(int attenNum, LocalDate from, LocalDate until) {
+	public static ArrayList<FlightForReport> BiggestFlights(int attenNum, LocalDate from, LocalDate until) {
 		
 		ArrayList<Flight> inRange = getFlightsInRange(from,until);
 		HashMap<AirPlane,Integer> pln = getSeatCntByPlane();
-		ArrayList<Flight> toReturn = new ArrayList<Flight>();
+		ArrayList<FlightForReport> toReturn = new ArrayList<FlightForReport>();
 		for(Flight f: inRange) {
 			if(pln.get(f.getAirPlaneTailNum()) >= attenNum) {
-				toReturn.add(f);
+				 String  flightID = f.getFlightNum() + "";			
+				 String planeID = f.getAirPlaneTailNum() + "";
+				 String CountryFrom = f.getDepatureAirportID().getCountry();
+				 String cityFrom  = f.getDepatureAirportID().getCity();
+				 String countryTo = f.getDestinationAirportID().getCountry();
+				 String cityTo = f.getDestinationAirportID().getCity();
+				 String depTime = f.getDepatureTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+				 String LandTime = f.getLandingTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));;				
+				 String status = f.getFlightStatus();
+				 FlightForReport fToRep = new FlightForReport(flightID,planeID,CountryFrom,cityFrom,countryTo,cityTo,depTime,LandTime,status);
+				toReturn.add(fToRep);
 			}
 		}
 		return toReturn;
@@ -178,12 +190,13 @@ public class ReportsLogic {
 	         int count = entry.getValue();
 			 System.out.println("plane = " + f.getTailNum() + " seat count = " + count);
 		 }
-		 ArrayList<Flight> toReturn = BiggestFlights(attNum,from, until);
-		 for(Flight f: toReturn) {
-			 System.out.println("flight num = " + f.getFlightNum() +  " from = " + f.getDepatureAirportID().getCountry() + " " + f.getDepatureAirportID().getCity() + " to = " + f.getDestinationAirportID().getCountry() + " " + f.getDestinationAirportID().getCity() + " DepTime = " + f.getDepatureTime() + " LandingTime = " + f.getLandingTime() + " FlightStatus = " + f.getFlightStatus());
+		 ArrayList<FlightForReport> toReturn = BiggestFlights(attNum,from, until);
+		 for(FlightForReport f: toReturn) {
+			 System.out.println("flight num = " + f.getFlightID() +  " from = " + f.getCountryFrom() + " " + f.getCityFrom() + " to = " + f.getCountryTo() + " " + f.getCityTo() + " DepTime = " + f.getDepTime() + " LandingTime = " + f.getLandTime() + " FlightStatus = " + f.getStatus());
 		 }
 		 
     }
+	
 	
 	
 	
