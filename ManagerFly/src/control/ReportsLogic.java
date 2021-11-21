@@ -1,5 +1,9 @@
 package control;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,6 +20,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.swing.JFrame;
@@ -23,10 +29,17 @@ import javax.swing.JFrame;
 import entity.AirPlane;
 import entity.AirPort;
 import entity.Flight;
+import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.swing.JRViewer;
+import net.sf.jasperreports.view.JasperViewer;
 import util.Consts;
 import util.FlightForReport;
 
@@ -156,11 +169,11 @@ public class ReportsLogic {
 	 * @return a HashMap of flights as key ,and string List of city and country of the departure airport, 
 	 * and the landing airport.
 	 */
-	public static ArrayList<FlightForReport> BiggestFlights(int attenNum, LocalDate from, LocalDate until) {
+	public static List<FlightForReport> BiggestFlights(int attenNum, LocalDate from, LocalDate until) {
 		
 		ArrayList<Flight> inRange = getFlightsInRange(from,until);
 		HashMap<AirPlane,Integer> pln = getSeatCntByPlane();
-		ArrayList<FlightForReport> toReturn = new ArrayList<FlightForReport>();
+		List<FlightForReport> toReturn = new ArrayList<FlightForReport>();
 		for(Flight f: inRange) {
 			if(pln.get(f.getAirPlaneTailNum()) >= attenNum) {
 				 String  flightID = f.getFlightNum() + "";			
@@ -190,12 +203,71 @@ public class ReportsLogic {
 	         int count = entry.getValue();
 			 System.out.println("plane = " + f.getTailNum() + " seat count = " + count);
 		 }
-		 ArrayList<FlightForReport> toReturn = BiggestFlights(attNum,from, until);
+		 List<FlightForReport> toReturn = BiggestFlights(attNum,from, until);
 		 for(FlightForReport f: toReturn) {
 			 System.out.println("flight num = " + f.getFlightID() +  " from = " + f.getCountryFrom() + " " + f.getCityFrom() + " to = " + f.getCountryTo() + " " + f.getCityTo() + " DepTime = " + f.getDepTime() + " LandingTime = " + f.getLandTime() + " FlightStatus = " + f.getStatus());
 		 }
 		 
-    }
+		 
+		 JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(toReturn); 
+		 /* Map to hold Jasper report Parameters */
+	        Map<String, Object> parameters = new HashMap<String, Object>();
+	        parameters.put("CollectionBeanParam", itemsJRBean);
+	        
+	        //read jrxml file and creating jasperdesign object
+	        InputStream input = null;
+			try {
+				input = new FileInputStream(new File("D:\\Documents\\ManagerFly\\ManagerFly\\src\\boundery\\RptBiggestFlights.jrxml"));
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	                            
+	        JasperDesign jasperDesign = null;
+			try {
+				jasperDesign = JRXmlLoader.load(input);
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(jasperDesign != null) {
+				System.out.println("sucssess");
+			}
+	        /*compiling jrxml with help of JasperReport class*/
+	        JasperReport jasperReport = null;
+			try {
+				jasperReport = JasperCompileManager.compileReport(jasperDesign);
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(jasperReport != null) {
+				System.out.println("sucssess");
+			}
+	        /* Using jasperReport object to generate PDF */
+	        JasperPrint jasperPrint = null;
+			try {
+				jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, new JREmptyDataSource());
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+	        /*call jasper engine to display report in jasperviewer window*/
+	        JasperViewer.viewReport(jasperPrint);
+	        
+	        
+	        /* outputStream to create PDF */
+	        //OutputStream outputStream = new FileOutputStream(new File(outputFile));
+	        
+	        
+	        /* Write content to PDF file */
+	        //JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream);
+
+	        System.out.println("File Generated");	
+		
+		
+	}
 	
 	
 	

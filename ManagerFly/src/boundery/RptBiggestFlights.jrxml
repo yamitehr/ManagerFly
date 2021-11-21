@@ -72,8 +72,8 @@
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
 				</reportElement>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="MTCollectionDataSet" uuid="0aa99824-16a8-4b38-9b53-72d2833a2875">
-						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
+					<datasetRun subDataset="MTCollectionDataSet" uuid="9c235137-dd80-4b51-907b-b045fa7d15b3">
+						<dataSourceExpression><![CDATA[$P{CollectionBeanParam}]]></dataSourceExpression>
 					</datasetRun>
 					<jr:column width="60" uuid="3212f201-94c9-40fe-a956-a66604ad6cd1">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
@@ -89,7 +89,15 @@
 							</staticText>
 						</jr:columnHeader>
 						<jr:columnFooter style="Table_CH" height="50" rowSpan="1"/>
-						<jr:detailCell style="Table_TD" height="60"/>
+						<jr:detailCell style="Table_TD" height="60">
+							<textField>
+								<reportElement x="0" y="0" width="60" height="60" uuid="f349910a-1897-442f-bad8-c890ce225bab"/>
+								<textElement verticalAlignment="Middle">
+									<font size="14"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{flightID}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
 					</jr:column>
 					<jr:column width="80" uuid="02a8ba7f-1b6d-4bc3-95e6-5e33a1ad09f4">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
@@ -105,7 +113,15 @@
 							</staticText>
 						</jr:columnHeader>
 						<jr:columnFooter style="Table_CH" height="50" rowSpan="1"/>
-						<jr:detailCell style="Table_TD" height="60"/>
+						<jr:detailCell style="Table_TD" height="60">
+							<textField>
+								<reportElement x="0" y="0" width="80" height="60" uuid="4a381547-e1ee-486a-ae3c-0215e07883a9"/>
+								<textElement verticalAlignment="Middle">
+									<font size="14"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{planeID}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
 					</jr:column>
 					<jr:column width="90" uuid="a0877f80-9097-4bf3-8551-15e879ac8091">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
@@ -121,7 +137,15 @@
 							</staticText>
 						</jr:columnHeader>
 						<jr:columnFooter style="Table_CH" height="50" rowSpan="1"/>
-						<jr:detailCell style="Table_TD" height="60"/>
+						<jr:detailCell style="Table_TD" height="60">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="60" uuid="66b0e7ca-942e-4eb7-8652-4e5cc31ac475"/>
+								<textElement verticalAlignment="Middle">
+									<font size="14"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{CountryFrom}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
 					</jr:column>
 					<jr:column width="100" uuid="7a6ac58f-06da-465f-a236-cab57edf3b7f">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
@@ -137,7 +161,15 @@
 							</staticText>
 						</jr:columnHeader>
 						<jr:columnFooter style="Table_CH" height="50" rowSpan="1"/>
-						<jr:detailCell style="Table_TD" height="60"/>
+						<jr:detailCell style="Table_TD" height="60">
+							<textField>
+								<reportElement x="0" y="0" width="100" height="60" uuid="2849c9a8-6a77-4cb4-a768-3ae11e7775be"/>
+								<textElement verticalAlignment="Middle">
+									<font size="14"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{cityFrom}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
 					</jr:column>
 					<jr:column width="100" uuid="5d7c07a3-a49f-4cae-9a07-12a07828f79d">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
@@ -153,7 +185,15 @@
 							</staticText>
 						</jr:columnHeader>
 						<jr:columnFooter style="Table_CH" height="50" rowSpan="1"/>
-						<jr:detailCell style="Table_TD" height="60"/>
+						<jr:detailCell style="Table_TD" height="60">
+							<textField>
+								<reportElement x="0" y="0" width="100" height="60" uuid="b9ee6fd5-46e9-4f4f-b3db-c4da90481ac3"/>
+								<textElement verticalAlignment="Middle">
+									<font size="14"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{countryTo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
 					</jr:column>
 					<jr:column width="100" uuid="c8c159df-3109-4055-9392-cbe4be186151">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
@@ -169,7 +209,15 @@
 							</staticText>
 						</jr:columnHeader>
 						<jr:columnFooter style="Table_CH" height="50" rowSpan="1"/>
-						<jr:detailCell style="Table_TD" height="60"/>
+						<jr:detailCell style="Table_TD" height="60">
+							<textField>
+								<reportElement x="0" y="0" width="100" height="60" uuid="a05a8402-c1e9-489b-a719-00369feb0e5f"/>
+								<textElement verticalAlignment="Middle">
+									<font size="14"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{cityTo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
 					</jr:column>
 					<jr:column width="260" uuid="ece64e74-900d-49e5-9e00-d9133dcee025">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
@@ -185,7 +233,15 @@
 							</staticText>
 						</jr:columnHeader>
 						<jr:columnFooter style="Table_CH" height="50" rowSpan="1"/>
-						<jr:detailCell style="Table_TD" height="60"/>
+						<jr:detailCell style="Table_TD" height="60">
+							<textField>
+								<reportElement x="0" y="0" width="260" height="60" uuid="493f9111-51e4-47fa-9391-98a383130d22"/>
+								<textElement verticalAlignment="Middle">
+									<font size="14"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{depTime}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
 					</jr:column>
 					<jr:column width="250" uuid="7bf7ea8a-9871-45f0-83ff-e5643bdbf58c">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column8"/>
@@ -201,7 +257,15 @@
 							</staticText>
 						</jr:columnHeader>
 						<jr:columnFooter style="Table_CH" height="50" rowSpan="1"/>
-						<jr:detailCell style="Table_TD" height="60"/>
+						<jr:detailCell style="Table_TD" height="60">
+							<textField>
+								<reportElement x="0" y="0" width="250" height="60" uuid="82d8a541-14fc-42f9-8874-428b0d3b4831"/>
+								<textElement verticalAlignment="Middle">
+									<font size="14"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{LandTime}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
 					</jr:column>
 					<jr:column width="170" uuid="0704560a-fec5-4fc3-9982-db5ee46f6814">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column9"/>
@@ -217,7 +281,15 @@
 							</staticText>
 						</jr:columnHeader>
 						<jr:columnFooter style="Table_CH" height="50" rowSpan="1"/>
-						<jr:detailCell style="Table_TD" height="60"/>
+						<jr:detailCell style="Table_TD" height="60">
+							<textField>
+								<reportElement x="0" y="0" width="170" height="60" uuid="68174d49-4450-4b45-880c-8fb0b98fd848"/>
+								<textElement verticalAlignment="Middle">
+									<font size="14"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
 					</jr:column>
 				</jr:table>
 			</componentElement>
