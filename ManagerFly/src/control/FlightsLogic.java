@@ -7,8 +7,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -116,6 +118,40 @@ public class FlightsLogic {
 				e.printStackTrace();
 			}
 			return results;
+		}
+		
+		public boolean isPlaneOverlapping(AirPlane airplane, LocalDateTime startDate, LocalDateTime endDate){
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
+			
+			String depatureTimeStampStr = sdf.format(Timestamp.valueOf(startDate));
+			String landingTimeStampStr = sdf.format(Timestamp.valueOf(endDate));
+			
+			String query = "SELECT SerialNum FROM FlightTbl WHERE (((FlightTbl.AirPlaneTailNum)='"
+							+ airplane.getTailNum() + "') AND ((FlightTbl.DepatureTime)<=#"
+							+landingTimeStampStr+ "#) AND ((FlightTbl.LandingTime)>=#"+depatureTimeStampStr+"#))";
+			ArrayList<Integer> results = new ArrayList<Integer>();
+			try {
+				Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+				try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+						PreparedStatement stmt = conn.prepareStatement(query);
+						ResultSet rs = stmt.executeQuery()) {
+					while (rs.next()) {
+						int i = 1;
+						
+						int flightID = rs.getInt(i++);
+						results.add(flightID);
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			if(results.isEmpty()) {
+				return true;
+			}
+			return false;
 		}
 	
 	/*----------------------------------------- ADD / REMOVE / UPDATE FLIGHT METHODS --------------------------------------------*/
