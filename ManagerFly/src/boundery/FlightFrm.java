@@ -99,8 +99,8 @@ public class FlightFrm {
 			if(departureDate.getValue().isAfter(landingDate.getValue())) {
 				throw new InvalidInputException("landing date should be after the departure date");
 			}
-			if(departureDate.getValue().isBefore(LocalDate.now())) {
-				throw new InvalidInputException("departure date cannot be before today");
+			if(departureDate.getValue().isBefore(LocalDate.now().plusMonths(2))) {
+				throw new InvalidInputException("a new flight must be added 2 months before it's planned date");
 			}
 			if(depHour.getValue() == null) {
 				throw new InvalidInputException("Please select Depature Hour");
