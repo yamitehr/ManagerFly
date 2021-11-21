@@ -136,6 +136,10 @@ public class FlightFrm {
 					arrHour.getValue(),
                     arrMinute.getValue());
 			
+			if(!flightsInstance.isPlaneOverlapping(airPlanes.getValue(), depatureDateTime, landingDateTime)) {
+				throw new InvalidInputException("Airplane is already taken by another flight");
+			}
+			
 			if(flightsInstance.addFlight(Integer.parseInt(flightNumber), depatureDateTime, landingDateTime, depAirports.getValue().getAirportCode(),
 													arrAirports.getValue().getAirportCode(), airPlanes.getValue().getTailNum(), null, null, null, null)) {
 				messageToUser.setText("added successfully!");
