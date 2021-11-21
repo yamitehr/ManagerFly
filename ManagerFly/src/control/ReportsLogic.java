@@ -17,9 +17,15 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import javax.swing.JFrame;
+
 import entity.AirPlane;
 import entity.AirPort;
 import entity.Flight;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.swing.JRViewer;
 import util.Consts;
 
 public class ReportsLogic {
@@ -35,7 +41,28 @@ public class ReportsLogic {
 		return _instance;
 	}
 	
-	
+	public JFrame compileBiggestFlights() 
+	{
+		try (Connection conn = DriverManager.getConnection(Consts.CONN_STR)) { 
+			JasperPrint print = JasperFillManager.fillReport( 
+			        
+			getClass().getResourceAsStream("/boundary/RptBiggestFlights.jasper"),  
+			        new HashMap<String, Object>(), conn); 
+			JFrame frame = new JFrame("Biggest Flights Report"); 
+			frame.getContentPane().add(new JRViewer(print)); 
+			frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+			frame.pack(); 
+			return frame; 
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		return null; 
+	}
+		
 	/**
 	 * return a HashMap of planes and the number of tourists seats in them
 	 * @return
