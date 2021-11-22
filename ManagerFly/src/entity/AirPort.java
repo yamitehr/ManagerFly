@@ -95,8 +95,8 @@ public class AirPort {
 	@Override
 	public String toString() {
 		
-		return "AirPort [airportCode=" + airportCode + ", city=" + city + ", country=" + country + ", timeZone="
-				+ timeZone + "]";
+		return " " + airportCode + " " + city + " " + country + ", GMT = "
+				+ timeZone + "";
 	}
 	
 	

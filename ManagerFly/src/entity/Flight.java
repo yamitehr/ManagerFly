@@ -223,9 +223,9 @@ public class Flight {
 		return true;
 	}
 
-	//flight to String
-	@Override
-	public String toString() {
+	
+
+	public String fullToString() {
 		
 		return "Flight [flightNum=" + flightNum + ", depatureTime=" + depatureTime + ", LandingTime=" + landingTime
 				+ ", flightStatus=" + flightStatus + ", depatureAirportID=" + depatureAirport
@@ -233,9 +233,11 @@ public class Flight {
 				+ ", cheifPilotID=" + cheifPilotID + ", coPilotID=" + coPilotID + "]";
 	}
 	
-	public String toStringForReport() {
+	//flight to String
+		@Override
+		public String toString() {
 		
-		return "flight num = " + this.getFlightNum() +  " from = " + this.getDepatureAirportID().getCountry() + " " + this.getDepatureAirportID().getCity() + " to = " + this.getDestinationAirportID().getCountry() + " " + this.getDestinationAirportID().getCity() + " DepTime = " + getDepatureTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + " LandingTime = " + getLandingTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + " FlightStatus = " + this.getFlightStatus() + "";
+		return "flight num = " + this.getFlightNum() +  " from = " + this.getDepatureAirportID().getCountry() + " " + this.getDepatureAirportID().getCity() + " to = " + this.getDestinationAirportID().getCountry() + " " + this.getDestinationAirportID().getCity() + "\nDepTime = " + getDepatureTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + " LandingTime = " + getLandingTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + " FlightStatus = " + this.getFlightStatus() + "";
 	}
 		
 }

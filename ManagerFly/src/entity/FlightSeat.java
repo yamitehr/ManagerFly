@@ -99,8 +99,7 @@ public class FlightSeat {
 	@Override
 	public String toString() {
 		
-		return "FlightSeat [seatID=" + seatID + ", rowNum=" + rowNum + ", colNum=" + colNum + ", seatType=" + seatType
-				+ ", plane=" + plane.getTailNum() + "]";
+		return " seatID = " + seatID + ", row = " + rowNum + ", col = " + colNum + ", Type = " + seatType;
 	}
 	
 	

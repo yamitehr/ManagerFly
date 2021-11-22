@@ -26,7 +26,7 @@ public class Main extends Application{
 
 	public void start(Stage primaryStage) throws Exception {
 		  
-		Parent root = FXMLLoader.load(getClass().getResource("FlightsFrm.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("AirPortsFrm.fxml"));
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("app.css").toExternalForm());	
 		primaryStage.setScene(scene);

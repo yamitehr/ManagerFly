@@ -64,9 +64,11 @@ public class Consts {
 
 	/*----------------------------------------- AIRPORTS QUERIES -----------------------------------------*/
 	public static final String SQL_SEL_AIRPORT = "SELECT * FROM AirPortTbl";
+	public static final String SQL_INS_AIRPORT = "{ call qryInsAirPort(?,?,?,?) }"; 
 	
 	/*----------------------------------------- AIRPLANES QUERIES -----------------------------------------*/
 	public static final String SQL_SEL_AIRPLANE = "SELECT * FROM AirPlaneTbl";
+	
 	
 	
 	
