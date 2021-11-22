@@ -5,8 +5,8 @@
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="src\control\DataAdapter.xml"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="346"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="649"/>
-	<parameter name="p1" class="java.sql.Date"/>
-	<parameter name="p2" class="java.sql.Date"/>
+	<parameter name="p1" class="java.sql.Timestamp"/>
+	<parameter name="p2" class="java.sql.Timestamp"/>
 	<parameter name="p3" class="java.lang.Integer"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT FlightTbl.SerialNum, AirPortTbl.Country AS CountryFrom, AirPortTbl.City AS CityFrom, AirPortTbl_1.Country AS CountryTo, AirPortTbl_1.City AS CityTo, FlightTbl.DepatureTime, FlightTbl.LandingTime, FlightTbl.Status
@@ -20,8 +20,8 @@ ORDER BY AirPortTbl_1.Country DESC , AirPortTbl_1.City DESC , FlightTbl.Depature
 	<field name="CityFrom" class="java.lang.String"/>
 	<field name="CountryTo" class="java.lang.String"/>
 	<field name="CityTo" class="java.lang.String"/>
-	<field name="DepatureTime" class="java.sql.Date"/>
-	<field name="LandingTime" class="java.sql.Date"/>
+	<field name="DepatureTime" class="java.sql.Timestamp"/>
+	<field name="LandingTime" class="java.sql.Timestamp"/>
 	<field name="Status" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
@@ -60,11 +60,11 @@ ORDER BY AirPortTbl_1.Country DESC , AirPortTbl_1.City DESC , FlightTbl.Depature
 				<text><![CDATA[until]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="340" y="70" width="100" height="30" uuid="7f47ad51-f467-44d0-9f99-f004c1d141e1"/>
+				<reportElement x="330" y="70" width="90" height="30" uuid="294fcef8-c884-466b-951e-790ef8aba3ba"/>
 				<textFieldExpression><![CDATA[$P{p1}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="560" y="70" width="100" height="30" uuid="abf3d6fc-fce8-4346-ad5d-7eae4fbc1e20"/>
+				<reportElement x="560" y="70" width="90" height="30" uuid="543aee67-fc99-4769-b319-910862ecb9f2"/>
 				<textFieldExpression><![CDATA[$P{p2}]]></textFieldExpression>
 			</textField>
 		</band>

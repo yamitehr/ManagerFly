@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -49,8 +50,20 @@ public class ReportsLogic {
 			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR))
 			{
 				HashMap<String, Object> params = new HashMap<>();
-				java.sql.Date sqlFrom = java.sql.Date.valueOf(from);
-				java.sql.Date sqlyeTo = java.sql.Date.valueOf(until);
+				LocalDate yesreday = from.minusDays(1);
+				LocalDate tommarow =until.plusDays(1);
+				LocalDateTime fromWwithTime  = from.atTime(00, 00, 01);
+				LocalDateTime toWwithTime  = until.atTime(23, 59, 59);
+				java.sql.Timestamp sqlFrom = Timestamp.valueOf(fromWwithTime);
+				java.sql.Timestamp sqlyeTo = Timestamp.valueOf(toWwithTime);
+				//java.sql.Date sqlFrom = java.sql.Date.valueOf(fromWwithTime);
+				//java.sql.Date sqlyeTo = java.sql.Date.valueOf(toWwithTime);
+				/*sqlFrom.setHours(0);
+				sqlFrom.setMinutes(0);
+				sqlFrom.setSeconds(0);
+				sqlyeTo.setHours(23);
+				sqlyeTo.setMinutes(59);
+				sqlyeTo.setSeconds(59);*/
 				params.put("p1", sqlFrom);
 				params.put("p2", sqlyeTo);
 				params.put("p3", seatNum);
