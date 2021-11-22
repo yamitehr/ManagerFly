@@ -141,6 +141,15 @@ public class FlightFrm {
 			if(!flightsInstance.isPlaneOverlapping(airPlanes.getValue(), depatureDateTime, landingDateTime)) {
 				throw new InvalidInputException("Airplane is already taken by another flight");
 			}
+			if(!flightsInstance.isAirportsOverlapping(depAirports.getValue(), depatureDateTime, true)) {
+				throw new InvalidInputException("Please select a different Departue airport - flights collison");
+			}
+			if(!flightsInstance.isAirportsOverlapping(arrAirports.getValue(), landingDateTime, false)) {
+				throw new InvalidInputException("Please select a different Landing airport - flights collison");
+			}
+			if(depAirports.getValue().equals(arrAirports.getValue())) {
+				throw new InvalidInputException("Departure and Destination airports cannot be the same");
+			}
 			
 			if(flightsInstance.addFlight(Integer.parseInt(flightNumber), depatureDateTime, landingDateTime, depAirports.getValue().getAirportCode(),arrAirports.getValue().getAirportCode(), airPlanes.getValue().getTailNum(), null, null,null)) {
 				messageToUser.setText("added successfully!");
