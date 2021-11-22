@@ -20,14 +20,54 @@ ORDER BY AirPortTbl_1.Country DESC , AirPortTbl_1.City DESC , FlightTbl.Depature
 	<field name="CityFrom" class="java.lang.String"/>
 	<field name="CountryTo" class="java.lang.String"/>
 	<field name="CityTo" class="java.lang.String"/>
-	<field name="DepatureTime" class="java.sql.Timestamp"/>
-	<field name="LandingTime" class="java.sql.Timestamp"/>
+	<field name="DepatureTime" class="java.sql.Date"/>
+	<field name="LandingTime" class="java.sql.Date"/>
 	<field name="Status" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch"/>
+		<band height="118" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="0" y="0" width="100" height="30" uuid="2b490921-3ae8-4602-8465-0f4a65d1e008"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm">
+				<reportElement x="110" y="0" width="100" height="30" uuid="37e88522-e6fb-44f6-b1b7-99de58337f85"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="252" y="10" width="298" height="50" uuid="dfbe3f3d-203a-48c4-ab18-90f5205b5c7d"/>
+				<textElement textAlignment="Center">
+					<font size="26"/>
+				</textElement>
+				<text><![CDATA[Biggest flights report]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-10" y="69" width="100" height="30" uuid="8275b46c-f7b1-43d7-ae2e-22ae1188c993"/>
+				<text><![CDATA[min tourists seats:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="90" y="69" width="60" height="30" uuid="c220df19-972e-49a2-ad8d-b5f6a5093386"/>
+				<textFieldExpression><![CDATA[$P{p3}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="230" y="70" width="100" height="30" uuid="8f768f1e-368a-4983-a1bd-5d9e9a0f0d5a"/>
+				<text><![CDATA[from:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="70" width="100" height="30" uuid="31b095fe-46a1-4027-be75-3bb1c0e20c24"/>
+				<text><![CDATA[until]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="340" y="70" width="100" height="30" uuid="7f47ad51-f467-44d0-9f99-f004c1d141e1"/>
+				<textFieldExpression><![CDATA[$P{p1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="560" y="70" width="100" height="30" uuid="abf3d6fc-fce8-4346-ad5d-7eae4fbc1e20"/>
+				<textFieldExpression><![CDATA[$P{p2}]]></textFieldExpression>
+			</textField>
+		</band>
 	</title>
 	<pageHeader>
 		<band height="35" splitType="Stretch"/>
@@ -140,7 +180,18 @@ ORDER BY AirPortTbl_1.Country DESC , AirPortTbl_1.City DESC , FlightTbl.Depature
 		<band height="45" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="300" y="12" width="100" height="30" uuid="65e642d5-db7b-40bc-b2f4-8a396a91be59"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="410" y="12" width="100" height="30" uuid="8d9b8882-a664-4580-9951-50afd6652b0d"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageFooter>
 	<summary>
 		<band height="42" splitType="Stretch"/>

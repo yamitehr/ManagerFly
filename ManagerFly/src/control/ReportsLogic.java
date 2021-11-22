@@ -49,14 +49,10 @@ public class ReportsLogic {
 			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR))
 			{
 				HashMap<String, Object> params = new HashMap<>();
-				LocalDate yesterday = from.minusDays(1);
-				LocalDate Tommarow  =until.plusDays(1);
-				java.sql.Date sqlyesterday = java.sql.Date.valueOf(yesterday);
-				java.sql.Date sqlyeTommarow = java.sql.Date.valueOf(Tommarow);
-				String date1 = "#" + yesterday.getMonthValue() + "/" + yesterday.getDayOfMonth() + "/" + yesterday.getYear() + "#";
-				String date2 = "#" + Tommarow.getMonthValue() + "/" + Tommarow.getDayOfMonth() + "/" + Tommarow.getYear() + "#";				
-				params.put("p1", sqlyesterday);
-				params.put("p2", sqlyeTommarow);
+				java.sql.Date sqlFrom = java.sql.Date.valueOf(from);
+				java.sql.Date sqlyeTo = java.sql.Date.valueOf(until);
+				params.put("p1", sqlFrom);
+				params.put("p2", sqlyeTo);
 				params.put("p3", seatNum);
 				JasperPrint print = JasperFillManager.fillReport(
 						getClass().getResourceAsStream("/boundery/BiggestFlightsReport.jasper"),

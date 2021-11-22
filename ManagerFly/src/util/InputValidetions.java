@@ -111,7 +111,11 @@ public class InputValidetions {
 		
 		// main method for testing
 		public static void main(String args[]){
-			
+			LocalDate from = LocalDate.of(2022, 2, 9);
+			LocalDate until = LocalDate.of(2022, 2, 14);
+			int attNum = 2;
+			JFrame fram = ReportsLogic.getInstance().compileBiggestFlights(attNum, from, until);
+			fram.setVisible(true);
 			LocalDateTime d = LocalDateTime.of(2022, 
                     Month.JANUARY, 21, 19, 30, 40);
 			
