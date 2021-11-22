@@ -115,7 +115,7 @@ public class FlightsLogic {
      * @return 
 	 */
 	public boolean addFlight(int flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, int depatureAirportID,
-			int destinationAirportID, String airPlaneTailNum, String cheifPilotID, String coPilotID, String flightStatus, String orderStatus) {
+			int destinationAirportID, String airPlaneTailNum, String cheifPilotID, String coPilotID, String flightStatus) {
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
@@ -143,11 +143,6 @@ public class FlightsLogic {
 					stmt.setString(i++, flightStatus);
 				else
 					stmt.setNull(i++, java.sql.Types.VARCHAR);
-				if (orderStatus != null)
-					stmt.setString(i++, orderStatus);
-				else
-					stmt.setNull(i++, java.sql.Types.VARCHAR);
-				
 				stmt.executeUpdate();
 				return true;
 				
@@ -191,7 +186,7 @@ public class FlightsLogic {
      * @return 
 	 */
 	public boolean editFlight(int flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, int depatureAirportID,
-			int destinationAirportID, String airPlaneTailNum, String cheifPilotID, String coPilotID, String flightStatus, String orderStatus) {
+			int destinationAirportID, String airPlaneTailNum, String cheifPilotID, String coPilotID, String flightStatus) {
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
@@ -219,11 +214,6 @@ public class FlightsLogic {
 					stmt.setString(i++, flightStatus);
 				else
 					stmt.setNull(i++, java.sql.Types.VARCHAR);
-				if (orderStatus != null)
-					stmt.setString(i++, orderStatus);
-				else
-					stmt.setNull(i++, java.sql.Types.VARCHAR);
-				
 				stmt.executeUpdate();
 				return true;
 				

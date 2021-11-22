@@ -37,7 +37,7 @@ public class AirpPortLogic {
 				while (rs.next()) {
 					int i = 1;
 					
-					results.add(new AirPort(rs.getInt(i++), rs.getString(i++), rs.getString(i++), rs.getInt(i++), rs.getBoolean(i++)));
+					results.add(new AirPort(rs.getInt(i++), rs.getString(i++), rs.getString(i++), rs.getInt(i++)));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();

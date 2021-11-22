@@ -142,8 +142,7 @@ public class FlightFrm {
 				throw new InvalidInputException("Airplane is already taken by another flight");
 			}
 			
-			if(flightsInstance.addFlight(Integer.parseInt(flightNumber), depatureDateTime, landingDateTime, depAirports.getValue().getAirportCode(),
-													arrAirports.getValue().getAirportCode(), airPlanes.getValue().getTailNum(), null, null, null, null)) {
+			if(flightsInstance.addFlight(Integer.parseInt(flightNumber), depatureDateTime, landingDateTime, depAirports.getValue().getAirportCode(),arrAirports.getValue().getAirportCode(), airPlanes.getValue().getTailNum(), null, null,null)) {
 				messageToUser.setText("added successfully!");
 			} else {
 				messageToUser.setText("something went wrong while adding a new flight");

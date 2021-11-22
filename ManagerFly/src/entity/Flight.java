@@ -15,7 +15,6 @@ public class Flight {
 	private  AirPlane airPlaneTail;		//Foreign key, airplane tail number of the flight
 	private String cheifPilotID;			//TODO: change to object pilot
 	private String coPilotID;				//TODO: change to object pilot
-	private String orderStatus;				//TODO: change to enum {initialize, pre-sale, regular sale}
 	
 	
 	/**
@@ -100,7 +99,7 @@ public class Flight {
 	 */
 	public Flight(int flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, String flightStatus,
 			AirPort depatureAirportID, AirPort destinationAirportID, AirPlane airPlaneTailNum, String cheifPilotID,
-			String coPilotID, String orderStatus) {
+			String coPilotID) {
 		
 		this.flightNum = flightNum;
 		this.depatureTime = depatureTime;
@@ -111,7 +110,6 @@ public class Flight {
 		this.airPlaneTail = airPlaneTailNum;
 		this.cheifPilotID = cheifPilotID;
 		this.coPilotID = coPilotID;
-		this.orderStatus = orderStatus;
 	}
 
 	//getters and setters
@@ -194,16 +192,6 @@ public class Flight {
 		this.coPilotID = coPilotID;
 	}
 
-	public String getOrderStatus() {
-		
-		return orderStatus;
-	}
-
-	public void setOrderStatus(String orderStatus) {
-		
-		this.orderStatus = orderStatus;
-	}
-
 	public int getFlightNum() {
 		
 		return flightNum;
@@ -242,7 +230,7 @@ public class Flight {
 		return "Flight [flightNum=" + flightNum + ", depatureTime=" + depatureTime + ", LandingTime=" + landingTime
 				+ ", flightStatus=" + flightStatus + ", depatureAirportID=" + depatureAirport
 				+ ", destinationAirportID=" + destinationAirport + ", airPlaneTailNum=" + airPlaneTail
-				+ ", cheifPilotID=" + cheifPilotID + ", coPilotID=" + coPilotID + ", orderStatus=" + orderStatus + "]";
+				+ ", cheifPilotID=" + cheifPilotID + ", coPilotID=" + coPilotID + "]";
 	}
 	
 	public String toStringForReport() {
