@@ -67,12 +67,6 @@ public class FlightsLogic {
 		return results;
 	}
 	
-	//TODO: should we separate this to different controller?
-	
-	
-	//TODO: should we separate this to different controller?
-	
-		
 		public boolean isPlaneOverlapping(AirPlane airplane, LocalDateTime startDate, LocalDateTime endDate){
 			
 			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
@@ -83,6 +77,49 @@ public class FlightsLogic {
 			String query = "SELECT SerialNum FROM FlightTbl WHERE (((FlightTbl.AirPlaneTailNum)='"
 							+ airplane.getTailNum() + "') AND ((FlightTbl.DepatureTime)<=#"
 							+landingTimeStampStr+ "#) AND ((FlightTbl.LandingTime)>=#"+depatureTimeStampStr+"#))";
+			ArrayList<Integer> results = new ArrayList<Integer>();
+			try {
+				Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+				try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+						PreparedStatement stmt = conn.prepareStatement(query);
+						ResultSet rs = stmt.executeQuery()) {
+					while (rs.next()) {
+						int i = 1;
+						
+						int flightID = rs.getInt(i++);
+						results.add(flightID);
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			if(results.isEmpty()) {
+				return true;
+			}
+			return false;
+		}
+		
+public boolean isAirportsOverlapping(AirPort depAirport, AirPort landAirport, LocalDateTime startDate, LocalDateTime endDate){
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
+			
+			String depatureTimeStampPlusHalfHour = sdf.format(Timestamp.valueOf(startDate.plusMinutes(30)));
+			String departureTimeStampMinusHalfHour = sdf.format(Timestamp.valueOf(startDate.minusMinutes(30)));
+			
+			String landingTimeStampPlusHalfHour = sdf.format(Timestamp.valueOf(endDate.plusMinutes(30)));
+			String landingTimeStampMinusHalfHour = sdf.format(Timestamp.valueOf(endDate.minusMinutes(30)));
+			
+			String query = "SELECT FlightTbl.SerialNum"
+					+ "FROM FlightTbl"
+					+ "WHERE (((FlightTbl.DepatureAirportID)="
+					+ depAirport.getAirportCode() +") "
+					+ "AND ((FlightTbl.DepatureTime)>=#" + departureTimeStampMinusHalfHour + "#) "
+					+ "AND ((FlightTbl.DepatureTime)<=#" + depatureTimeStampPlusHalfHour + "#) "
+					+ "OR ((FlightTbl.LandingAirportID)=" + landAirport.getAirportCode() + ") "
+					+ "AND ((FlightTbl.LandingTime)>=#" + landingTimeStampMinusHalfHour + "#) "
+					+ "AND ((FlightTbl.LandingTime)<=#" + landingTimeStampPlusHalfHour + "#);";
 			ArrayList<Integer> results = new ArrayList<Integer>();
 			try {
 				Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
