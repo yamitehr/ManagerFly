@@ -101,25 +101,31 @@ public class FlightsLogic {
 			return false;
 		}
 		
-public boolean isAirportsOverlapping(AirPort depAirport, AirPort landAirport, LocalDateTime startDate, LocalDateTime endDate){
+public boolean isAirportsOverlapping(AirPort airport, LocalDateTime dateTime, boolean isDeparture){
+			
+			String airportType;
+			String timeType;
+			if(isDeparture) {
+				airportType = "FlightTbl.DepatureAirportID";
+				timeType = "FlightTbl.DepatureTime";
+			} else {
+				airportType = "FlightTbl.DestinationAirportID";
+				timeType = "FlightTbl.LandingTime";
+			}
 			
 			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
 			
-			String depatureTimeStampPlusHalfHour = sdf.format(Timestamp.valueOf(startDate.plusMinutes(30)));
-			String departureTimeStampMinusHalfHour = sdf.format(Timestamp.valueOf(startDate.minusMinutes(30)));
+			String timeStampPlusHalfHour = sdf.format(Timestamp.valueOf(dateTime.plusMinutes(30)));
+			String timeStampMinusHalfHour = sdf.format(Timestamp.valueOf(dateTime.minusMinutes(30)));
 			
-			String landingTimeStampPlusHalfHour = sdf.format(Timestamp.valueOf(endDate.plusMinutes(30)));
-			String landingTimeStampMinusHalfHour = sdf.format(Timestamp.valueOf(endDate.minusMinutes(30)));
 			
 			String query = "SELECT FlightTbl.SerialNum"
 					+ "FROM FlightTbl"
-					+ "WHERE (((FlightTbl.DepatureAirportID)="
-					+ depAirport.getAirportCode() +") "
-					+ "AND ((FlightTbl.DepatureTime)>=#" + departureTimeStampMinusHalfHour + "#) "
-					+ "AND ((FlightTbl.DepatureTime)<=#" + depatureTimeStampPlusHalfHour + "#) "
-					+ "OR ((FlightTbl.LandingAirportID)=" + landAirport.getAirportCode() + ") "
-					+ "AND ((FlightTbl.LandingTime)>=#" + landingTimeStampMinusHalfHour + "#) "
-					+ "AND ((FlightTbl.LandingTime)<=#" + landingTimeStampPlusHalfHour + "#);";
+					+ "WHERE (((" + airportType + ")="
+					+ airport.getAirportCode() +") "
+					+ "AND ((" + timeType + ")>=#" + timeStampMinusHalfHour + "#) "
+					+ "AND ((" + timeType + ")<=#" + timeStampPlusHalfHour + "#));";
+			
 			ArrayList<Integer> results = new ArrayList<Integer>();
 			try {
 				Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
