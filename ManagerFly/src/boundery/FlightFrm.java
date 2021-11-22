@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
+import control.AirPlaneLogic;
+import control.AirpPortLogic;
 import control.FlightsLogic;
 import entity.AirPlane;
 import entity.AirPort;
@@ -54,14 +56,14 @@ public class FlightFrm {
 	
 	private void init() {
 		//init AirPorts
-		ObservableList<AirPort> airports = FXCollections.observableArrayList(FlightsLogic.getInstance().getAirports());
+		ObservableList<AirPort> airports = FXCollections.observableArrayList(AirpPortLogic.getInstance().getAirports());
 		depAirports.getItems().clear();		
 		arrAirports.getItems().clear();	
 		depAirports.setItems(FXCollections.observableArrayList(airports));
 		arrAirports.setItems(FXCollections.observableArrayList(airports));
 		
 		//init planes
-		ObservableList<AirPlane> planes = FXCollections.observableArrayList(FlightsLogic.getInstance().getAirplanes());
+		ObservableList<AirPlane> planes = FXCollections.observableArrayList(AirPlaneLogic.getInstance().getAirplanes());
 		airPlanes.getItems().clear();	
 		airPlanes.setItems(FXCollections.observableArrayList(planes));
 		

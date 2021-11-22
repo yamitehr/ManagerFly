@@ -69,56 +69,9 @@ public class FlightsLogic {
 	
 	//TODO: should we separate this to different controller?
 	
-	/**
-	 * fetches all airports from DB file.
-	 * @return ArrayList of airports.
-	 */
-	public ArrayList<AirPort> getAirports() {
-		ArrayList<AirPort> results = new ArrayList<AirPort>();
-		try {
-			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
-					PreparedStatement stmt = conn.prepareStatement(Consts.SQL_SEL_AIRPORT);
-					ResultSet rs = stmt.executeQuery()) {
-				while (rs.next()) {
-					int i = 1;
-					
-					results.add(new AirPort(rs.getInt(i++), rs.getString(i++), rs.getString(i++), rs.getInt(i++), rs.getBoolean(i++)));
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		return results;
-	}
+	
 	//TODO: should we separate this to different controller?
 	
-		/**
-		 * fetches all airplanes from DB file.
-		 * @return ArrayList of airplanes.
-		 */
-		public ArrayList<AirPlane> getAirplanes() {
-			ArrayList<AirPlane> results = new ArrayList<AirPlane>();
-			try {
-				Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-				try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
-						PreparedStatement stmt = conn.prepareStatement(Consts.SQL_SEL_AIRPLANE);
-						ResultSet rs = stmt.executeQuery()) {
-					while (rs.next()) {
-						int i = 1;
-						
-						results.add(new AirPlane(rs.getString(i++), rs.getInt(i++)));
-					}
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-			return results;
-		}
 		
 		public boolean isPlaneOverlapping(AirPlane airplane, LocalDateTime startDate, LocalDateTime endDate){
 			

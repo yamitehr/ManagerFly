@@ -8,7 +8,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import control.ReportsLogic;
 
@@ -37,7 +39,6 @@ public class InputValidetions {
 			return (last.isAfter(first));
 		}
 		
-	/*----------------------------------------- AIRPORT VALIDATIONS METHODS --------------------------------------------*/
 		/**
 		 * validate names {city ,country, person ...etc}
 		 * @param string
@@ -56,6 +57,26 @@ public class InputValidetions {
 			}
 			return true;
 		}
+		
+		/**
+		 * validate positive Integers or 0 Integers from text fields
+		 * @param string
+		 * @return true if valid
+		 */
+		public static boolean validatePositiveIntegerOrZero(String s) {
+			
+			for(int i = 0; i < s.length(); i++) {
+				
+				if(s.charAt(i) < '0' || s.charAt(i) > '9') {
+					return false;
+					}
+				}
+			return true;
+		}
+		
+		
+		
+	/*----------------------------------------- AIRPORT VALIDATIONS METHODS --------------------------------------------*/
 		
 		/**
 		 * validate time zone of a airport (in range -12 -> 12 (int))
@@ -107,19 +128,6 @@ public class InputValidetions {
 			}
 			
 			return false;
-		}
-		
-		// main method for testing
-		public static void main(String args[]){
-			LocalDate from = LocalDate.of(2022, 2, 9);
-			LocalDate until = LocalDate.of(2022, 2, 14);
-			int attNum = 2;
-			JFrame fram = ReportsLogic.getInstance().compileBiggestFlights(attNum, from, until);
-			fram.setVisible(true);
-			LocalDateTime d = LocalDateTime.of(2022, 
-                    Month.JANUARY, 21, 19, 30, 40);
-			
-			System.out.println(validateDepDate(d));
 		}
 		
 }

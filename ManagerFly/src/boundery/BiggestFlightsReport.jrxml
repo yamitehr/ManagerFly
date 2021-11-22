@@ -141,10 +141,6 @@ ORDER BY AirPortTbl_1.Country DESC , AirPortTbl_1.City DESC , FlightTbl.Depature
 					<pen lineWidth="1.0"/>
 				</graphicElement>
 			</line>
-			<image>
-				<reportElement x="690" y="0" width="82" height="80" uuid="1da1e0bf-4512-49d1-ac11-ed13c34b7ad4"/>
-				<imageExpression><![CDATA["https://media.istockphoto.com/vectors/airplane-fly-out-logo-plane-taking-off-stylized-sign-vector-id1137971264?k=20&m=1137971264&s=612x612&w=0&h=_Mds3bkTPPoIBHsa9orqQCW6gO7dka96d3BJvdh7sHg="]]></imageExpression>
-			</image>
 		</band>
 	</title>
 	<pageHeader>

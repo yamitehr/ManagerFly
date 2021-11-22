@@ -15,9 +15,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-
-
+import javax.swing.JLabel;
 
 import entity.AirPlane;
 import entity.AirPort;
@@ -68,7 +68,7 @@ public class ReportsLogic {
 				JasperPrint print = JasperFillManager.fillReport(
 						getClass().getResourceAsStream("/boundery/BiggestFlightsReport.jasper"),
 						params, conn);
-				JFrame frame = new JFrame("Show Report for " + LocalDate.now());
+				JFrame frame = new JFrame("Show Report for " + LocalDate.now());				
 				frame.getContentPane().add(new JRViewer(print));
 				frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				frame.pack();
