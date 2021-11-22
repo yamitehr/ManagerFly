@@ -56,47 +56,17 @@ public class Consts {
 	public static final int MAX_TAIL_NUM = 15;
 	
 	
-	/*----------------------------------------- REPORTS QUERIES -----------------------------------------*/
-	/*-----------------------------------------for BiggestFlyReport--------------------------------------*/
-	/**
-	 * return a list of planes and the number of tourists seats in them  
-	 */
-	public static final String SQL_SEL_CNT_TSEAT_BY_PLANE = "SELECT AirPlaneTbl.TailNum, Count(FlightSeatTbl.ID) AS CountOfID\r\n"
-			+ "FROM AirPlaneTbl INNER JOIN FlightSeatTbl ON AirPlaneTbl.TailNum = FlightSeatTbl.TailNum\r\n"
-			+ "WHERE (((FlightSeatTbl.type) Like \"tourists\"))\r\n"
-			+ "GROUP BY AirPlaneTbl.TailNum;";
-	/**
-	 * String that present a query to return flights in range of to dates
-	 * @param date1 = string of the date which  the method start collect flights.
-	 * @param date2 = string of the date which  the method end collect flights.
-	 * @return a string that present the qryFlightsInRange
-	 */
-	public static String flightsInRangeQuery(String date1, String date2) {
-		
-		return "SELECT FlightTbl.SerialNum, FlightTbl.AirPlaneTailNum, AirPortTbl.Country, AirPortTbl.City, AirPortTbl_1.Country, AirPortTbl_1.City, FlightTbl.DepatureTime, FlightTbl.LandingTime, FlightTbl.Status, AirPortTbl.airportCode, AirPortTbl_1.airportCode\r\n"
-				+ "FROM AirPortTbl INNER JOIN (AirPortTbl AS AirPortTbl_1 INNER JOIN FlightTbl ON AirPortTbl_1.airportCode = FlightTbl.DestinationAirportID) ON AirPortTbl.airportCode = FlightTbl.DepatureAirportID\r\n"
-				+ "WHERE (((FlightTbl.DepatureTime)>= " + date1 + "  And (FlightTbl.DepatureTime)<= " + date2 + ") AND ((FlightTbl.LandingTime)>= " + date1 + " And (FlightTbl.LandingTime)<= " + date2 + "))\r\n"
-				+ "GROUP BY FlightTbl.SerialNum, FlightTbl.AirPlaneTailNum, AirPortTbl.Country, AirPortTbl.City, AirPortTbl_1.Country, AirPortTbl_1.City, FlightTbl.DepatureTime, FlightTbl.LandingTime, FlightTbl.Status, AirPortTbl.airportCode, AirPortTbl_1.airportCode\r\n"
-				+ "ORDER BY AirPortTbl_1.Country DESC , AirPortTbl_1.City DESC , FlightTbl.DepatureTime DESC , FlightTbl.LandingTime DESC;";
-	}
+	/*----------------------------------------- FLIGHTS QUERIES -----------------------------------------*/
+	public static final String SQL_SEL_FLIGHT = "SELECT * FROM FlightTbl";
+	public static final String SQL_DEL_FLIGHT = "{ call qryDelFlight(?) }";
+	public static final String SQL_INS_FLIGHT = "{ call qryInsFlight(?,?,?,?,?,?,?,?,?,?) }";
+	public static final String SQL_UPD_FLIGHT = "{ call qryUpdFlight(?,?,?,?,?,?,?,?,?,?,?) }";
+
+	/*----------------------------------------- AIRPORTS QUERIES -----------------------------------------*/
+	public static final String SQL_SEL_AIRPORT = "SELECT * FROM AirPortTbl";
 	
-	/**
-	 * String that present a query to return flights in range of to dates and that has ta list input amount of tourists seats
-	 * @param date1 = from date String
-	 * @param date2 = until date String
-	 * @param num = tourists seat
-	 * @return String that present a query
-	 */
-	public static  String qryBiggestFlightsStr(String date1, String date2, int num) {
-		
-		return "SELECT FlightTbl.SerialNum, AirPortTbl.Country, AirPortTbl.City, AirPortTbl_1.Country, AirPortTbl_1.City, FlightTbl.DepatureTime, FlightTbl.LandingTime, FlightTbl.Status\r\n"
-				+ "FROM AirPortTbl INNER JOIN (qryCntTouristsInPlane INNER JOIN (AirPortTbl AS AirPortTbl_1 INNER JOIN FlightTbl ON AirPortTbl_1.airportCode = FlightTbl.DestinationAirportID) ON qryCntTouristsInPlane.TailNum = FlightTbl.AirPlaneTailNum) ON AirPortTbl.airportCode = FlightTbl.DepatureAirportID\r\n"
-				+ "WHERE (((FlightTbl.DepatureTime)>= " + date1 + " And (FlightTbl.DepatureTime)<= " + date2 + " ) AND ((FlightTbl.LandingTime)>= " + date1 + " And (FlightTbl.LandingTime)<= " + date2 + " ) AND ((qryCntTouristsInPlane.CountOfID)>= " + num + " ))\r\n"
-				+ "GROUP BY FlightTbl.SerialNum, AirPortTbl.Country, AirPortTbl.City, AirPortTbl_1.Country, AirPortTbl_1.City, FlightTbl.DepatureTime, FlightTbl.LandingTime, FlightTbl.Status\r\n"
-				+ "ORDER BY AirPortTbl_1.Country DESC , AirPortTbl_1.City DESC , FlightTbl.DepatureTime DESC , FlightTbl.LandingTime DESC;";
-	} 
-	/*-----------------------------------------------------------------------------------------------------*/		
-	
+	/*----------------------------------------- AIRPLANES QUERIES -----------------------------------------*/
+	public static final String SQL_SEL_AIRPLANE = "SELECT * FROM AirPlaneTbl";
 	
 	
 	
@@ -123,18 +93,5 @@ public class Consts {
 			return null;
 		}
 	}
-	
-	/*----------------------------------------- FLIGHTS QUERIES -----------------------------------------*/
-	public static final String SQL_SEL_FLIGHT = "SELECT * FROM FlightTbl";
-	public static final String SQL_DEL_FLIGHT = "{ call qryDelFlight(?) }";
-	public static final String SQL_INS_FLIGHT = "{ call qryInsFlight(?,?,?,?,?,?,?,?,?,?) }";
-	public static final String SQL_UPD_FLIGHT = "{ call qryUpdFlight(?,?,?,?,?,?,?,?,?,?,?) }";
-
-	/*----------------------------------------- AIRPORTS QUERIES -----------------------------------------*/
-	public static final String SQL_SEL_AIRPORT = "SELECT * FROM AirPortTbl";
-	
-	/*----------------------------------------- AIRPLANES QUERIES -----------------------------------------*/
-	public static final String SQL_SEL_AIRPLANE = "SELECT * FROM AirPlaneTbl";
-	
 }
 
