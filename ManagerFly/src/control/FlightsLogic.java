@@ -119,8 +119,8 @@ public boolean isAirportsOverlapping(AirPort airport, LocalDateTime dateTime, bo
 			String timeStampMinusHalfHour = sdf.format(Timestamp.valueOf(dateTime.minusMinutes(30)));
 			
 			
-			String query = "SELECT FlightTbl.SerialNum"
-					+ "FROM FlightTbl"
+			String query = "SELECT FlightTbl.SerialNum "
+					+ "FROM FlightTbl "
 					+ "WHERE (((" + airportType + ")="
 					+ airport.getAirportCode() +") "
 					+ "AND ((" + timeType + ")>=#" + timeStampMinusHalfHour + "#) "
