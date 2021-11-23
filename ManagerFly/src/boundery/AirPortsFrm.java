@@ -103,11 +103,61 @@ public class AirPortsFrm {
     	
 	}
 
+    
 
 	@FXML
     void addAirPort(ActionEvent event) {
 		
+		if(inEditMode == true) {
+			String city = cityFld.getText();
+			String country = countryFld.getText();
+			String ID = IDFld.getText();
+			int timeZone = timeZoneFld.getValue();
+			if(InputValidetions.validateName(city) && InputValidetions.validateName(country) && InputValidetions.validatePositiveIntegerOrZero(ID)) {
+				int id = Integer.parseInt(ID);
+				if(id > 0) {
+					if(AirpPortLogic.getInstance().addAirPort(id, city, country, timeZone)) {
+						a.setAlertType(AlertType.INFORMATION);
+			    		a.setHeaderText("MESSAGE");
+			    		a.setTitle("SYSTEM MESSAGE");
+			    		a.setContentText("Added succesfully");
+			    		a.show();
+			    		notInEdit();
+			    		AirPort newAP = new AirPort(id, city, country, timeZone);
+			    		addtoDataStructures(newAP);
+			    		
+					}
+					else
+						faildtoAddMsg();
+				}
+				else
+					faildtoAddMsg();
+			}
+			else
+				faildtoAddMsg();
+		}
+		
     }
+	
+	private void faildtoAddMsg() {
+		
+		a.setAlertType(AlertType.WARNING);
+		a.setHeaderText("MESSAGE");
+		a.setTitle("SYSTEM MESSAGE");
+		a.setContentText("Faild to add");
+		a.show();
+		notInEdit();
+	}
+	
+	private void addtoDataStructures(AirPort ap) {
+		
+		airportMap.put(ap.getAirportCode(), ap);
+		currentAirPort = ap;
+		airportArrList.add(ap);
+		currentAirPortIndex = airportArrList.size() - 1; 
+		airPortCmbBx.getItems().add(ap);
+		airPortCmbBx.setValue(ap);
+	}
 
     @FXML
     void LoadPort(KeyEvent event) {
@@ -115,7 +165,8 @@ public class AirPortsFrm {
     	String s = IDFld.getText();
 		boolean ans = InputValidetions.validatePositiveIntegerOrZero(s);
 		if(ans == true && s != null && !s.isEmpty()) {
-			AirPort ap = airportMap.get(Integer.parseInt(s));
+			AirPort ap = null;
+			ap = airportMap.get(Integer.parseInt(s));
 			if(ap != null) {
 				currentAirPort = ap;
 				airPortCmbBx.setValue(ap);
@@ -123,6 +174,8 @@ public class AirPortsFrm {
 	    		cityFld.setText(currentAirPort.getCity());
 	    		countryFld.setText(currentAirPort.getCountry());
 	    		timeZoneFld.setValue(currentAirPort.getTimeZone());
+	    		currentAirPortIndex = airportArrList.indexOf(ap);
+	    		notInEdit();
 			}
 		}
     }
@@ -130,18 +183,21 @@ public class AirPortsFrm {
     @FXML
     void loadAirPortByCmb(ActionEvent event) {
     	
-    	if(airPortCmbBx.getValue() != null) {
+    	if(airPortCmbBx.getValue() != null && inEditMode == false) {
     		currentAirPort = airPortCmbBx.getValue();
     		IDFld.setText(currentAirPort.getAirportCode() + "");
     		cityFld.setText(currentAirPort.getCity());
     		countryFld.setText(currentAirPort.getCountry());
     		timeZoneFld.setValue(currentAirPort.getTimeZone());
+    		currentAirPortIndex = airportArrList.indexOf(currentAirPort);
+    		notInEdit();
     	}
     }
 
     @FXML
     void loadEmptyFrm(ActionEvent event) {
 
+    	inEdit();  	
     }
 
     @FXML
@@ -150,6 +206,7 @@ public class AirPortsFrm {
     	if((currentAirPortIndex + 1) < airportArrList.size()) {
     		currentAirPortIndex++;
     		airPortCmbBx.setValue(airportArrList.get(currentAirPortIndex));
+    		notInEdit();
     		loadAirPortByCmb(new ActionEvent());
     	}
     	else {
@@ -158,6 +215,7 @@ public class AirPortsFrm {
     		a.setTitle("SYSTEM MESSAGE");
     		a.setContentText("Last in the list!");
     		a.show();
+    		notInEdit();
     	}
     		
     }
@@ -168,6 +226,7 @@ public class AirPortsFrm {
     	if((currentAirPortIndex - 1) >= 0) {
     		currentAirPortIndex--;
     		airPortCmbBx.setValue(airportArrList.get(currentAirPortIndex));
+    		notInEdit();
     		loadAirPortByCmb(new ActionEvent());
     	}
     	else {
@@ -176,7 +235,29 @@ public class AirPortsFrm {
     		a.setTitle("SYSTEM MESSAGE");
     		a.setContentText("First in the list!");
     		a.show();
+    		notInEdit();
     	}
+    }
+    
+    private void notInEdit() {
+    	
+    	inEditMode = false;
+		saveAirPort.setOpacity(0.4);
+		saveAirPort.setDisable(true);
+		cityFld.setEditable(false);
+		countryFld.setEditable(false);
+    }
+    
+    private void inEdit() {
+    	
+    	inEditMode = true;
+		saveAirPort.setOpacity(1.0);
+		saveAirPort.setDisable(false);
+		cityFld.setText(null);
+		countryFld.setText(null);
+		IDFld.setText(null);
+		cityFld.setEditable(true);
+		countryFld.setEditable(true);
     }
 
 }
