@@ -42,6 +42,10 @@ public class ReportsFrm {
     private LocalDate until;
     private int seatsNum = 0;
     private String massage = "";
+   
+    /**
+     * info about the biggest flights report
+     */
     private String biggestFlightsInfo = "biggest Flights Reprot = return a report of all the flights that occurred in range of 'from' and 'until' fields,\n"
     		+ "and thier plane  contain at least a given amount of  tourists seats.\n"
     		+ "return fields: flight serial num, city and country of dep airport and dest airport, dep and land time and flight status\n"
@@ -49,6 +53,11 @@ public class ReportsFrm {
     		+ "           secnd: dep + land time desc order.\n";
     private Alert a = new Alert(AlertType.NONE);
     private Alert b = new Alert(AlertType.NONE);
+    
+    /**
+     * display info about the report
+     * @param event
+     */
     @FXML
     void CallreadMoreICn(MouseEvent event) {
     	
@@ -60,6 +69,10 @@ public class ReportsFrm {
     	a.show();
     }
 
+    /**
+     * creating the report
+     * @param event
+     */
     @FXML
     void callBiggestFlightsReport(ActionEvent event) {
 
@@ -85,7 +98,12 @@ public class ReportsFrm {
     	a.show();
     }
 
-   
+   ///////////////////////////////////////////////validating methods//////////////////////////////////////////////////////
+    
+    /**
+     * validate seats amount
+     * @return true if valid
+     */
     private boolean validateSeatsFld() {
 
     	String s = seatsNumFld.getText();
@@ -106,6 +124,10 @@ public class ReportsFrm {
     	return false;
     }
 
+    /**
+     * validate dates for the report
+     * @return true if valid
+     */
     private boolean validateUntilafterFrom() {
     	
     	LocalDate from = fromFld.getValue();

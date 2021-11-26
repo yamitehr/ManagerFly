@@ -57,12 +57,14 @@ public class AirPortsFrm {
     private Tooltip GMTtooltip;
     private Tooltip pervtooltip;
     private Tooltip nexttooltip;
-    private ArrayList<AirPort> airportArrList;
-    private int currentAirPortIndex;
+    private ArrayList<AirPort> airportArrList;			//list of all airports
+    private int currentAirPortIndex;					//to indicate which airport to show from the list when clicking
+    													//'>' or '<' button
     private AirPort currentAirPort;
-    private boolean inEditMode;//to determine if the user want to add new airport
-    private HashMap<Integer, AirPort> airportMap;
-    private Alert a = new Alert(AlertType.NONE);
+    private boolean inEditMode; 						//to determine if the user can add new airport
+    private HashMap<Integer, AirPort> airportMap;		//contains all airports, uses their id as key help to search and
+    													//display airport details when typing in the id field
+    private Alert a = new Alert(AlertType.NONE);		//for displaying pop up messages for the user
     @FXML
     public void initialize() {
 		init();
@@ -71,6 +73,7 @@ public class AirPortsFrm {
 
     private void init() {
 		
+    	//initializing fields and data structures
     	inEditMode = false;
     	GMTtooltip = new Tooltip();
     	pervtooltip = new Tooltip();
@@ -104,19 +107,29 @@ public class AirPortsFrm {
 	}
 
     
-
+    /**
+     * adding a new air port to the DB
+     * @param event
+     */
 	@FXML
     void addAirPort(ActionEvent event) {
 		
+		//if in edit mode
 		if(inEditMode == true) {
+			
+			//collect data from fields
 			String city = cityFld.getText();
 			String country = countryFld.getText();
 			String ID = IDFld.getText();
 			int timeZone = timeZoneFld.getValue();
-			if(InputValidetions.validateName(city) && InputValidetions.validateName(country) && InputValidetions.validatePositiveIntegerOrZero(ID)) {
+			//validating fields
+			if(timeZoneFld.getValue() != null && IDFld.getText() != null && countryFld.getText() != null && cityFld.getText() != null && InputValidetions.validateName(city) && InputValidetions.validateName(country) && InputValidetions.validatePositiveIntegerOrZero(ID)) {
 				int id = Integer.parseInt(ID);
 				if(id > 0) {
+					//adding a new airport
 					if(AirpPortLogic.getInstance().addAirPort(id, city, country, timeZone)) {
+						
+						//printing  message to user
 						a.setAlertType(AlertType.INFORMATION);
 			    		a.setHeaderText("MESSAGE");
 			    		a.setTitle("SYSTEM MESSAGE");
@@ -139,6 +152,7 @@ public class AirPortsFrm {
 		
     }
 	
+	//displayed when the append failed
 	private void faildtoAddMsg() {
 		
 		a.setAlertType(AlertType.WARNING);
@@ -149,6 +163,10 @@ public class AirPortsFrm {
 		notInEdit();
 	}
 	
+	/**
+	 * adding the new airport to the class data structures
+	 * @param ap = the new airport
+	 */
 	private void addtoDataStructures(AirPort ap) {
 		
 		airportMap.put(ap.getAirportCode(), ap);
@@ -159,6 +177,10 @@ public class AirPortsFrm {
 		airPortCmbBx.setValue(ap);
 	}
 
+	/**
+	 * display current airport details
+	 * @param event
+	 */
     @FXML
     void LoadPort(KeyEvent event) {
     	
@@ -180,6 +202,7 @@ public class AirPortsFrm {
 		}
     }
 
+ /////loading airport by combo box or id field/////
     @FXML
     void loadAirPortByCmb(ActionEvent event) {
     	
@@ -194,6 +217,10 @@ public class AirPortsFrm {
     	}
     }
 
+    /**
+     * load empty firm (when entering edit mode)
+     * @param event
+     */
     @FXML
     void loadEmptyFrm(ActionEvent event) {
 
