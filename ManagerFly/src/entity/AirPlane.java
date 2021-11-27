@@ -1,9 +1,12 @@
 package entity;
 
+import java.util.ArrayList;
+
 public class AirPlane {
 
 	private final String tailNum;					//Primary key
 	private int attendantsNum;						//required number of air attendants for flight
+	private ArrayList<FlightSeat> seats;			//all the seats that belong to the plane
 	
 	//main constructor
 	public AirPlane(String tailNum, int attendantsNum) {
@@ -18,6 +21,13 @@ public class AirPlane {
 		this.tailNum = tailNum;		
 	}
 	
+	//full constructor
+	public AirPlane(String tailNum, int attendantsNum, ArrayList<FlightSeat> seats) {
+		
+		this.tailNum = tailNum;
+		this.attendantsNum = attendantsNum;
+		this.seats = seats;
+	}
 	
 	//getters and setters
 	public String getTailNum() {
@@ -33,6 +43,16 @@ public class AirPlane {
 	public void setAttendantsNum(int attendantsNum) {
 		
 		this.attendantsNum = attendantsNum;
+	}
+	
+	public ArrayList<FlightSeat> getSeats() {
+		
+		return seats;
+	}
+
+	public void setSeats(ArrayList<FlightSeat> seats) {
+		
+		this.seats = seats;
 	}
 
 	//hash function
