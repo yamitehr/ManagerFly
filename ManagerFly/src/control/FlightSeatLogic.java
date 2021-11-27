@@ -82,26 +82,5 @@ public class FlightSeatLogic {
 		return false;
 	}
 	
-	/**
-	 * get current biggest flight seat id from the DB.
-	 * @return id of a flight seat.
-	 */
-	public int getBiggestFlightSeatID() {
-		
-		int results = 0;
-		try {
-			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
-					PreparedStatement stmt = conn.prepareStatement(Consts.SQL_SEL_BIGGEST_FLIGHTSEAT_ID);
-					ResultSet rs = stmt.executeQuery()) {
-					results  = rs.getInt(1);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		return results;
-	}
 	
 }

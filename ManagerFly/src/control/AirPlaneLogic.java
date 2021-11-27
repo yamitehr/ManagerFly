@@ -78,31 +78,5 @@ public class AirPlaneLogic {
 		return false;
 	}
 	
-	/**
-	 * fetches all seats of a plane from DB file.
-	 * @return ArrayList of flight seats.
-	 */
-	public ArrayList<FlightSeat> getSeatsByplanes(String tailNum) {
-		ArrayList<FlightSeat> results = new ArrayList<FlightSeat>();
-		try {
-			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
-					PreparedStatement stmt = conn.prepareStatement("SELECT FlightSeatTbl.ID, FlightSeatTbl.RowNum, FlightSeatTbl.ColNum, FlightSeatTbl.type\r\n"
-				+ "FROM AirPlaneTbl INNER JOIN FlightSeatTbl ON AirPlaneTbl.TailNum = FlightSeatTbl.TailNum\r\n"
-				+ "WHERE (((AirPlaneTbl.TailNum)= " + tailNum + "))\r\n"
-				+ "GROUP BY FlightSeatTbl.ID, FlightSeatTbl.RowNum, FlightSeatTbl.ColNum, FlightSeatTbl.type;");
-					ResultSet rs = stmt.executeQuery()) {
-				while (rs.next()) {
-					int i = 1;
-					
-					results.add(new FlightSeat(rs.getInt(i++), rs.getInt(i++), rs.getString(i++), rs.getString(i++), new AirPlane(rs.getString(i++))));
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		return results;
-	}
+	
 }

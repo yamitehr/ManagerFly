@@ -89,6 +89,28 @@ public class InputValidetions {
 				return false;
 			return true;
 		}
+	/*----------------------------------------- Plane VALIDATIONS METHODS --------------------------------------------*/
+		/**
+		 * validate Plane tail num
+		 * @param string
+		 * @return true if valid
+		 */
+		public static boolean validateTailNum(String s) {
+			if( s.length() > 2 && s.charAt(0) >= 'A' && s.charAt(0) <= 'Z' && s.charAt(1) == '-') {
+				String subS = s.substring(2);
+				for(int i = 0; i < subS.length(); i++) {
+					
+					if(subS.charAt(i) < 'A' || subS.charAt(i) > 'Z') {
+						if(subS.charAt(i) < 'a' || subS.charAt(i) > 'z') {
+							if(subS.charAt(i) < '0' || subS.charAt(i) > '9')
+								return false;
+						}
+					}
+				}
+				return true;
+			}
+			return false;
+		}
 	/*----------------------------------------- FLIGHT VALIDATIONS METHODS --------------------------------------------*/		
 		/**
 		 * check that the 2 pilots of the flight are not the same 

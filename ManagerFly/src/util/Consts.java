@@ -73,9 +73,7 @@ public class Consts {
 	/*------------------------------------------FLIGHT SEATS QUERIES ---------------------------------------*/
 	public static final String SQL_SEL_FLIGHTSEATS = "SELECT * FROM FlightSeatTbl";
 	public static final String SQL_INS_FLIGHTSEATS = "{ call qryInsFlightSeat(?,?,?,?,?) }";
-	public static final String SQL_SEL_BIGGEST_FLIGHTSEAT_ID = "SELECT TOP 1 FlightSeatTbl.ID\r\n"
-																+ "FROM FlightSeatTbl\r\n"
-																+ "ORDER BY FlightSeatTbl.ID DESC;";
+	
 	
 	
 	/**
