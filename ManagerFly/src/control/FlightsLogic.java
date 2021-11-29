@@ -69,14 +69,14 @@ public class FlightsLogic {
 	
 		public boolean isPlaneOverlapping(AirPlane airplane, LocalDateTime startDate, LocalDateTime endDate){
 			
-			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
+			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 			
-			String depatureTimeStampStr = sdf.format(Timestamp.valueOf(startDate));
-			String landingTimeStampStr = sdf.format(Timestamp.valueOf(endDate));
+			String depatureDateStr = sdf.format(Timestamp.valueOf(startDate));
+			String landingDateStr = sdf.format(Timestamp.valueOf(endDate));
 			
 			String query = "SELECT SerialNum FROM FlightTbl WHERE (((FlightTbl.AirPlaneTailNum)='"
-							+ airplane.getTailNum() + "') AND ((FlightTbl.DepatureTime)<=#"
-							+landingTimeStampStr+ "#) AND ((FlightTbl.LandingTime)>=#"+depatureTimeStampStr+"#))";
+							+ airplane.getTailNum() + "') AND ((DateValue(FlightTbl.DepatureTime))<=#"
+							+landingDateStr+ "#) AND ((DateValue(FlightTbl.LandingTime))>=#"+depatureDateStr+"#))";
 			ArrayList<Integer> results = new ArrayList<Integer>();
 			try {
 				Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
