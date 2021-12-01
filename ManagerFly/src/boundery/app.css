@@ -1,0 +1,7 @@
+.Homebutton:hover {
+    -fx-background-color: #003366;
+    -fx-scale-y: 1.1;
+}
+.Homebutton{
+	-fx-font-size: 25;
+}

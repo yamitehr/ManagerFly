@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="693.0" prefWidth="934.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundery.HomePageFrm">
+   <children>
+      <Pane prefHeight="693.0" prefWidth="934.0">
+         <children>
+            <ImageView fitHeight="633.0" fitWidth="662.0" layoutX="190.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../media/Logo.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="331.0" layoutY="519.0" text="AL - HAIFA INC.">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="33.0" />
+               </font>
+            </Label>
+            <Label layoutX="347.0" layoutY="153.0" text="WELCOME">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="33.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

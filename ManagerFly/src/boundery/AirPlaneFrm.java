@@ -84,15 +84,14 @@ public class AirPlaneFrm {
     private Tooltip IDtooltip;
     private Tooltip pervtooltip;
     private Tooltip nexttooltip;
-    private ArrayList<AirPlane> airplaneArrList;			//list of all airports
+    private ArrayList<AirPlane> airplaneArrList;			//list of all airplanes
     private ArrayList<FlightSeat> flightSeatsArrList;
-    private int currentAirPlaneIndex;					//to indicate which airport to show from the list when clicking 
+    private int currentAirPlaneIndex;					//to indicate which airplane to show from the list when clicking 
     													//'>' or '<' button
     private AirPlane currentPlane;
-    private boolean inEditMode; 						//to determine if the user can add new airport
-    private HashMap<String, AirPlane> airPlaneMap;		//contains all airports, uses their id as key help to search and
+    private boolean inEditMode; 						//to determine if the user can add new airplane
+    private HashMap<String, AirPlane> airPlaneMap;		//contains all airplane, uses their id as key help to search and
     private HashMap<String, ArrayList<FlightSeat>> seatsMap;
-    //display airport details when typing in the id field
     private Alert a = new Alert(AlertType.NONE);		//for displaying pop up messages for the user
     private int biggestSeatID;
     
@@ -180,6 +179,10 @@ public class AirPlaneFrm {
 		
 	}
 
+	/**
+	 * load the chosen plane data
+	 * @param event
+	 */
 	@FXML
     void LoadPlane(KeyEvent event) {
 
@@ -199,6 +202,10 @@ public class AirPlaneFrm {
     	}
     }
 
+	/**
+	 * load the chosen plane data
+	 * @param event
+	 */
     @FXML
     void loadPlaneByCmbo(ActionEvent event) {
     	
@@ -214,6 +221,10 @@ public class AirPlaneFrm {
 
     }
     
+    /**
+     * add new plane and seats to the DB
+     * @param event
+     */
     @FXML
     void addAirPlane(ActionEvent event) {
 
@@ -272,6 +283,16 @@ public class AirPlaneFrm {
 			faildtoAddMsg();
 	}
 
+    /**
+     * generate seats and add them to DB by user input from the add plane screen
+     * @param tailNum = tail number of the plane
+     * @param totalCl = = user input columns number for the plane
+     * @param firstClsRow = user input rows number for first class seats
+     * @param buisRow = user input rows number for business seats
+     * @param tourRow = user input rows number for tourists seats
+     * @param plane
+     * @return
+     */
     private ArrayList<FlightSeat> createSeats(String tailNum, int totalCl, int firstClsRow, int buisRow, int tourRow, AirPlane plane) {
 		
     	ArrayList<FlightSeat> seats = new ArrayList<FlightSeat>();
@@ -308,12 +329,20 @@ public class AirPlaneFrm {
 	}
 
 
+    /**
+     * load empty firm for adding new plane and its seats
+     * @param event
+     */
 	@FXML
     void loadEmptyFrm(ActionEvent event) {
 
     	inEdit();
     }
 
+	/**
+	 * load next data of the next plane from the plane array list
+	 * @param event
+	 */
     @FXML
     void loadNextAirPlane(ActionEvent event) {
 
@@ -333,6 +362,10 @@ public class AirPlaneFrm {
     	}
     }
 
+    /**
+	 * load next data of the previous plane from the plane array list
+	 * @param event
+	 */
     @FXML
     void loadPervAirPlane(ActionEvent event) {
 
@@ -364,7 +397,7 @@ public class AirPlaneFrm {
   	}
   	
   	/**
-	 * adding the new airport to the class data structures
+	 * adding the new airplane to the class data structures
 	 * @param ap = the new airport
 	 */
 	private void addtoDataStructures(AirPlane ap) {
@@ -381,6 +414,9 @@ public class AirPlaneFrm {
 		seatsTable.setItems(flightSeatsList);
 	}
 	
+	/**
+	 * set screen for edit mode
+	 */
 	 private void notInEdit() {
 	    	
 	    	inEditMode = false;
@@ -392,6 +428,9 @@ public class AirPlaneFrm {
 			
 	    }
 	    
+	 	/**
+	 	 * set screen for view mode
+	 	 */
 	    private void inEdit() {
 	    	
 	    	inEditMode = true;
