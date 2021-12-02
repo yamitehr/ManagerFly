@@ -22,7 +22,7 @@
                   <Image url="@../../media/Logo.png" />
                </image>
             </ImageView>
-            <Label layoutX="31.0" layoutY="129.0" text="airport code:">
+            <Label layoutX="14.0" layoutY="129.0" text="airport code:">
                <font>
                   <Font name="Microsoft Sans Serif" size="19.0" />
                </font>
@@ -39,18 +39,23 @@
             </Label>
             <TextField fx:id="cityFld" editable="false" layoutX="527.0" layoutY="128.0" prefHeight="0.0" prefWidth="160.0" />
             <TextField fx:id="countryFld" editable="false" layoutX="527.0" layoutY="168.0" prefHeight="25.0" prefWidth="160.0" />
-            <TextField fx:id="IDFld" layoutX="145.0" layoutY="128.0" onKeyReleased="#LoadPort" prefHeight="25.0" prefWidth="128.0" />
+            <TextField fx:id="IDFld" layoutX="167.0" layoutY="128.0" onKeyReleased="#LoadPort" prefHeight="25.0" prefWidth="106.0" />
             <ComboBox fx:id="airPortCmbBx" layoutX="281.0" layoutY="129.0" onAction="#loadAirPortByCmb" prefWidth="150.0" />
-            <Label layoutX="31.0" layoutY="170.0" text="time zone:">
+            <Label layoutX="14.0" layoutY="170.0" text="time zone:">
                <font>
                   <Font name="Microsoft Sans Serif" size="19.0" />
                </font>
             </Label>
-            <ComboBox fx:id="timeZoneFld" layoutX="145.0" layoutY="169.0" prefHeight="25.0" prefWidth="82.0" />
+            <ComboBox fx:id="timeZoneFld" layoutX="167.0" layoutY="168.0" prefHeight="25.0" prefWidth="82.0" />
             <Button fx:id="loadEmptyFrmBtn" layoutX="523.0" layoutY="468.0" mnemonicParsing="false" onAction="#loadEmptyFrm" prefHeight="25.0" prefWidth="106.0" text="Add New" />
             <Button fx:id="saveAirPort" disable="true" layoutX="411.0" layoutY="468.0" mnemonicParsing="false" onAction="#addAirPort" opacity="0.4" prefHeight="25.0" prefWidth="106.0" text="Save" />
             <Button fx:id="nextBtn" layoutX="295.0" layoutY="468.0" mnemonicParsing="false" onAction="#loadNextAirPort" prefHeight="25.0" prefWidth="106.0" text="&gt;&gt;" />
             <Button fx:id="pervBtn" layoutX="182.0" layoutY="468.0" mnemonicParsing="false" onAction="#loadPervAirPort" prefHeight="25.0" prefWidth="106.0" text="&lt;&lt;" />
+            <ImageView fitHeight="103.0" fitWidth="28.0" layoutX="131.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../media/searchIcon.png" />
+               </image>
+            </ImageView>
       </children>
             </AnchorPane>
    </children>

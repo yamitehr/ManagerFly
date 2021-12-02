@@ -108,7 +108,7 @@ public class AirPlaneFrm {
     	IDtooltip = new Tooltip();
     	pervtooltip = new Tooltip();
     	nexttooltip = new Tooltip();
-    	IDtooltip.setText("Example: A-2079");
+    	IDtooltip.setText("Search ,for Example: A-2079");
     	pervtooltip.setText("previous airplane");
     	nexttooltip.setText("next airplane");
     	IDFld.setTooltip(IDtooltip);
