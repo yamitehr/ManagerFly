@@ -24,7 +24,7 @@
                   <Image url="@../../media/Logo.png" />
                </image>
             </ImageView>
-            <Label layoutX="93.0" layoutY="107.0" text="Tail number:">
+            <Label layoutX="62.0" layoutY="107.0" text="Tail number:">
                <font>
                   <Font name="Microsoft Sans Serif" size="19.0" />
                </font>
@@ -99,6 +99,11 @@
                </children>
             </Pane>
             <ComboBox fx:id="planeCmbo" layoutX="287.0" layoutY="106.0" onAction="#loadPlaneByCmbo" prefHeight="25.0" prefWidth="87.0" />
+            <ImageView fitHeight="77.0" fitWidth="33.0" layoutX="174.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../media/searchIcon.png" />
+               </image>
+            </ImageView>
       </children>
             </AnchorPane>
    </children>

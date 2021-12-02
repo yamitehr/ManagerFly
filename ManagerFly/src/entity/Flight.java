@@ -1,5 +1,6 @@
 package entity;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -238,6 +239,12 @@ public class Flight {
 		public String toString() {
 		
 		return "flight num = " + this.getFlightNum() +  " from = " + this.getDepatureAirportID().getCountry() + " " + this.getDepatureAirportID().getCity() + " to = " + this.getDestinationAirportID().getCountry() + " " + this.getDestinationAirportID().getCity() + "\nDepTime = " + getDepatureTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + " LandingTime = " + getLandingTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + " FlightStatus = " + this.getFlightStatus() + "";
+	}
+		
+	public double calcFlightDuration() {
+		
+		double  HoursBetween = Duration.between(this.depatureTime, this.landingTime).toHours();
+		return HoursBetween;
 	}
 		
 }

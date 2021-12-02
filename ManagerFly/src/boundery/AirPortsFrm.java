@@ -57,6 +57,7 @@ public class AirPortsFrm {
     private Tooltip GMTtooltip;
     private Tooltip pervtooltip;
     private Tooltip nexttooltip;
+    private Tooltip searchtooltip;
     private ArrayList<AirPort> airportArrList;			//list of all airports
     private int currentAirPortIndex;					//to indicate which airport to show from the list when clicking
     													//'>' or '<' button
@@ -78,12 +79,15 @@ public class AirPortsFrm {
     	GMTtooltip = new Tooltip();
     	pervtooltip = new Tooltip();
     	nexttooltip = new Tooltip();
+    	searchtooltip = new Tooltip();
     	GMTtooltip.setText("GMT Values");
     	pervtooltip.setText("previous airport");
     	nexttooltip.setText("next airport");
+    	searchtooltip.setText("search");
     	timeZoneFld.setTooltip(GMTtooltip);
     	pervBtn.setTooltip(pervtooltip);
     	nextBtn.setTooltip(nexttooltip);
+    	IDFld.setTooltip(searchtooltip);
     	ArrayList<Integer> GmtArr  = new ArrayList<Integer>();
     	for(int i = -12; i <= 12; i++) {
     		GmtArr.add(i);
