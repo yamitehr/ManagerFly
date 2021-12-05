@@ -13,7 +13,7 @@
          <children>
             <ImageView fitHeight="633.0" fitWidth="662.0" layoutX="190.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../media/Logo.png" />
+                  <Image url="@media/Logo.png" />
                </image>
             </ImageView>
             <Label layoutX="331.0" layoutY="519.0" text="AL - HAIFA INC.">
