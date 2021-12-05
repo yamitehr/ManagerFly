@@ -23,7 +23,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import util.InputValidetions;
 
-public class AirPortsFrm {
+public class ManageAirportsFrm {
 
     @FXML
     private TextField cityFld;

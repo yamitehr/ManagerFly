@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="771.0" prefWidth="927.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundery.AddFlightFrm">
+   <children>
+      <AnchorPane layoutX="183.0" layoutY="39.0" prefHeight="270.0" prefWidth="525.0">
+      <children>
+      <Label layoutX="19.0" layoutY="36.0" styleClass="managerAllText" text="Flight number:" />
+      <Label layoutX="21.0" layoutY="71.0" styleClass="managerAllText" text="Departure Time:" />
+      <Label layoutX="21.0" layoutY="110.0" styleClass="managerAllText" text="Landing Time:" />
+      <TextField fx:id="flightNum" layoutX="139.0" layoutY="32.0" styleClass="textFields" />
+      <DatePicker fx:id="departureDate" layoutX="139.0" layoutY="66.0" styleClass="textFields" />
+            <DatePicker fx:id="landingDate" layoutX="139.0" layoutY="106.0" styleClass="textFields" />
+            <ComboBox fx:id="depHour" layoutX="338.0" layoutY="66.0" prefHeight="26.0" prefWidth="72.0" />
+            <ComboBox fx:id="depMinute" layoutX="430.0" layoutY="66.0" prefHeight="26.0" prefWidth="72.0" />
+            <ComboBox fx:id="arrHour" layoutX="338.0" layoutY="105.0" prefHeight="26.0" prefWidth="72.0" />
+            <ComboBox fx:id="arrMinute" layoutX="430.0" layoutY="105.0" prefHeight="26.0" prefWidth="72.0" />
+            <ComboBox fx:id="airPlanes" layoutX="142.0" layoutY="212.0" onMouseClicked="#initPlanesItems" prefHeight="25.0" prefWidth="149.0" />
+            <Label layoutX="21.0" layoutY="216.0" styleClass="managerAllText" text="Airplane:" />
+            <Label layoutX="19.0" layoutY="144.0" styleClass="managerAllText" text="Departure Airport:" />
+            <ComboBox fx:id="depAirports" layoutX="142.0" layoutY="143.0" onMouseClicked="#initAirports" prefHeight="26.0" prefWidth="149.0" />
+            <Label layoutX="21.0" layoutY="181.0" styleClass="managerAllText" text="Destination Airport:" />
+            <ComboBox fx:id="arrAirports" layoutX="142.0" layoutY="177.0" onMouseClicked="#initAirports" prefHeight="26.0" prefWidth="149.0" />
+      </children>
+            </AnchorPane>
+      <Pane fx:id="addPortFrm" layoutX="159.0" layoutY="321.0" prefHeight="241.0" prefWidth="271.0" />
+      <Pane fx:id="addPlaneFrm" layoutX="482.0" layoutY="321.0" prefHeight="241.0" prefWidth="271.0" />
+      <Pane layoutX="301.0" layoutY="576.0" prefHeight="147.0" prefWidth="271.0">
+         <children>
+      <Button fx:id="addFlight" layoutX="70.0" layoutY="20.0" mnemonicParsing="false" onAction="#addNewFlight" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" text="Add New Flight" />
+            <TextArea fx:id="messageToUser" editable="false" layoutX="25.0" layoutY="74.0" prefHeight="59.0" prefWidth="221.0" style="-fx-text-fill: Red;" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

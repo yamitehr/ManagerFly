@@ -28,7 +28,7 @@ import javafx.scene.layout.Pane;
 import util.Consts;
 import util.InputValidetions;
 
-public class AirPlaneFrm {
+public class ManageAirplanesFrm {
 
 
     @FXML
