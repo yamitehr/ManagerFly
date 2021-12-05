@@ -6,7 +6,6 @@ import java.util.HashMap;
 
 import control.AirPlaneLogic;
 import control.AirpPortLogic;
-import control.FlightSeatLogic;
 import entity.AirPlane;
 import entity.AirPort;
 import entity.FlightSeat;
@@ -157,7 +156,7 @@ public class AirPlaneFrm {
     		planeCmbo.setValue(airplaneArrList.get(0));
     		airPlaneMap = new HashMap<String,AirPlane>();
     		seatsMap  = new HashMap<String,ArrayList<FlightSeat>>();
-    		flightSeatsArrList = FlightSeatLogic.getInstance().getFlightSeats();
+    		flightSeatsArrList = AirPlaneLogic.getInstance().getFlightSeats();
     		biggestSeatID = flightSeatsArrList.get(0).getSeatID();
     		for(FlightSeat fs: flightSeatsArrList) {
     			if(fs.getSeatID() > biggestSeatID) {
@@ -303,7 +302,7 @@ public class AirPlaneFrm {
     		for(int j = 0; j < totalCl; j++) {
 	    		FlightSeat fs = new FlightSeat(idBegin++, rowindex, colls[j], Consts.SEAT_TYPES[0], plane);
 	    		seats.add(fs);
-	    		FlightSeatLogic.getInstance().addFlightSeat(idBegin, rowindex, colls[j], Consts.SEAT_TYPES[0], tailNum);
+	    		AirPlaneLogic.getInstance().addFlightSeat(idBegin, rowindex, colls[j], Consts.SEAT_TYPES[0], tailNum);
     		}
     		rowindex++;
     	}
@@ -311,7 +310,7 @@ public class AirPlaneFrm {
     		for(int j = 0; j < totalCl; j++) {
 	    		FlightSeat fs = new FlightSeat(idBegin++, rowindex, colls[j], Consts.SEAT_TYPES[1], plane);
 	    		seats.add(fs);
-	    		FlightSeatLogic.getInstance().addFlightSeat(idBegin, rowindex, colls[j], Consts.SEAT_TYPES[1], tailNum);
+	    		AirPlaneLogic.getInstance().addFlightSeat(idBegin, rowindex, colls[j], Consts.SEAT_TYPES[1], tailNum);
     		}
     		rowindex++;
     	}
@@ -319,7 +318,7 @@ public class AirPlaneFrm {
     		for(int j = 0; j < totalCl; j++) {
 	    		FlightSeat fs = new FlightSeat(idBegin++, rowindex, colls[j], Consts.SEAT_TYPES[2], plane);
 	    		seats.add(fs);
-	    		FlightSeatLogic.getInstance().addFlightSeat(idBegin, rowindex, colls[j], Consts.SEAT_TYPES[2], tailNum);
+	    		AirPlaneLogic.getInstance().addFlightSeat(idBegin, rowindex, colls[j], Consts.SEAT_TYPES[2], tailNum);
     		}
     		rowindex++;
     	}
