@@ -60,7 +60,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="addSeatsPane" layoutX="115.0" layoutY="148.0" prefHeight="202.0" prefWidth="620.0" style="-fx-background-color: #FFFAFA;" visible="false">
+            <Pane fx:id="addSeatsPane" layoutX="115.0" layoutY="148.0" prefHeight="202.0" prefWidth="620.0" style="-fx-background-color: #EDEEE8;" visible="false">
                <children>
                   <ComboBox fx:id="bsnsCombo" layoutX="122.0" layoutY="163.0" prefHeight="25.0" prefWidth="63.0" />
                   <ComboBox fx:id="firstClassCombo" layoutX="278.0" layoutY="163.0" prefHeight="25.0" prefWidth="63.0" />

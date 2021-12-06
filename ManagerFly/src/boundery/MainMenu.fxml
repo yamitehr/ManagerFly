@@ -6,33 +6,35 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="782.0" prefWidth="1005.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundery.MainMenuFrm">
+<AnchorPane fx:id="MainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="782.0" prefWidth="1005.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundery.MainMenuFrm">
    <children>
-      <BorderPane fx:id="pannelRoot" prefHeight="782.0" prefWidth="1005.0">
-         <top>
-            <MenuBar prefHeight="57.0" prefWidth="1005.0" style="-fx-background-color: #00ccff;" stylesheets="@app.css" BorderPane.alignment="CENTER">
-              <menus>
-                <Menu mnemonicParsing="false" style="-fx-font-size: 25;" styleClass="Homebutton" text="HOME       ">
-                  <items>
-                        <MenuItem mnemonicParsing="false" onAction="#goHome" text="HOME" />
-                    <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Exit" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" style="-fx-font-size: 25;" styleClass="Homebutton" text="MANAGMENT       ">
-                  <items>
-                    <MenuItem mnemonicParsing="false" onAction="#goFlights" text="Flights" />
-                        <MenuItem mnemonicParsing="false" onAction="#goAirPorts" text="AirPorts" />
-                        <MenuItem mnemonicParsing="false" onAction="#goPlanes" text="Planes" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" style="-fx-font-size: 25;" styleClass="Homebutton" text="REPORTS">
-                  <items>
-                    <MenuItem mnemonicParsing="false" onAction="#goReports" text="Reports" />
-                  </items>
-                </Menu>
-              </menus>
-            </MenuBar>
-         </top>
-      </BorderPane>
+      <BorderPane fx:id="pannelRoot" layoutY="57.0" prefHeight="725.0" prefWidth="1005.0" />
+      <MenuBar prefHeight="58.0" prefWidth="1005.0" style="-fx-background-color: #00ccff;" stylesheets="@app.css">
+        <menus>
+          <Menu mnemonicParsing="false" style="-fx-font-size: 25;" styleClass="Homebutton" text="HOME       ">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#goHome" text="HOME" />
+              <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Exit" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" style="-fx-font-size: 25;" styleClass="Homebutton" text="MANAGMENT       ">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#goAirPorts" text="AirPorts" />
+                  <MenuItem mnemonicParsing="false" onAction="#goPlanes" text="Planes" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" style="-fx-font-size: 25;" styleClass="Homebutton" text="REPORTS">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#goReports" text="Reports" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" onAction="#loadAddFlight" style="-fx-font-size: 25;" styleClass="Homebutton" text=" FLIGHTS">
+              <items>
+                <MenuItem mnemonicParsing="false" text="ADD" />
+                  <MenuItem mnemonicParsing="false" onAction="#goFlights" text="MANAGMENT" />
+              </items>
+            </Menu>
+        </menus>
+      </MenuBar>
    </children>
 </AnchorPane>

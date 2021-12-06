@@ -97,7 +97,7 @@ public class AddFlightFrm {
 	private void initFlights() {
 		ArrayList<Integer> hoursList  = new ArrayList<>();
 		ArrayList<Integer> minuteList  = new ArrayList<>();
-		for(int i=0;i<22;i++) 
+		for(int i=0;i<24;i++) 
 		{
 			hoursList.add(i);
 		}
@@ -111,7 +111,7 @@ public class AddFlightFrm {
 		arrMinute.setItems(FXCollections.observableArrayList(minuteList));
 	}
 	
-	@FXML
+	
 	private void initAirports(){
 		ObservableList<AirPort> airports = FXCollections.observableArrayList(AirpPortLogic.getInstance().getAirports());
 		depAirports.getItems().clear();		
@@ -120,7 +120,7 @@ public class AddFlightFrm {
 		arrAirports.setItems(FXCollections.observableArrayList(airports));
 	}
 	
-	@FXML
+	
 	public void initPlanesItems() {
 		ObservableList<AirPlane> planes = FXCollections.observableArrayList(AirPlaneLogic.getInstance().getAirplanes());
 		airPlanes.getItems().clear();	
@@ -181,20 +181,20 @@ public class AddFlightFrm {
 					arrHour.getValue(),
                     arrMinute.getValue());
 			
-			if(!flightsInstance.isPlaneOverlapping(airPlanes.getSelectionModel().getSelectedItem(), depatureDateTime, landingDateTime)) {
+			if(!flightsInstance.isPlaneOverlapping(airPlanes.getSelectionModel().getSelectedItem(), depatureDateTime, landingDateTime, null)) {
 				throw new InvalidInputException("Airplane is already taken by another flight");
 			}
-			if(!flightsInstance.isAirportsOverlapping(depAirports.getValue(), depatureDateTime, true)) {
+			if(!flightsInstance.isAirportsOverlapping(depAirports.getValue(), depatureDateTime, true,null)) {
 				throw new InvalidInputException("Please select a different Departue airport - flights collison");
 			}
-			if(!flightsInstance.isAirportsOverlapping(arrAirports.getValue(), landingDateTime, false)) {
+			if(!flightsInstance.isAirportsOverlapping(arrAirports.getValue(), landingDateTime, false, null)) {
 				throw new InvalidInputException("Please select a different Landing airport - flights collison");
 			}
 			if(depAirports.getValue().equals(arrAirports.getValue())) {
 				throw new InvalidInputException("Departure and Destination airports cannot be the same");
 			}
 			
-			if(flightsInstance.addFlight(Integer.parseInt(flightNumber), depatureDateTime, landingDateTime, depAirports.getValue().getAirportCode(),arrAirports.getValue().getAirportCode(), airPlanes.getSelectionModel().getSelectedItem().getTailNum(), null, null,null)) {
+			if(flightsInstance.addFlight(Integer.parseInt(flightNumber), depatureDateTime, landingDateTime, depAirports.getValue().getAirportCode(),arrAirports.getValue().getAirportCode(), airPlanes.getSelectionModel().getSelectedItem().getTailNum(), null, null,"on time")) {
 				messageToUser.setText("added successfully!");
 			} else {
 				messageToUser.setText("something went wrong while adding a new flight");

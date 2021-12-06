@@ -238,7 +238,7 @@ public class Flight {
 		@Override
 		public String toString() {
 		
-		return "flight num = " + this.getFlightNum() +  " from = " + this.getDepatureAirportID().getCountry() + " " + this.getDepatureAirportID().getCity() + " to = " + this.getDestinationAirportID().getCountry() + " " + this.getDestinationAirportID().getCity() + "\nDepTime = " + getDepatureTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + " LandingTime = " + getLandingTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + " FlightStatus = " + this.getFlightStatus() + "";
+		return "flight num = " + this.flightNum;
 	}
 		
 	public double calcFlightDuration() {

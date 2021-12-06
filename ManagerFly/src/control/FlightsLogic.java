@@ -55,7 +55,7 @@ public class FlightsLogic {
 						      .toLocalDateTime();
 					
 					
-					results.add(new Flight(flightID, depTime, arrTime, new AirPort(rs.getInt(i++)), new AirPort(rs.getInt(i++)),
+					results.add(new Flight(flightID, depTime, arrTime, rs.getString(9), new AirPort(rs.getInt(i++)), new AirPort(rs.getInt(i++)),
 								new AirPlane(rs.getString(i++)), rs.getString(i++), rs.getString(i++)));
 				}
 			} catch (SQLException e) {
@@ -67,7 +67,7 @@ public class FlightsLogic {
 		return results;
 	}
 	
-		public boolean isPlaneOverlapping(AirPlane airplane, LocalDateTime startDate, LocalDateTime endDate){
+		public boolean isPlaneOverlapping(AirPlane airplane, LocalDateTime startDate, LocalDateTime endDate, Integer currFlightID){
 			
 			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 			
@@ -87,7 +87,8 @@ public class FlightsLogic {
 						int i = 1;
 						
 						int flightID = rs.getInt(i++);
-						results.add(flightID);
+						if(currFlightID == null || currFlightID != flightID)
+							results.add(flightID);
 					}
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -101,7 +102,7 @@ public class FlightsLogic {
 			return false;
 		}
 		
-public boolean isAirportsOverlapping(AirPort airport, LocalDateTime dateTime, boolean isDeparture){
+public boolean isAirportsOverlapping(AirPort airport, LocalDateTime dateTime, boolean isDeparture, Integer currFlightID){
 			
 			String airportType;
 			String timeType;
@@ -136,7 +137,8 @@ public boolean isAirportsOverlapping(AirPort airport, LocalDateTime dateTime, bo
 						int i = 1;
 						
 						int flightID = rs.getInt(i++);
-						results.add(flightID);
+						if(currFlightID == null || currFlightID != flightID)
+							results.add(flightID);
 					}
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -228,8 +230,7 @@ public boolean isAirportsOverlapping(AirPort airport, LocalDateTime dateTime, bo
 	 * return true if the update was successful, else - return false
      * @return 
 	 */
-	public boolean editFlight(int flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, int depatureAirportID,
-			int destinationAirportID, String airPlaneTailNum, String cheifPilotID, String coPilotID, String flightStatus) {
+	public boolean editFlight(int flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, String airPlaneTailNum) {
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
@@ -239,24 +240,11 @@ public boolean isAirportsOverlapping(AirPort airport, LocalDateTime dateTime, bo
 				Timestamp depatureTimeStamp = Timestamp.valueOf(depatureTime);
 				Timestamp landingTimeStamp = Timestamp.valueOf(landingTime);
 				
-				stmt.setInt(i++, flightNum); // can't be null
+				// can't be null
 				stmt.setTimestamp(i++, depatureTimeStamp);
 				stmt.setTimestamp(i++, landingTimeStamp);
-				stmt.setInt(i++, depatureAirportID);
-				stmt.setInt(i++, destinationAirportID);
 				stmt.setString(i++, airPlaneTailNum);
-				if (cheifPilotID != null)
-					stmt.setString(i++, cheifPilotID);
-				else
-					stmt.setNull(i++, java.sql.Types.VARCHAR);
-				if (coPilotID != null)
-					stmt.setString(i++, coPilotID);
-				else
-					stmt.setNull(i++, java.sql.Types.VARCHAR);
-				if (flightStatus != null)
-					stmt.setString(i++, flightStatus);
-				else
-					stmt.setNull(i++, java.sql.Types.VARCHAR);
+				stmt.setInt(i++, flightNum);
 				stmt.executeUpdate();
 				return true;
 				
