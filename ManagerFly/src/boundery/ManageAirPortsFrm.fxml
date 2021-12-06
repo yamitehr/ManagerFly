@@ -9,49 +9,54 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="693.0" prefWidth="934.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundery.ManageAirportsFrm">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="742.0" prefWidth="1036.0" style="-fx-background-color: white;" stylesheets="@app.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundery.ManageAirportsFrm">
    <children>
       <AnchorPane layoutX="51.0" layoutY="29.0" prefHeight="610.0" prefWidth="810.0">
       <children>
-      <Label layoutX="31.0" layoutY="34.0" prefHeight="28.0" prefWidth="261.0" styleClass="managerAllText" text="AirPorts Details:">
+            <ImageView fitHeight="757.0" fitWidth="1212.0" layoutX="-69.0" layoutY="-41.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@media/background.jpg" />
+               </image>
+            </ImageView>
+      <Label layoutX="31.0" layoutY="34.0" prefHeight="28.0" prefWidth="261.0" styleClass="managerAllTitles" text="AirPorts Details:">
                <font>
                   <Font name="Microsoft Sans Serif" size="25.0" />
                </font></Label>
-            <ImageView fitHeight="150.0" fitWidth="138.0" layoutX="672.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView blendMode="DARKEN" fitHeight="176.0" fitWidth="182.0" layoutX="733.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@media/Logo.png" />
                </image>
             </ImageView>
-            <Label layoutX="14.0" layoutY="129.0" text="airport code:">
+            <Label layoutX="14.0" layoutY="129.0" styleClass="managerAllText" text="airport code:">
                <font>
                   <Font name="Microsoft Sans Serif" size="19.0" />
                </font>
             </Label>
-            <Label layoutX="453.0" layoutY="130.0" text="city:">
+            <Label layoutX="453.0" layoutY="130.0" styleClass="managerAllText" text="city:">
                <font>
                   <Font name="Microsoft Sans Serif" size="19.0" />
                </font>
             </Label>
-            <Label layoutX="453.0" layoutY="170.0" text="country:">
+            <Label layoutX="453.0" layoutY="170.0" styleClass="managerAllText" text="country:">
                <font>
                   <Font name="Microsoft Sans Serif" size="19.0" />
                </font>
             </Label>
-            <TextField fx:id="cityFld" editable="false" layoutX="527.0" layoutY="128.0" prefHeight="0.0" prefWidth="160.0" />
-            <TextField fx:id="countryFld" editable="false" layoutX="527.0" layoutY="168.0" prefHeight="25.0" prefWidth="160.0" />
-            <TextField fx:id="IDFld" layoutX="167.0" layoutY="128.0" onKeyReleased="#LoadPort" prefHeight="25.0" prefWidth="106.0" />
-            <ComboBox fx:id="airPortCmbBx" layoutX="281.0" layoutY="129.0" onAction="#loadAirPortByCmb" prefWidth="150.0" />
-            <Label layoutX="14.0" layoutY="170.0" text="time zone:">
+            <TextField fx:id="cityFld" editable="false" layoutX="527.0" layoutY="128.0" prefHeight="0.0" prefWidth="160.0" styleClass="fld" />
+            <TextField fx:id="countryFld" editable="false" layoutX="527.0" layoutY="168.0" prefHeight="25.0" prefWidth="160.0" styleClass="fld" />
+            <TextField fx:id="IDFld" layoutX="167.0" layoutY="128.0" onKeyReleased="#LoadPort" prefHeight="25.0" prefWidth="106.0" styleClass="fld" />
+            <ComboBox fx:id="airPortCmbBx" layoutX="281.0" layoutY="129.0" onAction="#loadAirPortByCmb" prefWidth="150.0" styleClass="combo" />
+            <Label layoutX="14.0" layoutY="170.0" styleClass="managerAllText" text="time zone:">
                <font>
                   <Font name="Microsoft Sans Serif" size="19.0" />
                </font>
             </Label>
-            <ComboBox fx:id="timeZoneFld" layoutX="167.0" layoutY="168.0" prefHeight="25.0" prefWidth="82.0" />
-            <Button fx:id="loadEmptyFrmBtn" layoutX="523.0" layoutY="468.0" mnemonicParsing="false" onAction="#loadEmptyFrm" prefHeight="25.0" prefWidth="106.0" text="Add New" />
-            <Button fx:id="saveAirPort" disable="true" layoutX="411.0" layoutY="468.0" mnemonicParsing="false" onAction="#addAirPort" opacity="0.4" prefHeight="25.0" prefWidth="106.0" text="Save" />
-            <Button fx:id="nextBtn" layoutX="295.0" layoutY="468.0" mnemonicParsing="false" onAction="#loadNextAirPort" prefHeight="25.0" prefWidth="106.0" text="&gt;&gt;" />
-            <Button fx:id="pervBtn" layoutX="182.0" layoutY="468.0" mnemonicParsing="false" onAction="#loadPervAirPort" prefHeight="25.0" prefWidth="106.0" text="&lt;&lt;" />
-            <ImageView fitHeight="103.0" fitWidth="28.0" layoutX="131.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
+            <ComboBox fx:id="timeZoneFld" layoutX="167.0" layoutY="168.0" prefHeight="25.0" prefWidth="82.0" styleClass="combo" />
+            <Button fx:id="loadEmptyFrmBtn" layoutX="523.0" layoutY="468.0" mnemonicParsing="false" onAction="#loadEmptyFrm" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="Add New" />
+            <Button fx:id="saveAirPort" disable="true" layoutX="411.0" layoutY="468.0" mnemonicParsing="false" onAction="#addAirPort" opacity="0.4" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="Save" />
+            <Button fx:id="nextBtn" layoutX="295.0" layoutY="468.0" mnemonicParsing="false" onAction="#loadNextAirPort" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="&gt;&gt;" />
+            <Button fx:id="pervBtn" layoutX="182.0" layoutY="468.0" mnemonicParsing="false" onAction="#loadPervAirPort" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="&lt;&lt;" />
+            <ImageView blendMode="DARKEN" fitHeight="103.0" fitWidth="28.0" layoutX="131.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@media/searchIcon.png" />
                </image>

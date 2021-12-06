@@ -87,7 +87,7 @@ public class Consts {
 			// System.out.println(decoded) - Can help to check the returned path
 			if (decoded.contains(".jar")) {
 				decoded = decoded.substring(0, decoded.lastIndexOf('/'));
-				return decoded + "/database/DB_ManagerFly.accdb";
+				return decoded + "/src/entity/DB_ManagerFly.accdb";
 			} else {
 				decoded = decoded.substring(0, decoded.lastIndexOf("bin/"));
 				System.out.println(decoded);

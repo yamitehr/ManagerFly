@@ -186,6 +186,7 @@ public class FlightManagmentFrm {
 			f = flightsById.get(Integer.parseInt(s));
 			if(f != null) {
 				currentFlight = FlightCmbBx.getValue();
+				currFlightIndex = flightArr.indexOf(f);
 				FlightCmbBx.setValue(f);
 				setFields();
 			}
@@ -219,7 +220,7 @@ public class FlightManagmentFrm {
 	    		a.show();
 			}
 			else {
-				a.setAlertType(AlertType.WARNING);
+				a.setAlertType(AlertType.ERROR);
 	    		a.setHeaderText("MESSAGE");
 	    		a.setTitle("SYSTEM MESSAGE");
 	    		a.setContentText("Somthing went wrong!");
@@ -233,6 +234,7 @@ public class FlightManagmentFrm {
 
     	if(FlightCmbBx.getValue() != null) {
     		currentFlight = FlightCmbBx.getValue();
+    		currFlightIndex = flightArr.indexOf(currentFlight);
     		IDFld.setText(currentFlight.getFlightNum() + "");
     		setFields();
     	}
@@ -353,7 +355,7 @@ public class FlightManagmentFrm {
 			return true;
     	}
     	catch(InvalidInputException e) {
-    		a.setAlertType(AlertType.WARNING);
+    		a.setAlertType(AlertType.ERROR);
     		a.setHeaderText("MESSAGE");
     		a.setTitle("SYSTEM MESSAGE");
     		a.setContentText(e.getMessage());

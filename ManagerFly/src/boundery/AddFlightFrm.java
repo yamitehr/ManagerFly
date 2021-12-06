@@ -61,9 +61,7 @@ public class AddFlightFrm {
 	@FXML
 	private Button addFlight;
 	@FXML
-	public TextArea messageToUser;
-	@FXML
-	private Alert a;
+	private Alert a = new Alert(AlertType.NONE);;
 	
 	private FlightsLogic flightsInstance = FlightsLogic.getInstance();
 	
@@ -195,15 +193,32 @@ public class AddFlightFrm {
 			}
 			
 			if(flightsInstance.addFlight(Integer.parseInt(flightNumber), depatureDateTime, landingDateTime, depAirports.getValue().getAirportCode(),arrAirports.getValue().getAirportCode(), airPlanes.getSelectionModel().getSelectedItem().getTailNum(), null, null,"on time")) {
-				messageToUser.setText("added successfully!");
+				a.setAlertType(AlertType.INFORMATION);
+	    		a.setHeaderText("MESSAGE");
+	    		a.setTitle("SYSTEM MESSAGE");
+	    		a.setContentText("added successfully!");
+	    		a.show();
 			} else {
-				messageToUser.setText("something went wrong while adding a new flight");
+				a.setAlertType(AlertType.ERROR);
+	    		a.setHeaderText("MESSAGE");
+	    		a.setTitle("SYSTEM MESSAGE");
+	    		a.setContentText("something went wrong while adding a new flight");
+	    		a.show();
+			
 			}
 			
 		}  catch(InvalidInputException ipe) {
-			messageToUser.setText(ipe.getMessage());
+			a.setAlertType(AlertType.ERROR);
+    		a.setHeaderText("MESSAGE");
+    		a.setTitle("SYSTEM MESSAGE");
+    		a.setContentText(ipe.getMessage());
+    		a.show();
 		} catch(Exception exc) {
-			messageToUser.setText("an error has accured please try again");
+			a.setAlertType(AlertType.ERROR);
+    		a.setHeaderText("MESSAGE");
+    		a.setTitle("SYSTEM MESSAGE");
+    		a.setContentText("an error has accured please try again");
+    		a.show();
 		}
 	}
 	
