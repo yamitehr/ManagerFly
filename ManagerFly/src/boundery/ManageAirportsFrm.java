@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
-import control.AirpPortLogic;
+import control.FlightsLogic;
+import control.Getters;
 import entity.AirPort;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -96,7 +97,7 @@ public class ManageAirportsFrm {
     	GMTValuesList = FXCollections.observableArrayList(GmtArr);
     	timeZoneFld.setItems(GMTValuesList);
     	currentAirPortIndex = 0;
-    	airportArrList = AirpPortLogic.getInstance().getAirports();
+    	airportArrList = Getters.getInstance().getAirports();
     	if(airportArrList != null) {
     		airPortsList = FXCollections.observableArrayList(airportArrList);
     		airPortCmbBx.setItems(airPortsList);
@@ -131,7 +132,7 @@ public class ManageAirportsFrm {
 				int id = Integer.parseInt(ID);
 				if(id > 0) {
 					//adding a new airport
-					if(AirpPortLogic.getInstance().addAirPort(id, city, country, timeZone)) {
+					if(FlightsLogic.getInstance().addAirPort(id, city, country, timeZone)) {
 						
 						//printing  message to user
 						a.setAlertType(AlertType.INFORMATION);
@@ -142,6 +143,7 @@ public class ManageAirportsFrm {
 			    		notInEdit();
 			    		AirPort newAP = new AirPort(id, city, country, timeZone);
 			    		addtoDataStructures(newAP);
+			    		AddFlightFrm.closeWindow();
 			    		
 					}
 					else
@@ -164,7 +166,6 @@ public class ManageAirportsFrm {
 		a.setTitle("SYSTEM MESSAGE");
 		a.setContentText("Faild to add");
 		a.show();
-		notInEdit();
 	}
 	
 	/**
@@ -271,7 +272,6 @@ public class ManageAirportsFrm {
     }
     
     private void notInEdit() {
-    	
     	inEditMode = false;
 		saveAirPort.setOpacity(0.4);
 		saveAirPort.setDisable(true);
@@ -280,7 +280,6 @@ public class ManageAirportsFrm {
     }
     
     private void inEdit() {
-    	
     	inEditMode = true;
 		saveAirPort.setOpacity(1.0);
 		saveAirPort.setDisable(false);
@@ -289,6 +288,26 @@ public class ManageAirportsFrm {
 		IDFld.setText(null);
 		cityFld.setEditable(true);
 		countryFld.setEditable(true);
+    }
+    
+   public void inEditAddFlight() {
+    	
+    	inEditMode = true;
+    	pervtooltip.hide();
+    	nexttooltip.hide();
+    	nextBtn.setTooltip(nexttooltip);
+    	IDFld.clear();
+		saveAirPort.setOpacity(1.0);
+		saveAirPort.setDisable(false);
+		cityFld.setText(null);
+		countryFld.setText(null);
+		IDFld.setText(null);
+		cityFld.setEditable(true);
+		countryFld.setEditable(true);
+		airPortCmbBx.setVisible(false);
+		pervBtn.setVisible(false);
+		nextBtn.setVisible(false);
+		loadEmptyFrmBtn.setVisible(false);
     }
 
 }

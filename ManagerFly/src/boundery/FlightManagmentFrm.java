@@ -6,9 +6,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import control.AirPlaneLogic;
-import control.AirpPortLogic;
 import control.FlightsLogic;
+import control.Getters;
 import entity.AirPlane;
 import entity.AirPort;
 import entity.Flight;
@@ -142,7 +141,7 @@ public class FlightManagmentFrm {
     
     private void initFlights(){
 		
-    	flightArr = flightsInstance.getFlights();
+    	flightArr = Getters.getInstance().getFlights();
 
     	ArrayList<Integer> hoursList  = new ArrayList<>();
 		ArrayList<Integer> minuteList  = new ArrayList<>();
@@ -163,14 +162,14 @@ public class FlightManagmentFrm {
 
 	public void initPlanesItems() {
 		
-    	ObservableList<AirPlane> planes = FXCollections.observableArrayList(AirPlaneLogic.getInstance().getAirplanes());
+    	ObservableList<AirPlane> planes = FXCollections.observableArrayList(Getters.getInstance().getAirplanes());
 		airPlanes.getItems().clear();	
 		airPlanes.setItems(FXCollections.observableArrayList(planes));
 	}
     
     private void initAirports(){
 		
-    	ObservableList<AirPort> airports = FXCollections.observableArrayList(AirpPortLogic.getInstance().getAirports());
+    	ObservableList<AirPort> airports = FXCollections.observableArrayList(Getters.getInstance().getAirports());
 		for(AirPort ap: airports) {
 			 airPortsById.put(ap.getAirportCode(), ap);
 		}

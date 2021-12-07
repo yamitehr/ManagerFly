@@ -4,8 +4,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import control.AirPlaneLogic;
-import control.AirpPortLogic;
+import control.FlightsLogic;
+import control.Getters;
 import entity.AirPlane;
 import entity.AirPort;
 import entity.FlightSeat;
@@ -149,14 +149,14 @@ public class ManageAirplanesFrm {
         totalCollsCombo.setValue(totalColsArr.get(0));
     	currentAirPlaneIndex = 0;
     	seatsTable.setFixedCellSize(45);
-    	airplaneArrList = AirPlaneLogic.getInstance().getAirplanes();
+    	airplaneArrList = Getters.getInstance().getAirplanes();
     	if(airplaneArrList != null) {
     		airPlaneList = FXCollections.observableArrayList(airplaneArrList);
     		planeCmbo.setItems(airPlaneList);
     		planeCmbo.setValue(airplaneArrList.get(0));
     		airPlaneMap = new HashMap<String,AirPlane>();
     		seatsMap  = new HashMap<String,ArrayList<FlightSeat>>();
-    		flightSeatsArrList = AirPlaneLogic.getInstance().getFlightSeats();
+    		flightSeatsArrList = Getters.getInstance().getFlightSeats();
     		biggestSeatID = flightSeatsArrList.get(0).getSeatID();
     		for(FlightSeat fs: flightSeatsArrList) {
     			if(fs.getSeatID() > biggestSeatID) {
@@ -245,7 +245,7 @@ public class ManageAirplanesFrm {
 						Integer attNum = attendNumByCombo;
 						
 						//adding a new airport
-						if(AirPlaneLogic.getInstance().addAirPlane(tailNum, attNum)) {
+						if(FlightsLogic.getInstance().addAirPlane(tailNum, attNum)) {
 							
     							//printing  message to user
     							a.setAlertType(AlertType.INFORMATION);
@@ -257,7 +257,8 @@ public class ManageAirplanesFrm {
     				    		ArrayList<FlightSeat> seats = createSeats(tailNum, totalColl, firstClassRows, BuissnessRows, toursitsRows, newAP);
     				    		newAP.setSeats(seats);
     				    		addtoDataStructures(newAP);
-    				    		notInEdit();		    		
+    				    		notInEdit();	
+    				    		AddFlightFrm.closeWindow();
 							}
 						else
 							faildtoAddMsg();
@@ -275,7 +276,6 @@ public class ManageAirplanesFrm {
 		  		a.setContentText("Tail number must be of this pattern Letter-Letters/integers\n"
 		  				+ "Example: A-2079B");
 		  		a.show();
-		  		notInEdit();
 			}					
 		}
 		else
@@ -302,7 +302,7 @@ public class ManageAirplanesFrm {
     		for(int j = 0; j < totalCl; j++) {
 	    		FlightSeat fs = new FlightSeat(idBegin++, rowindex, colls[j], Consts.SEAT_TYPES[0], plane);
 	    		seats.add(fs);
-	    		AirPlaneLogic.getInstance().addFlightSeat(idBegin, rowindex, colls[j], Consts.SEAT_TYPES[0], tailNum);
+	    		FlightsLogic.getInstance().addFlightSeat(idBegin, rowindex, colls[j], Consts.SEAT_TYPES[0], tailNum);
     		}
     		rowindex++;
     	}
@@ -310,7 +310,7 @@ public class ManageAirplanesFrm {
     		for(int j = 0; j < totalCl; j++) {
 	    		FlightSeat fs = new FlightSeat(idBegin++, rowindex, colls[j], Consts.SEAT_TYPES[1], plane);
 	    		seats.add(fs);
-	    		AirPlaneLogic.getInstance().addFlightSeat(idBegin, rowindex, colls[j], Consts.SEAT_TYPES[1], tailNum);
+	    		FlightsLogic.getInstance().addFlightSeat(idBegin, rowindex, colls[j], Consts.SEAT_TYPES[1], tailNum);
     		}
     		rowindex++;
     	}
@@ -318,7 +318,7 @@ public class ManageAirplanesFrm {
     		for(int j = 0; j < totalCl; j++) {
 	    		FlightSeat fs = new FlightSeat(idBegin++, rowindex, colls[j], Consts.SEAT_TYPES[2], plane);
 	    		seats.add(fs);
-	    		AirPlaneLogic.getInstance().addFlightSeat(idBegin, rowindex, colls[j], Consts.SEAT_TYPES[2], tailNum);
+	    		FlightsLogic.getInstance().addFlightSeat(idBegin, rowindex, colls[j], Consts.SEAT_TYPES[2], tailNum);
     		}
     		rowindex++;
     	}
@@ -438,6 +438,24 @@ public class ManageAirplanesFrm {
 			addSeatsPane.setVisible(true);
 			seatsPane.setVisible(false);
 			planeCmbo.setVisible(false);
+	    }
+	    
+	    public void inEditAddFlight() {
+	    	
+	    	inEditMode = true;
+	    	IDtooltip.setText("Format: A-1234");
+	    	pervtooltip.hide();
+	    	nexttooltip.hide();
+	    	nextBtn.setTooltip(nexttooltip);
+	    	IDFld.clear();
+			saveAirPlane.setOpacity(1.0);
+			saveAirPlane.setDisable(false);
+			addSeatsPane.setVisible(true);
+			seatsPane.setVisible(false);
+			planeCmbo.setVisible(false);
+			pervBtn.setVisible(false);
+			nextBtn.setVisible(false);
+			loadEmptyFrmBtn.setVisible(false);
 	    }
 
 }

@@ -1,14 +1,16 @@
 package boundery;
 
 
+import static util.LoadPane.LoadFXML;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
-import control.AirPlaneLogic;
-import control.AirpPortLogic;
+import javafx.event.EventHandler;
 import control.FlightsLogic;
+import control.Getters;
 import entity.AirPlane;
 import entity.AirPort;
 import entity.FlightSeat;
@@ -17,6 +19,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -25,15 +29,16 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import util.Consts;
 import util.InputValidetions;
 
 public class AddFlightFrm {
-	@FXML
-	private Pane addPlaneFrm;
-	@FXML
-	private Pane addPortFrm;
 	//flight
 	@FXML
 	private TextField flightNum;
@@ -61,7 +66,14 @@ public class AddFlightFrm {
 	@FXML
 	private Button addFlight;
 	@FXML
-	private Alert a = new Alert(AlertType.NONE);;
+	private Button redAddPlane;
+	@FXML
+	private Button redAddPort;
+	@FXML
+	private Alert a = new Alert(AlertType.NONE);
+	
+	public static Stage primaryStagePlane;
+	public static Stage primaryStagePort;
 	
 	private FlightsLogic flightsInstance = FlightsLogic.getInstance();
 	
@@ -71,27 +83,21 @@ public class AddFlightFrm {
     }
 	
 	private void init() {
-		//load secondary forms
-		try {
-			addPlaneFrm.getChildren().add(FXMLLoader.load(getClass().getResource("AddAirplaneFrm.fxml")));
-			addPortFrm.getChildren().add(FXMLLoader.load(getClass().getResource("AddAirportFrm.fxml")));
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		initFlights();
 		initAirports();
-
-		ObservableList<AirPlane> airplanes = FXCollections.observableArrayList(AirPlaneLogic.getInstance().getAirplanes());
+		initAirplanes();
+		
+	}
+	@FXML
+	private void initAirplanes() {
+		ObservableList<AirPlane> airplanes = FXCollections.observableArrayList(Getters.getInstance().getAirplanes());
 		airPlanes.getItems().clear();		
 		airPlanes.setItems(FXCollections.observableArrayList(airplanes));
-		
 	}
 	
 	
-	
+	@FXML
 	private void initFlights() {
 		ArrayList<Integer> hoursList  = new ArrayList<>();
 		ArrayList<Integer> minuteList  = new ArrayList<>();
@@ -109,9 +115,9 @@ public class AddFlightFrm {
 		arrMinute.setItems(FXCollections.observableArrayList(minuteList));
 	}
 	
-	
+	@FXML
 	private void initAirports(){
-		ObservableList<AirPort> airports = FXCollections.observableArrayList(AirpPortLogic.getInstance().getAirports());
+		ObservableList<AirPort> airports = FXCollections.observableArrayList(Getters.getInstance().getAirports());
 		depAirports.getItems().clear();		
 		arrAirports.getItems().clear();	
 		depAirports.setItems(FXCollections.observableArrayList(airports));
@@ -119,11 +125,70 @@ public class AddFlightFrm {
 	}
 	
 	
-	public void initPlanesItems() {
-		ObservableList<AirPlane> planes = FXCollections.observableArrayList(AirPlaneLogic.getInstance().getAirplanes());
-		airPlanes.getItems().clear();	
-		airPlanes.setItems(FXCollections.observableArrayList(planes));
+	@FXML
+	private void redirectAddPlane() throws IOException {
+		
+		primaryStagePlane = new Stage();
+		FXMLLoader loader = new FXMLLoader(
+				  getClass().getResource(
+				    "ManageAirPlanesFrm.fxml"
+				  )
+				);
+		Parent root = loader.load();
+		ManageAirplanesFrm controller = 
+			    loader.<ManageAirplanesFrm>getController();
+		
+		controller.inEditAddFlight();
+		
+		Scene scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("app.css").toExternalForm());	
+		
+		
+		primaryStagePlane.setScene(scene);
+		primaryStagePlane.setTitle("Add New Plane");
+		primaryStagePlane.setResizable(false);
+		primaryStagePlane.initStyle(StageStyle.DECORATED);
+	
+		primaryStagePlane.setWidth(1000);
+		primaryStagePlane.setHeight(750);
+		primaryStagePlane.show();
+		
 	}
+	
+	static void closeWindow() {
+		if(primaryStagePlane != null) {
+			primaryStagePlane.close();
+		}
+		
+		if(primaryStagePort != null) {
+			primaryStagePort.close();
+		}
+	}
+	
+	@FXML
+	private void redirectAddAirport() throws IOException {
+		
+		primaryStagePort = new Stage();
+		
+		FXMLLoader loader = new FXMLLoader(
+				  getClass().getResource(
+				    "ManageAirPortsFrm.fxml"
+				  )
+				);
+		Parent root = loader.load();
+		ManageAirportsFrm controller = 
+			    loader.<ManageAirportsFrm>getController();
+		controller.inEditAddFlight();
+		Scene scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("app.css").toExternalForm());	
+		primaryStagePort.setScene(scene);
+		primaryStagePort.setTitle("Add New Airport");
+		primaryStagePort.setResizable(false);
+		primaryStagePort.initStyle(StageStyle.DECORATED);
+		primaryStagePort.show();
+	}
+	
+	
 	
 	@FXML
 	private void addNewFlight() {
@@ -199,12 +264,7 @@ public class AddFlightFrm {
 	    		a.setContentText("added successfully!");
 	    		a.show();
 			} else {
-				a.setAlertType(AlertType.ERROR);
-	    		a.setHeaderText("MESSAGE");
-	    		a.setTitle("SYSTEM MESSAGE");
-	    		a.setContentText("something went wrong while adding a new flight");
-	    		a.show();
-			
+				throw new InvalidInputException("something went wrong while adding a new flight. Try a different ID");
 			}
 			
 		}  catch(InvalidInputException ipe) {

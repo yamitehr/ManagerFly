@@ -31,41 +31,14 @@ public class FlightsLogic {
 			_instance = new FlightsLogic();
 		return _instance;
 	}
-
-	/**
-	 * fetches all flights from DB file.
-	 * @return ArrayList of flights.
-	 */
-	public ArrayList<Flight> getFlights() {
-		ArrayList<Flight> results = new ArrayList<Flight>();
-		try {
-			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
-					PreparedStatement stmt = conn.prepareStatement(Consts.SQL_SEL_FLIGHT);
-					ResultSet rs = stmt.executeQuery()) {
-				while (rs.next()) {
-					int i = 1;
-					
-					int flightID = rs.getInt(i++);
-					LocalDateTime depTime = rs.getTimestamp(i++).toInstant()
-						      .atZone(ZoneId.systemDefault())
-						      .toLocalDateTime();
-					LocalDateTime arrTime = rs.getTimestamp(i++).toInstant()
-						      .atZone(ZoneId.systemDefault())
-						      .toLocalDateTime();
-					
-					
-					results.add(new Flight(flightID, depTime, arrTime, rs.getString(9), new AirPort(rs.getInt(i++)), new AirPort(rs.getInt(i++)),
-								new AirPlane(rs.getString(i++)), rs.getString(i++), rs.getString(i++)));
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		return results;
-	}
+/**
+ * Validation on Plane overlappse
+ * @param airplane
+ * @param startDate
+ * @param endDate
+ * @param currFlightID
+ * @return
+ */
 	
 		public boolean isPlaneOverlapping(AirPlane airplane, LocalDateTime startDate, LocalDateTime endDate, Integer currFlightID){
 			
@@ -101,8 +74,16 @@ public class FlightsLogic {
 			}
 			return false;
 		}
-		
-public boolean isAirportsOverlapping(AirPort airport, LocalDateTime dateTime, boolean isDeparture, Integer currFlightID){
+	
+		/**
+		 * Validation on Airports overlappse
+		 * @param airport
+		 * @param dateTime
+		 * @param isDeparture
+		 * @param currFlightID
+		 * @return
+		 */
+		public boolean isAirportsOverlapping(AirPort airport, LocalDateTime dateTime, boolean isDeparture, Integer currFlightID){
 			
 			String airportType;
 			String timeType;
@@ -151,8 +132,6 @@ public boolean isAirportsOverlapping(AirPort airport, LocalDateTime dateTime, bo
 			}
 			return false;
 		}
-	
-	/*----------------------------------------- ADD / REMOVE / UPDATE FLIGHT METHODS --------------------------------------------*/
 
 	/**
 	 * Adding a new Employee with the parameters received from the form.
@@ -192,38 +171,103 @@ public boolean isAirportsOverlapping(AirPort airport, LocalDateTime dateTime, bo
 				return true;
 				
 			} catch (SQLException e) {
-				e.printStackTrace();
 			}
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		}
 		return false;
 	}
 
 	/**
-	 * Delete the selected employee in form.
-	 * return true if the deletion was successful, else - return false
-	 * @param employeeID - the employee to delete from DB
-     * @return 
+	 * add a new airport to the data base
+	 * @param airPortCode = primary key of the airport
+	 * @param city = city which the airport is locate at
+	 * @param country = country which the airport is locate at
+	 * @param timeZone = time zone of the place according to GMT {in range of -12 -> 12}
+	 * @return true if added successfully 
 	 */
-	public boolean removeFlight(int flightNum) {
-		try {
-			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
-					CallableStatement stmt = conn.prepareCall(Consts.SQL_DEL_FLIGHT)) {
-				
-				stmt.setLong(1, flightNum);
-				stmt.executeUpdate();
-				return true;
-				
-			} catch (SQLException e) {
+		public boolean addAirPort(int id, String city, String country, int GMT ) {
+			try {
+				Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+				try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+						CallableStatement stmt = conn.prepareCall(Consts.SQL_INS_AIRPORT)){			
+					int i = 1;
+					
+					stmt.setInt(i++, id); // can't be null
+					stmt.setString(i++, city);
+					stmt.setString(i++, country);
+					stmt.setInt(i++, GMT);
+					stmt.executeUpdate();
+					return true;
+					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			return false;
 		}
-		return false;
-	}
+		
+		
+		/**
+		 * add a new airplane to the data base
+		 * @param tailNum = the id of the airplane example: A-345X
+		 * @param attendantsNum = the amount of necessary air attendants for the flight 
+		 * @return true if added successfully
+		 */
+		public boolean addAirPlane(String tailNum, int attendantsNum) {
+			try {
+				Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+				try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+						CallableStatement stmt = conn.prepareCall(Consts.SQL_INS_AIRPLANE)){			
+					int i = 1;
+					
+					stmt.setString(i++, tailNum);
+					stmt.setInt(i++, attendantsNum);
+					stmt.executeUpdate();
+					return true;
+					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			return false;
+		}
+		
+		
+		/**
+		 * add a new flight seat to the data base
+		 * @param id = id of the seat
+		 * @param row = row index
+		 * @param col = col index
+		 * @param type = type of the seat {"first class", "business","tourists"}
+		 * @param tailNum = the id of the airplane which the seat belongs to
+		 * @return true if added successfully
+		 */
+		public boolean addFlightSeat(int id , int row, String col , String type ,String tailNum) {
+			try {
+				Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+				try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+						CallableStatement stmt = conn.prepareCall(Consts.SQL_INS_FLIGHTSEATS)){			
+					int i = 1;
+					stmt.setInt(i++, id);
+					stmt.setInt(i++, row);
+					stmt.setString(i++, col);
+					stmt.setString(i++, type);
+					stmt.setString(i++, tailNum);
+					stmt.executeUpdate();
+					return true;
+					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			return false;
+		}
 	
 	/**
 	 * Editing a exist employee with the parameters received from the form.
