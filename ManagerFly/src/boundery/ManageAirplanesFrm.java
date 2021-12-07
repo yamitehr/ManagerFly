@@ -239,7 +239,7 @@ public class ManageAirplanesFrm {
 			Integer BuissnessRows = bsnsCombo.getValue();
 			
 			//validating fields
-			if(!tailNum.isEmpty() && IDFld.getText() != null &&  InputValidetions.validateTailNum(tailNum)) {
+			if(tailNum != null  && !tailNum.isEmpty() &&  InputValidetions.validateTailNum(tailNum)) {
 				if( totalCollsCombo.getValue() != null && TouristsCombo.getValue() != null && firstClassCombo.getValue() != null && bsnsCombo.getValue() != null) {			
 					if(attendNumByCombo != null) {
 						Integer attNum = attendNumByCombo;
@@ -438,6 +438,7 @@ public class ManageAirplanesFrm {
 			addSeatsPane.setVisible(true);
 			seatsPane.setVisible(false);
 			planeCmbo.setVisible(false);
+			IDFld.setText(null);
 	    }
 	    
 	    public void inEditAddFlight() {
