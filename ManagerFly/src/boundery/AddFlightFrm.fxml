@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="742.0" prefWidth="1036.0" style="-fx-background-color: white;" stylesheets="@app.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundery.AddFlightFrm">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="742.0" prefWidth="1036.0" style="-fx-background-color: white;" stylesheets="@app.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundery.AddFlightFrm">
    <children>
       <ImageView fitHeight="888.0" fitWidth="1170.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -49,9 +49,9 @@
             <Label layoutX="75.0" layoutY="-19.0" prefHeight="38.0" prefWidth="145.0" styleClass="managerAllTitles" text="Add Flight:" />
       </children>
             </AnchorPane>
-      <Pane layoutX="383.0" layoutY="571.0" prefHeight="147.0" prefWidth="271.0">
+      <Pane layoutX="393.0" layoutY="554.0" prefHeight="147.0" prefWidth="271.0">
          <children>
-      <Button fx:id="addFlight" layoutX="70.0" layoutY="20.0" mnemonicParsing="false" onAction="#addNewFlight" prefHeight="38.0" prefWidth="131.0" styleClass="btn" text="Add New Flight" />
+      <Button fx:id="addFlight" layoutX="105.0" layoutY="14.0" mnemonicParsing="false" onAction="#addNewFlight" prefHeight="38.0" prefWidth="131.0" styleClass="btn" text="Add New Flight" />
          </children>
       </Pane>
       <ImageView blendMode="DARKEN" fitHeight="198.0" fitWidth="211.0" layoutX="824.0" layoutY="-17.0" pickOnBounds="true" preserveRatio="true">
@@ -59,7 +59,7 @@
             <Image url="@media/Logo.png" />
          </image>
       </ImageView>
-      <Button fx:id="redAddPlane" layoutX="339.0" layoutY="413.0" mnemonicParsing="false" onAction="#redirectAddPlane" prefHeight="55.0" prefWidth="145.0" text="Add New Airplane" />
-      <Button fx:id="redAddPort" layoutX="512.0" layoutY="413.0" mnemonicParsing="false" onAction="#redirectAddAirport" prefHeight="55.0" prefWidth="145.0" text="Add New Airport" />
+      <Button fx:id="redAddPlane" layoutX="383.0" layoutY="445.0" mnemonicParsing="false" onAction="#redirectAddPlane" prefHeight="29.0" prefWidth="149.0" styleClass="btn" text="Add New Airplane" />
+      <Button fx:id="redAddPort" layoutX="555.0" layoutY="445.0" mnemonicParsing="false" onAction="#redirectAddAirport" prefHeight="25.0" prefWidth="145.0" styleClass="btn" text="Add New Airport" />
    </children>
 </AnchorPane>

@@ -130,7 +130,7 @@ public class ManageAirportsFrm {
 			//validating fields
 			if(timeZoneFld.getValue() != null && IDFld.getText() != null && countryFld.getText() != null && cityFld.getText() != null && InputValidetions.validateName(city) && InputValidetions.validateName(country) && InputValidetions.validatePositiveIntegerOrZero(ID)) {
 				int id = Integer.parseInt(ID);
-				if(id > 0) {
+				if(id > 0 && airportMap.get(id) == null) {
 					//adding a new airport
 					if(FlightsLogic.getInstance().addAirPort(id, city, country, timeZone)) {
 						
