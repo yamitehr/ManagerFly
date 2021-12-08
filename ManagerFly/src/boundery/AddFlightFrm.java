@@ -35,6 +35,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import util.Alerts;
 import util.Consts;
 import util.InputValidetions;
 
@@ -70,12 +71,12 @@ public class AddFlightFrm {
 	@FXML
 	private Button redAddPort;
 	@FXML
-	private Alert a = new Alert(AlertType.NONE);
+	private Alert a;
 	
 	public static Stage primaryStagePlane;
 	public static Stage primaryStagePort;
 	
-	private FlightsLogic flightsInstance = FlightsLogic.getInstance();
+	private FlightsLogic flightsInstance;
 	
 	@FXML
     public void initialize() {
@@ -84,21 +85,20 @@ public class AddFlightFrm {
 	
 	private void init() {
 		
-		initFlights();
+		initFeilds();
 		initAirports();
 		initAirplanes();
 		
 	}
 	@FXML
 	private void initAirplanes() {
-		ObservableList<AirPlane> airplanes = FXCollections.observableArrayList(Getters.getInstance().getAirplanes());
-		airPlanes.getItems().clear();		
+		ObservableList<AirPlane> airplanes = FXCollections.observableArrayList(Getters.getInstance().getAirplanes());	
 		airPlanes.setItems(FXCollections.observableArrayList(airplanes));
 	}
 	
 	
 	@FXML
-	private void initFlights() {
+	private void initFeilds() {
 		ArrayList<Integer> hoursList  = new ArrayList<>();
 		ArrayList<Integer> minuteList  = new ArrayList<>();
 		for(int i=0;i<24;i++) 
@@ -147,9 +147,6 @@ public class AddFlightFrm {
 		primaryStagePlane.setTitle("Add New Plane");
 		primaryStagePlane.setResizable(false);
 		primaryStagePlane.initStyle(StageStyle.DECORATED);
-	
-		primaryStagePlane.setWidth(1000);
-		primaryStagePlane.setHeight(750);
 		primaryStagePlane.show();
 		
 	}
@@ -192,7 +189,7 @@ public class AddFlightFrm {
 	@FXML
 	private void addNewFlight() {
 		try {
-			
+			flightsInstance = FlightsLogic.getInstance();
 			String flightNumber = flightNum.getText();
 			if(flightNumber.isEmpty()) {
 				throw new InvalidInputException("Please fill Flight Number");
@@ -242,48 +239,23 @@ public class AddFlightFrm {
 					landingDate.getValue().getDayOfMonth(),
 					arrHour.getValue(),
                     arrMinute.getValue());
-			
-			if(!flightsInstance.isPlaneOverlapping(airPlanes.getSelectionModel().getSelectedItem(), depatureDateTime, landingDateTime)) {
-				throw new InvalidInputException("Airplane is already taken by another flight");
-			}
-			if(!flightsInstance.isAirportsOverlapping(depAirports.getValue(), depatureDateTime, true)) {
-				throw new InvalidInputException("Please select a different Departue airport - flights collison");
-			}
-			if(!flightsInstance.isAirportsOverlapping(arrAirports.getValue(), landingDateTime, false)) {
-				throw new InvalidInputException("Please select a different Landing airport - flights collison");
-			}
 			if(depAirports.getValue().equals(arrAirports.getValue())) {
 				throw new InvalidInputException("Departure and Destination airports cannot be the same");
 			}
 			
-			if(flightsInstance.addFlight(Integer.parseInt(flightNumber), depatureDateTime, landingDateTime, depAirports.getValue().getAirportCode(),arrAirports.getValue().getAirportCode(), airPlanes.getSelectionModel().getSelectedItem().getTailNum(), null, null,"on time")) {
-				a.setAlertType(AlertType.INFORMATION);
-	    		a.setHeaderText("MESSAGE");
-	    		a.setTitle("SYSTEM MESSAGE");
-	    		a.setContentText("added successfully!");
+			if(flightsInstance.addFlight(Integer.parseInt(flightNumber), depatureDateTime, landingDateTime, depAirports.getValue(),arrAirports.getValue(), airPlanes.getSelectionModel().getSelectedItem(), null, null,"on time")) {
+				a = Alerts.infoAlert("Added Flight Successfully!");
 	    		a.show();
 			} else {
 				throw new InvalidInputException("something went wrong while adding a new flight. Try a different ID");
 			}
 			
 		}  catch(InvalidInputException ipe) {
-			a.setAlertType(AlertType.ERROR);
-    		a.setHeaderText("MESSAGE");
-    		a.setTitle("SYSTEM MESSAGE");
-    		a.setContentText(ipe.getMessage());
-    		a.show();
+			a = Alerts.errorAlert(ipe.getMessage());
+			a.show();
 		} catch(Exception exc) {
-			a.setAlertType(AlertType.ERROR);
-    		a.setHeaderText("MESSAGE");
-    		a.setTitle("SYSTEM MESSAGE");
-    		a.setContentText("an error has accured please try again");
+			a = Alerts.errorAlert("an error has accured please try again");
     		a.show();
 		}
 	}
-	
-	//----------------------------------------------------------------------------------------------------
-	
-	
-
-
 }
