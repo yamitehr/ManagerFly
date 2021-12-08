@@ -14,6 +14,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
+import boundery.FlightManagmentFrm;
 import entity.AirPlane;
 import entity.AirPort;
 import entity.Flight;
@@ -40,7 +41,7 @@ public class FlightsLogic {
  * @return
  */
 	
-		public boolean isPlaneOverlapping(AirPlane airplane, LocalDateTime startDate, LocalDateTime endDate, Integer currFlightID){
+		public boolean isPlaneOverlapping(AirPlane airplane, LocalDateTime startDate, LocalDateTime endDate){
 			
 			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 			
@@ -60,7 +61,7 @@ public class FlightsLogic {
 						int i = 1;
 						
 						int flightID = rs.getInt(i++);
-						if(currFlightID == null || currFlightID != flightID)
+						if(FlightManagmentFrm.getCurrentFlight() == null || FlightManagmentFrm.getCurrentFlight().getFlightNum() != flightID)
 							results.add(flightID);
 					}
 				} catch (SQLException e) {
@@ -83,7 +84,7 @@ public class FlightsLogic {
 		 * @param currFlightID
 		 * @return
 		 */
-		public boolean isAirportsOverlapping(AirPort airport, LocalDateTime dateTime, boolean isDeparture, Integer currFlightID){
+		public boolean isAirportsOverlapping(AirPort airport, LocalDateTime dateTime, boolean isDeparture){
 			
 			String airportType;
 			String timeType;
@@ -118,7 +119,7 @@ public class FlightsLogic {
 						int i = 1;
 						
 						int flightID = rs.getInt(i++);
-						if(currFlightID == null || currFlightID != flightID)
+						if(FlightManagmentFrm.getCurrentFlight() == null || FlightManagmentFrm.getCurrentFlight().getFlightNum() != flightID)
 							results.add(flightID);
 					}
 				} catch (SQLException e) {

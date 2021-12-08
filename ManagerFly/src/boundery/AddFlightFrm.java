@@ -117,9 +117,8 @@ public class AddFlightFrm {
 	
 	@FXML
 	private void initAirports(){
-		ObservableList<AirPort> airports = FXCollections.observableArrayList(Getters.getInstance().getAirports());
-		depAirports.getItems().clear();		
-		arrAirports.getItems().clear();	
+		
+		ObservableList<AirPort> airports = FXCollections.observableArrayList(Getters.getInstance().getAirports());	
 		depAirports.setItems(FXCollections.observableArrayList(airports));
 		arrAirports.setItems(FXCollections.observableArrayList(airports));
 	}
@@ -244,13 +243,13 @@ public class AddFlightFrm {
 					arrHour.getValue(),
                     arrMinute.getValue());
 			
-			if(!flightsInstance.isPlaneOverlapping(airPlanes.getSelectionModel().getSelectedItem(), depatureDateTime, landingDateTime, null)) {
+			if(!flightsInstance.isPlaneOverlapping(airPlanes.getSelectionModel().getSelectedItem(), depatureDateTime, landingDateTime)) {
 				throw new InvalidInputException("Airplane is already taken by another flight");
 			}
-			if(!flightsInstance.isAirportsOverlapping(depAirports.getValue(), depatureDateTime, true,null)) {
+			if(!flightsInstance.isAirportsOverlapping(depAirports.getValue(), depatureDateTime, true)) {
 				throw new InvalidInputException("Please select a different Departue airport - flights collison");
 			}
-			if(!flightsInstance.isAirportsOverlapping(arrAirports.getValue(), landingDateTime, false, null)) {
+			if(!flightsInstance.isAirportsOverlapping(arrAirports.getValue(), landingDateTime, false)) {
 				throw new InvalidInputException("Please select a different Landing airport - flights collison");
 			}
 			if(depAirports.getValue().equals(arrAirports.getValue())) {

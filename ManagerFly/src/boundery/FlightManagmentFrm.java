@@ -96,14 +96,23 @@ public class FlightManagmentFrm {
     private ObservableList<Flight> flightsList;
     private HashMap<Integer,Flight> flightsById;
     private HashMap<Integer,AirPort> airPortsById;
-    private Flight currentFlight;
+    private  Flight currentFlight;
+    private static Flight curreStatucntFlight;
     private int currFlightIndex;
     private ArrayList<Flight> flightArr;
     private Alert a = new Alert(AlertType.NONE);	
     private FlightsLogic flightsInstance = FlightsLogic.getInstance();
     
     
-    @FXML
+    public static Flight getCurrentFlight() {
+		return curreStatucntFlight;
+	}
+
+	public static void setCurrentFlight(Flight currentFlight) {
+		FlightManagmentFrm.curreStatucntFlight = currentFlight;
+	}
+
+	@FXML
     public void initialize(){
 		
     	init();
@@ -301,7 +310,6 @@ public class FlightManagmentFrm {
     }
     
     private boolean validateFields() {
-    	
     	try {
 			if(departureDate.getValue() == null) {
 				throw new InvalidInputException("Please select Depature Date");
@@ -341,16 +349,17 @@ public class FlightManagmentFrm {
 			if(airPlanes.getSelectionModel().getSelectedItem() == null) {
 				throw new InvalidInputException("Please select an Airplane");
 			}
-			if(!flightsInstance.isPlaneOverlapping(airPlanes.getSelectionModel().getSelectedItem(), depatureDateTime, landingDateTime, currentFlight.getFlightNum())) {
+			curreStatucntFlight = currentFlight;
+			if(!flightsInstance.isPlaneOverlapping(airPlanes.getSelectionModel().getSelectedItem(), depatureDateTime, landingDateTime)) {
 				throw new InvalidInputException("Airplane is already taken by another flight");
 			}
-			if(!flightsInstance.isAirportsOverlapping(currentFlight.getDepatureAirportID(), depatureDateTime, true, currentFlight.getFlightNum())) {
+			if(!flightsInstance.isAirportsOverlapping(currentFlight.getDepatureAirportID(), depatureDateTime, true)) {
 				throw new InvalidInputException("Please select a different Departue Date - flights collison");
 			}
-			if(!flightsInstance.isAirportsOverlapping(currentFlight.getDestinationAirportID(), landingDateTime, false, currentFlight.getFlightNum())) {
+			if(!flightsInstance.isAirportsOverlapping(currentFlight.getDestinationAirportID(), landingDateTime, false)) {
 				throw new InvalidInputException("Please select a different Landing Date - flights collison");
 			}
-			
+			curreStatucntFlight = null;
 			return true;
     	}
     	catch(InvalidInputException e) {
@@ -360,6 +369,7 @@ public class FlightManagmentFrm {
     		a.setContentText(e.getMessage());
     		a.show();
     	}
+    	curreStatucntFlight = null;
     	return false;
     }
 }
