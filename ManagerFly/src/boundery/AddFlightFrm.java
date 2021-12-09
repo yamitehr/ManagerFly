@@ -243,7 +243,7 @@ public class AddFlightFrm {
 				throw new InvalidInputException("Departure and Destination airports cannot be the same");
 			}
 			
-			if(flightsInstance.addFlight(Integer.parseInt(flightNumber), depatureDateTime, landingDateTime, depAirports.getValue(),arrAirports.getValue(), airPlanes.getSelectionModel().getSelectedItem(), null, null,"on time")) {
+			if(flightsInstance.addFlight(flightNumber, depatureDateTime, landingDateTime, depAirports.getValue(),arrAirports.getValue(), airPlanes.getSelectionModel().getSelectedItem(), null, null,"on time")) {
 				a = Alerts.infoAlert("Added Flight Successfully!");
 	    		a.show();
 			} else {

@@ -52,7 +52,7 @@ public class FlightsLogic {
 			String query = "SELECT SerialNum FROM FlightTbl WHERE (((FlightTbl.AirPlaneTailNum)='"
 							+ airplane.getTailNum() + "') AND ((DateValue(FlightTbl.DepatureTime))<=#"
 							+landingDateStr+ "#) AND ((DateValue(FlightTbl.LandingTime))>=#"+depatureDateStr+"#))";
-			ArrayList<Integer> results = new ArrayList<Integer>();
+			ArrayList<String> results = new ArrayList<String>();
 			try {
 				Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 				try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
@@ -61,8 +61,8 @@ public class FlightsLogic {
 					while (rs.next()) {
 						int i = 1;
 						
-						int flightID = rs.getInt(i++);
-						if(FlightManagmentFrm.getCurrentFlight() == null || FlightManagmentFrm.getCurrentFlight().getFlightNum() != flightID)
+						String flightID = rs.getString(i++);
+						if(FlightManagmentFrm.getCurrentFlight() == null || !FlightManagmentFrm.getCurrentFlight().getFlightNum().equals(flightID))
 							results.add(flightID);
 					}
 				} catch (SQLException e) {
@@ -110,7 +110,7 @@ public class FlightsLogic {
 					+ "AND ((" + timeType + ")>=#" + timeStampMinusHalfHour + "#) "
 					+ "AND ((" + timeType + ")<=#" + timeStampPlusHalfHour + "#));";
 			
-			ArrayList<Integer> results = new ArrayList<Integer>();
+			ArrayList<String> results = new ArrayList<String>();
 			try {
 				Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 				try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
@@ -119,8 +119,8 @@ public class FlightsLogic {
 					while (rs.next()) {
 						int i = 1;
 						
-						int flightID = rs.getInt(i++);
-						if(FlightManagmentFrm.getCurrentFlight() == null || FlightManagmentFrm.getCurrentFlight().getFlightNum() != flightID)
+						String flightID = rs.getString(i++);
+						if(FlightManagmentFrm.getCurrentFlight() == null || !FlightManagmentFrm.getCurrentFlight().getFlightNum().equals(flightID))
 							results.add(flightID);
 					}
 				} catch (SQLException e) {
@@ -141,7 +141,7 @@ public class FlightsLogic {
      * @return 
 	 * @throws InvalidInputException 
 	 */
-	public boolean addFlight(int flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, AirPort depatureAirport,
+	public boolean addFlight(String flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, AirPort depatureAirport,
 			AirPort destinationAirport, AirPlane airplane, String cheifPilotID, String coPilotID, String flightStatus) throws InvalidInputException {
 		
 		if(isAirportsOverlapping(depatureAirport, depatureTime, true)) {
@@ -156,7 +156,7 @@ public class FlightsLogic {
 							Timestamp depatureTimeStamp = Timestamp.valueOf(depatureTime);
 							Timestamp landingTimeStamp = Timestamp.valueOf(landingTime);
 							
-							stmt.setInt(i++, flightNum); // can't be null
+							stmt.setString(i++, flightNum); // can't be null
 							stmt.setTimestamp(i++, depatureTimeStamp);
 							stmt.setTimestamp(i++, landingTimeStamp);
 							stmt.setInt(i++, depatureAirport.getAirportCode());
@@ -291,7 +291,7 @@ public class FlightsLogic {
 	 * return true if the update was successful, else - return false
      * @return 
 	 */
-	public boolean editFlight(int flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, String airPlaneTailNum) {
+	public boolean editFlight(String flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, String airPlaneTailNum) {
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
@@ -305,7 +305,7 @@ public class FlightsLogic {
 				stmt.setTimestamp(i++, depatureTimeStamp);
 				stmt.setTimestamp(i++, landingTimeStamp);
 				stmt.setString(i++, airPlaneTailNum);
-				stmt.setInt(i++, flightNum);
+				stmt.setString(i++, flightNum);
 				stmt.executeUpdate();
 				return true;
 				
