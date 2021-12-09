@@ -17,24 +17,24 @@
             <Image url="@media/background.jpg" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="45.0" layoutY="39.0" prefHeight="312.0" prefWidth="775.0">
+      <AnchorPane layoutX="45.0" layoutY="39.0" prefHeight="312.0" prefWidth="736.0">
       <children>
-      <Label layoutX="110.0" layoutY="37.0" styleClass="managerAllText" text="Flight number:" />
-      <Label layoutX="112.0" layoutY="72.0" styleClass="managerAllText" text="Departure Time:" />
-      <Label layoutX="112.0" layoutY="111.0" styleClass="managerAllText" text="Landing Time:" />
-      <TextField fx:id="flightNum" layoutX="291.0" layoutY="37.0" styleClass="fld" />
-      <DatePicker fx:id="departureDate" layoutX="288.0" layoutY="75.0" styleClass="textFields" />
-            <DatePicker fx:id="landingDate" layoutX="288.0" layoutY="115.0" styleClass="textFields" />
+      <Label layoutX="75.0" layoutY="35.0" styleClass="managerAllText" text="Flight number:" />
+      <Label layoutX="77.0" layoutY="70.0" styleClass="managerAllText" text="Departure Time:" />
+      <Label layoutX="77.0" layoutY="109.0" styleClass="managerAllText" text="Landing Time:" />
+      <TextField fx:id="flightNum" layoutX="256.0" layoutY="35.0" styleClass="fld" />
+      <DatePicker fx:id="departureDate" layoutX="253.0" layoutY="73.0" styleClass="textFields" />
+            <DatePicker fx:id="landingDate" layoutX="253.0" layoutY="113.0" styleClass="textFields" />
             <ComboBox fx:id="depHour" layoutX="498.0" layoutY="75.0" prefHeight="26.0" prefWidth="72.0" styleClass="combo" />
             <ComboBox fx:id="depMinute" layoutX="590.0" layoutY="75.0" prefHeight="26.0" prefWidth="72.0" styleClass="combo" />
             <ComboBox fx:id="arrHour" layoutX="498.0" layoutY="114.0" prefHeight="26.0" prefWidth="72.0" styleClass="combo" />
             <ComboBox fx:id="arrMinute" layoutX="590.0" layoutY="114.0" prefHeight="26.0" prefWidth="72.0" styleClass="combo" />
-            <ComboBox fx:id="airPlanes" layoutX="291.0" layoutY="221.0" onMouseClicked="#initAirplanes" prefHeight="25.0" prefWidth="149.0" styleClass="combo" />
-            <Label layoutX="112.0" layoutY="217.0" styleClass="managerAllText" text="Airplane:" />
-            <Label layoutX="110.0" layoutY="145.0" styleClass="managerAllText" text="Departure Airport:" />
-            <ComboBox fx:id="depAirports" layoutX="291.0" layoutY="152.0" onMouseClicked="#initAirports" prefHeight="26.0" prefWidth="149.0" styleClass="combo" />
-            <Label layoutX="112.0" layoutY="182.0" styleClass="managerAllText" text="Destination Airport:" />
-            <ComboBox fx:id="arrAirports" layoutX="291.0" layoutY="186.0" onMouseClicked="#initAirports" prefHeight="26.0" prefWidth="149.0" styleClass="combo" />
+            <ComboBox fx:id="airPlanes" layoutX="256.0" layoutY="219.0" onMouseClicked="#initAirplanes" prefHeight="25.0" prefWidth="149.0" styleClass="combo" />
+            <Label layoutX="77.0" layoutY="215.0" styleClass="managerAllText" text="Airplane:" />
+            <Label layoutX="75.0" layoutY="143.0" styleClass="managerAllText" text="Departure Airport:" />
+            <ComboBox fx:id="depAirports" layoutX="256.0" layoutY="150.0" onMouseClicked="#initAirports" prefHeight="26.0" prefWidth="149.0" styleClass="combo" />
+            <Label layoutX="77.0" layoutY="180.0" styleClass="managerAllText" text="Destination Airport:" />
+            <ComboBox fx:id="arrAirports" layoutX="256.0" layoutY="184.0" onMouseClicked="#initAirports" prefHeight="26.0" prefWidth="149.0" styleClass="combo" />
             <Label layoutX="608.0" layoutY="43.0" prefHeight="22.0" prefWidth="37.0" styleClass="managerAllText" text="MM">
                <font>
                   <Font name="Microsoft Sans Serif" size="19.0" />
@@ -50,11 +50,11 @@
             <Button fx:id="redAddPlane" layoutX="495.0" layoutY="215.0" mnemonicParsing="false" onAction="#redirectAddPlane" prefHeight="29.0" prefWidth="149.0" styleClass="btn" text="Add New Airplane" />
       </children>
             </AnchorPane>
-      <ImageView blendMode="DARKEN" fitHeight="198.0" fitWidth="211.0" layoutX="824.0" layoutY="-17.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView blendMode="DARKEN" fitHeight="198.0" fitWidth="211.0" layoutX="729.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@media/Logo.png" />
          </image>
       </ImageView>
-<Button fx:id="addFlight" layoutX="400.0" layoutY="568.0" mnemonicParsing="false" onAction="#addNewFlight" prefHeight="57.0" prefWidth="198.0" styleClass="btn" text="Add New Flight" />
+<Button fx:id="addFlight" layoutX="350.0" layoutY="484.0" mnemonicParsing="false" onAction="#addNewFlight" prefHeight="57.0" prefWidth="198.0" styleClass="btn" text="Add New Flight" />
    </children>
 </AnchorPane>

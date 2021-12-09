@@ -164,6 +164,8 @@ public class AddFlightFrm {
 		primaryStagePlane.setTitle("Add New Plane");
 		primaryStagePlane.setResizable(false);
 		primaryStagePlane.initStyle(StageStyle.DECORATED);
+		primaryStagePlane.setWidth(900);
+		primaryStagePlane.setHeight(650);
 		primaryStagePlane.show();
 		
 	}
@@ -198,6 +200,8 @@ public class AddFlightFrm {
 		primaryStagePort.setTitle("Add New Airport");
 		primaryStagePort.setResizable(false);
 		primaryStagePort.initStyle(StageStyle.DECORATED);
+		primaryStagePort.setWidth(900);
+		primaryStagePort.setHeight(650);
 		primaryStagePort.show();
 	}
 	

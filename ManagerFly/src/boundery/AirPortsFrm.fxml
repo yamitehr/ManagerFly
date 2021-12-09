@@ -22,7 +22,7 @@
                <font>
                   <Font name="Microsoft Sans Serif" size="25.0" />
                </font></Label>
-            <ImageView blendMode="DARKEN" fitHeight="176.0" fitWidth="182.0" layoutX="733.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView blendMode="DARKEN" fitHeight="167.0" fitWidth="160.0" layoutX="668.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@media/Logo.png" />
                </image>
@@ -52,10 +52,10 @@
                </font>
             </Label>
             <ComboBox fx:id="timeZoneFld" layoutX="167.0" layoutY="168.0" prefHeight="25.0" prefWidth="82.0" styleClass="combo" />
-            <Button fx:id="loadEmptyFrmBtn" layoutX="523.0" layoutY="468.0" mnemonicParsing="false" onAction="#loadEmptyFrm" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="Add New" />
-            <Button fx:id="saveAirPort" disable="true" layoutX="411.0" layoutY="468.0" mnemonicParsing="false" onAction="#addAirPort" opacity="0.4" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="Save" />
-            <Button fx:id="nextBtn" layoutX="295.0" layoutY="468.0" mnemonicParsing="false" onAction="#loadNextAirPort" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="&gt;&gt;" />
-            <Button fx:id="pervBtn" layoutX="182.0" layoutY="468.0" mnemonicParsing="false" onAction="#loadPervAirPort" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="&lt;&lt;" />
+            <Button fx:id="loadEmptyFrmBtn" layoutX="493.0" layoutY="470.0" mnemonicParsing="false" onAction="#loadEmptyFrm" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="Add New" />
+            <Button fx:id="saveAirPort" disable="true" layoutX="381.0" layoutY="470.0" mnemonicParsing="false" onAction="#addAirPort" opacity="0.4" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="Save" />
+            <Button fx:id="nextBtn" layoutX="265.0" layoutY="470.0" mnemonicParsing="false" onAction="#loadNextAirPort" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="&gt;&gt;" />
+            <Button fx:id="pervBtn" layoutX="152.0" layoutY="470.0" mnemonicParsing="false" onAction="#loadPervAirPort" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="&lt;&lt;" />
             <ImageView blendMode="DARKEN" fitHeight="103.0" fitWidth="28.0" layoutX="131.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@media/searchIcon.png" />

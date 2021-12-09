@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="742.0" prefWidth="1036.0" style="-fx-background-color: white;" stylesheets="@app.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundery.FlightManagmentFrm">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="742.0" prefWidth="1036.0" style="-fx-background-color: white;" stylesheets="@app.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundery.FlightManagmentFrm">
    <children>
       <AnchorPane fx:id="ManagmentPane" layoutX="109.0" layoutY="30.0" prefHeight="621.0" prefWidth="810.0">
       <children>
@@ -20,100 +20,95 @@
                   <Image url="@media/background.jpg" />
                </image>
             </ImageView>
-      <Label layoutX="31.0" layoutY="34.0" prefHeight="28.0" prefWidth="261.0" styleClass="managerAllTitles" text="Flights Details:">
+      <Label layoutX="-6.0" layoutY="-4.0" prefHeight="28.0" prefWidth="261.0" styleClass="managerAllTitles" text="Flights Details:">
                <font>
                   <Font name="Microsoft Sans Serif" size="25.0" />
                </font></Label>
-            <ImageView blendMode="DARKEN" fitHeight="198.0" fitWidth="211.0" layoutX="721.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView blendMode="DARKEN" fitHeight="181.0" fitWidth="175.0" layoutX="615.0" layoutY="-19.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@media/Logo.png" />
                </image>
             </ImageView>
-            <Label layoutX="14.0" layoutY="106.0" styleClass="managerAllText" text="Flight code:">
+            <Label layoutX="8.0" layoutY="68.0" styleClass="managerAllText" text="Flight code:">
                <font>
                   <Font name="Microsoft Sans Serif" size="19.0" />
                </font>
             </Label>
-            <Label layoutX="14.0" layoutY="227.0" prefHeight="22.0" prefWidth="99.0" styleClass="managerAllText" text="Departure:">
+            <Label layoutX="8.0" layoutY="159.0" prefHeight="22.0" prefWidth="99.0" styleClass="managerAllText" text="Departure:">
                <font>
                   <Font name="Microsoft Sans Serif" size="19.0" />
                </font>
             </Label>
-            <TextField fx:id="DepFld" editable="false" layoutX="213.0" layoutY="226.0" prefHeight="25.0" prefWidth="229.0" styleClass="fld" />
-            <TextField fx:id="IDFld" layoutX="167.0" layoutY="105.0" onKeyReleased="#LoadFlight" prefHeight="25.0" prefWidth="106.0" styleClass="fld" />
-            <ComboBox fx:id="FlightCmbBx" layoutX="281.0" layoutY="106.0" onAction="#loadFlightByCmb" prefWidth="150.0" styleClass="combo" />
-            <ImageView blendMode="DARKEN" fitHeight="103.0" fitWidth="28.0" layoutX="131.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
+            <TextField fx:id="DepFld" editable="false" layoutX="207.0" layoutY="158.0" prefHeight="25.0" prefWidth="229.0" styleClass="fld" />
+            <TextField fx:id="IDFld" layoutX="161.0" layoutY="67.0" onKeyReleased="#LoadFlight" prefHeight="25.0" prefWidth="106.0" styleClass="fld" />
+            <ComboBox fx:id="FlightCmbBx" layoutX="275.0" layoutY="68.0" onAction="#loadFlightByCmb" prefWidth="150.0" styleClass="combo" />
+            <ImageView blendMode="DARKEN" fitHeight="103.0" fitWidth="28.0" layoutX="125.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@media/searchIcon.png" />
                </image>
             </ImageView>
-            <Label layoutX="148.0" layoutY="198.0" prefHeight="22.0" prefWidth="22.0" styleClass="managerAllText" text="ID">
-               <font>
-                  <Font name="Microsoft Sans Serif" size="19.0" />
-               </font>
-            </Label>
-            <Label layoutX="118.0" layoutY="154.0" prefHeight="22.0" prefWidth="99.0" styleClass="managerAllTitles" text="AirPorts">
+            <Label layoutX="51.0" layoutY="109.0" prefHeight="30.0" prefWidth="99.0" styleClass="managerAllTitles" text="AirPorts">
                <font>
                   <Font name="Microsoft Sans Serif" size="25.0" />
                </font>
             </Label>
-            <Label layoutX="14.0" layoutY="260.0" prefHeight="22.0" prefWidth="106.0" styleClass="managerAllText" text="Destination:">
+            <Label layoutX="8.0" layoutY="192.0" prefHeight="22.0" prefWidth="106.0" styleClass="managerAllText" text="Destination:">
                <font>
                   <Font name="Microsoft Sans Serif" size="19.0" />
                </font>
             </Label>
-            <TextField fx:id="DestFld" editable="false" layoutX="213.0" layoutY="259.0" prefHeight="25.0" prefWidth="229.0" styleClass="fld" />
-            <TextField fx:id="DepIDFld" editable="false" layoutX="116.0" layoutY="226.0" prefHeight="22.0" prefWidth="87.0" styleClass="fld" />
-            <TextField fx:id="DestIDFld" editable="false" layoutX="116.0" layoutY="259.0" prefHeight="25.0" prefWidth="87.0" styleClass="fld" />
-            <Pane blendMode="DARKEN" layoutX="12.0" layoutY="305.0" prefHeight="248.0" prefWidth="781.0" style="-fx-background-color: #dadbd5;">
+            <TextField fx:id="DestFld" editable="false" layoutX="207.0" layoutY="191.0" prefHeight="25.0" prefWidth="229.0" styleClass="fld" />
+            <TextField fx:id="DepIDFld" editable="false" layoutX="110.0" layoutY="158.0" prefHeight="22.0" prefWidth="87.0" styleClass="fld" />
+            <TextField fx:id="DestIDFld" editable="false" layoutX="110.0" layoutY="191.0" prefHeight="25.0" prefWidth="87.0" styleClass="fld" />
+            <Pane blendMode="DARKEN" layoutX="11.0" layoutY="250.0" prefHeight="226.0" prefWidth="667.0" style="-fx-background-color: #dadbd5;">
                <children>
-                  <DatePicker fx:id="departureDate" layoutX="173.0" layoutY="43.0" styleClass="fldInPane" />
-                  <DatePicker fx:id="landingDate" layoutX="173.0" layoutY="83.0" styleClass="fldInPane" />
-                  <ComboBox fx:id="depHour" layoutX="372.0" layoutY="43.0" prefHeight="26.0" prefWidth="72.0" styleClass="combo" />
-                  <ComboBox fx:id="depMinute" layoutX="464.0" layoutY="43.0" prefHeight="26.0" prefWidth="72.0" styleClass="combo" />
-                  <ComboBox fx:id="arrHour" layoutX="372.0" layoutY="82.0" prefHeight="26.0" prefWidth="72.0" styleClass="combo" />
-                  <ComboBox fx:id="arrMinute" layoutX="464.0" layoutY="82.0" prefHeight="26.0" prefWidth="72.0" styleClass="combo" />
-                  <Label layoutX="23.0" layoutY="45.0" prefHeight="22.0" prefWidth="138.0" styleClass="managerAllText" text="Departure Time:">
+                  <DatePicker fx:id="departureDate" layoutX="164.0" layoutY="43.0" styleClass="fldInPane" />
+                  <DatePicker fx:id="landingDate" layoutX="164.0" layoutY="83.0" styleClass="fldInPane" />
+                  <ComboBox fx:id="depHour" layoutX="384.0" layoutY="41.0" prefHeight="26.0" prefWidth="72.0" styleClass="combo" />
+                  <ComboBox fx:id="depMinute" layoutX="476.0" layoutY="41.0" prefHeight="26.0" prefWidth="72.0" styleClass="combo" />
+                  <ComboBox fx:id="arrHour" layoutX="384.0" layoutY="80.0" prefHeight="26.0" prefWidth="72.0" styleClass="combo" />
+                  <ComboBox fx:id="arrMinute" layoutX="476.0" layoutY="80.0" prefHeight="26.0" prefWidth="72.0" styleClass="combo" />
+                  <Label layoutX="14.0" layoutY="45.0" prefHeight="22.0" prefWidth="138.0" styleClass="managerAllText" text="Departure Time:">
                      <font>
                         <Font name="Microsoft Sans Serif" size="19.0" />
                      </font>
                   </Label>
-                  <Label layoutX="28.0" layoutY="85.0" prefHeight="22.0" prefWidth="129.0" styleClass="managerAllText" text="Landing Time:">
+                  <Label layoutX="19.0" layoutY="85.0" prefHeight="22.0" prefWidth="129.0" styleClass="managerAllText" text="Landing Time:">
                      <font>
                         <Font name="Microsoft Sans Serif" size="19.0" />
                      </font>
                   </Label>
-                  <Label layoutX="482.0" layoutY="14.0" prefHeight="22.0" prefWidth="37.0" styleClass="managerAllText" text="MM">
+                  <Label layoutX="494.0" layoutY="12.0" prefHeight="22.0" prefWidth="37.0" styleClass="managerAllText" text="MM">
                      <font>
                         <Font name="Microsoft Sans Serif" size="19.0" />
                      </font>
                   </Label>
-                  <Label layoutX="390.0" layoutY="14.0" prefHeight="22.0" prefWidth="37.0" styleClass="managerAllText" text="HH">
+                  <Label layoutX="402.0" layoutY="12.0" prefHeight="22.0" prefWidth="37.0" styleClass="managerAllText" text="HH">
                      <font>
                         <Font name="Microsoft Sans Serif" size="19.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="airPlanes" layoutX="173.0" layoutY="125.0" prefHeight="25.0" prefWidth="149.0" styleClass="combo" />
-                  <Label layoutX="28.0" layoutY="126.0" prefHeight="22.0" prefWidth="129.0" styleClass="managerAllText" text="Airplane:">
+                  <ComboBox fx:id="airPlanes" layoutX="164.0" layoutY="125.0" prefHeight="25.0" prefWidth="149.0" styleClass="combo" />
+                  <Label layoutX="19.0" layoutY="126.0" prefHeight="22.0" prefWidth="129.0" styleClass="managerAllText" text="Airplane:">
                      <font>
                         <Font name="Microsoft Sans Serif" size="19.0" />
                      </font>
                   </Label>
-                  <Button fx:id="updateBtn" layoutX="319.0" layoutY="187.0" mnemonicParsing="false" onAction="#UpdateData" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="Update" />
+                  <Button fx:id="updateBtn" layoutX="303.0" layoutY="176.0" mnemonicParsing="false" onAction="#UpdateData" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="Update" />
                </children>
             </Pane>
-            <Label layoutX="550.0" layoutY="154.0" prefHeight="28.0" prefWidth="149.0" styleClass="managerAllTitles" text="Flight Status">
+            <Label layoutX="489.0" layoutY="120.0" prefHeight="28.0" prefWidth="149.0" styleClass="managerAllTitles" text="Flight Status">
                <font>
                   <Font name="Microsoft Sans Serif" size="25.0" />
                </font>
             </Label>
-            <Label fx:id="FlightStatusLbl" layoutX="550.0" layoutY="195.0" prefHeight="28.0" prefWidth="149.0">
+            <Label fx:id="FlightStatusLbl" layoutX="489.0" layoutY="161.0" prefHeight="28.0" prefWidth="149.0">
                <font>
                   <Font name="Microsoft Sans Serif" size="25.0" />
                </font>
             </Label>
-            <Button fx:id="nextBtn" layoutX="402.0" layoutY="569.0" mnemonicParsing="false" onAction="#loadNextFlight" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="&gt;&gt;" />
-            <Button fx:id="pervBtn" layoutX="281.0" layoutY="569.0" mnemonicParsing="false" onAction="#loadPervFlight" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="&lt;&lt;" />
+            <Button fx:id="nextBtn" layoutX="377.0" layoutY="501.0" mnemonicParsing="false" onAction="#loadNextFlight" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="&gt;&gt;" />
+            <Button fx:id="pervBtn" layoutX="256.0" layoutY="501.0" mnemonicParsing="false" onAction="#loadPervFlight" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="&lt;&lt;" />
       </children>
             </AnchorPane>
    </children>
