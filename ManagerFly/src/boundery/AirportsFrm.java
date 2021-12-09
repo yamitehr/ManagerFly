@@ -24,7 +24,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import util.InputValidetions;
 
-public class ManageAirportsFrm {
+public class AirportsFrm {
 
     @FXML
     private TextField cityFld;

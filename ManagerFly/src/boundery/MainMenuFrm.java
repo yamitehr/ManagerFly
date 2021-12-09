@@ -36,7 +36,7 @@ public class MainMenuFrm {
     @FXML
     void goAirPorts(ActionEvent event) throws IOException {
     	
-    	Pane root = LoadPane.LoadFXML(getClass(), "/boundery/ManageAirPortsFrm.fxml");
+    	Pane root = LoadPane.LoadFXML(getClass(), "/boundery/AirPortsFrm.fxml");
     	pannelRoot.setCenter(root);
     }
 
@@ -57,7 +57,7 @@ public class MainMenuFrm {
     @FXML
     void goPlanes(ActionEvent event) throws IOException {
     	
-    	Pane root = LoadPane.LoadFXML(getClass(), "/boundery/ManageAirPlanesFrm.fxml");
+    	Pane root = LoadPane.LoadFXML(getClass(), "/boundery/AirPlanesFrm.fxml");
     	pannelRoot.setCenter(root);
     }
 

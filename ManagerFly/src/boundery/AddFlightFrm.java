@@ -130,12 +130,12 @@ public class AddFlightFrm {
 		primaryStagePlane = new Stage();
 		FXMLLoader loader = new FXMLLoader(
 				  getClass().getResource(
-				    "ManageAirPlanesFrm.fxml"
+				    "AirPlanesFrm.fxml"
 				  )
 				);
 		Parent root = loader.load();
-		ManageAirplanesFrm controller = 
-			    loader.<ManageAirplanesFrm>getController();
+		AirplanesFrm controller = 
+			    loader.<AirplanesFrm>getController();
 		
 		controller.inEditAddFlight();
 		
@@ -168,12 +168,12 @@ public class AddFlightFrm {
 		
 		FXMLLoader loader = new FXMLLoader(
 				  getClass().getResource(
-				    "ManageAirPortsFrm.fxml"
+				    "AirPortsFrm.fxml"
 				  )
 				);
 		Parent root = loader.load();
-		ManageAirportsFrm controller = 
-			    loader.<ManageAirportsFrm>getController();
+		AirportsFrm controller = 
+			    loader.<AirportsFrm>getController();
 		controller.inEditAddFlight();
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("app.css").toExternalForm());	
