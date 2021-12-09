@@ -13,6 +13,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 import boundery.FlightManagmentFrm;
 import entity.AirPlane;
@@ -97,7 +98,7 @@ public class FlightsLogic {
 				timeType = "FlightTbl.LandingTime";
 			}
 			
-			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
+			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy KK:mm:ss a", Locale.ENGLISH);
 			
 			String timeStampPlusHalfHour = sdf.format(Timestamp.valueOf(dateTime.plusMinutes(30)));
 			String timeStampMinusHalfHour = sdf.format(Timestamp.valueOf(dateTime.minusMinutes(30)));
@@ -109,7 +110,6 @@ public class FlightsLogic {
 					+ airport.getAirportCode() +") "
 					+ "AND ((" + timeType + ")>=#" + timeStampMinusHalfHour + "#) "
 					+ "AND ((" + timeType + ")<=#" + timeStampPlusHalfHour + "#));";
-			
 			ArrayList<String> results = new ArrayList<String>();
 			try {
 				Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
