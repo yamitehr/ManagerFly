@@ -18,6 +18,7 @@ import boundery.FlightManagmentFrm;
 import entity.AirPlane;
 import entity.AirPort;
 import entity.Flight;
+import exceptions.InvalidInputException;
 import util.Consts;
 
 
@@ -51,7 +52,7 @@ public class FlightsLogic {
 			String query = "SELECT SerialNum FROM FlightTbl WHERE (((FlightTbl.AirPlaneTailNum)='"
 							+ airplane.getTailNum() + "') AND ((DateValue(FlightTbl.DepatureTime))<=#"
 							+landingDateStr+ "#) AND ((DateValue(FlightTbl.LandingTime))>=#"+depatureDateStr+"#))";
-			ArrayList<String> results = new ArrayList<String>();
+			ArrayList<Integer> results = new ArrayList<Integer>();
 			try {
 				Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 				try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
@@ -60,8 +61,8 @@ public class FlightsLogic {
 					while (rs.next()) {
 						int i = 1;
 						
-						String flightID = rs.getString(i++);
-						if(FlightManagmentFrm.getCurrentFlight() == null || !FlightManagmentFrm.getCurrentFlight().getFlightNum().equals(flightID))
+						int flightID = rs.getInt(i++);
+						if(FlightManagmentFrm.getCurrentFlight() == null || FlightManagmentFrm.getCurrentFlight().getFlightNum() != flightID)
 							results.add(flightID);
 					}
 				} catch (SQLException e) {
@@ -109,7 +110,7 @@ public class FlightsLogic {
 					+ "AND ((" + timeType + ")>=#" + timeStampMinusHalfHour + "#) "
 					+ "AND ((" + timeType + ")<=#" + timeStampPlusHalfHour + "#));";
 			
-			ArrayList<String> results = new ArrayList<String>();
+			ArrayList<Integer> results = new ArrayList<Integer>();
 			try {
 				Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 				try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
@@ -118,8 +119,8 @@ public class FlightsLogic {
 					while (rs.next()) {
 						int i = 1;
 						
-						String flightID = rs.getString(i++);
-						if(FlightManagmentFrm.getCurrentFlight() == null || !FlightManagmentFrm.getCurrentFlight().getFlightNum().equals(flightID))
+						int flightID = rs.getInt(i++);
+						if(FlightManagmentFrm.getCurrentFlight() == null || FlightManagmentFrm.getCurrentFlight().getFlightNum() != flightID)
 							results.add(flightID);
 					}
 				} catch (SQLException e) {
@@ -138,43 +139,58 @@ public class FlightsLogic {
 	 * Adding a new Employee with the parameters received from the form.
 	 * return true if the insertion was successful, else - return false
      * @return 
+	 * @throws InvalidInputException 
 	 */
-	public boolean addFlight(String flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, int depatureAirportID,
-			int destinationAirportID, String airPlaneTailNum, String cheifPilotID, String coPilotID, String flightStatus) {
-		try {
-			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
-					CallableStatement stmt = conn.prepareCall(Consts.SQL_INS_FLIGHT)){
-				
-				int i = 1;
-				Timestamp depatureTimeStamp = Timestamp.valueOf(depatureTime);
-				Timestamp landingTimeStamp = Timestamp.valueOf(landingTime);
-				
-				stmt.setString(i++, flightNum); // can't be null
-				stmt.setTimestamp(i++, depatureTimeStamp);
-				stmt.setTimestamp(i++, landingTimeStamp);
-				stmt.setInt(i++, depatureAirportID);
-				stmt.setInt(i++, destinationAirportID);
-				stmt.setString(i++, airPlaneTailNum);
-				if (cheifPilotID != null)
-					stmt.setString(i++, cheifPilotID);
-				else
-					stmt.setNull(i++, java.sql.Types.VARCHAR);
-				if (coPilotID != null)
-					stmt.setString(i++, coPilotID);
-				else
-					stmt.setNull(i++, java.sql.Types.VARCHAR);
-				if (flightStatus != null)
-					stmt.setString(i++, flightStatus);
-				else
-					stmt.setNull(i++, java.sql.Types.VARCHAR);
-				stmt.executeUpdate();
-				return true;
-				
-			} catch (SQLException e) {
+	public boolean addFlight(int flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, AirPort depatureAirport,
+			AirPort destinationAirport, AirPlane airplane, String cheifPilotID, String coPilotID, String flightStatus) throws InvalidInputException {
+		
+		if(isAirportsOverlapping(depatureAirport, depatureTime, true)) {
+			if(isAirportsOverlapping(destinationAirport, landingTime, false)) {
+				if(isPlaneOverlapping(airplane, depatureTime, landingTime)) {
+					try {
+						Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+						try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+								CallableStatement stmt = conn.prepareCall(Consts.SQL_INS_FLIGHT)){
+							
+							int i = 1;
+							Timestamp depatureTimeStamp = Timestamp.valueOf(depatureTime);
+							Timestamp landingTimeStamp = Timestamp.valueOf(landingTime);
+							
+							stmt.setInt(i++, flightNum); // can't be null
+							stmt.setTimestamp(i++, depatureTimeStamp);
+							stmt.setTimestamp(i++, landingTimeStamp);
+							stmt.setInt(i++, depatureAirport.getAirportCode());
+							stmt.setInt(i++, destinationAirport.getAirportCode());
+							stmt.setString(i++, airplane.getTailNum());
+							if (cheifPilotID != null)
+								stmt.setString(i++, cheifPilotID);
+							else
+								stmt.setNull(i++, java.sql.Types.VARCHAR);
+							if (coPilotID != null)
+								stmt.setString(i++, coPilotID);
+							else
+								stmt.setNull(i++, java.sql.Types.VARCHAR);
+							if (flightStatus != null)
+								stmt.setString(i++, flightStatus);
+							else
+								stmt.setNull(i++, java.sql.Types.VARCHAR);
+							stmt.executeUpdate();
+							return true;
+							
+						} catch (SQLException e) {
+						}
+					} catch (ClassNotFoundException e) {
+					}
+				} else {
+					throw new InvalidInputException("Airplane is already taken by another flight");
+				}
+			} else {
+				throw new InvalidInputException("Please select a different Landing airport - flights collison");
 			}
-		} catch (ClassNotFoundException e) {
+		} else {
+			throw new InvalidInputException("Please select a different Departue airport - flights collison");
 		}
+		
 		return false;
 	}
 
@@ -275,7 +291,7 @@ public class FlightsLogic {
 	 * return true if the update was successful, else - return false
      * @return 
 	 */
-	public boolean editFlight(String flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, String airPlaneTailNum) {
+	public boolean editFlight(int flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, String airPlaneTailNum) {
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
@@ -289,7 +305,7 @@ public class FlightsLogic {
 				stmt.setTimestamp(i++, depatureTimeStamp);
 				stmt.setTimestamp(i++, landingTimeStamp);
 				stmt.setString(i++, airPlaneTailNum);
-				stmt.setString(i++, flightNum);
+				stmt.setInt(i++, flightNum);
 				stmt.executeUpdate();
 				return true;
 				
