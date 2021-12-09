@@ -1,3 +1,3 @@
 @ECHO OFF
-java  -jar ManageSystem.jar
+java  -jar ManagerFly.jar
 PAUSE
