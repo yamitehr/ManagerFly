@@ -41,7 +41,7 @@ public class Getters {
 				while (rs.next()) {
 					int i = 1;
 					
-					int flightID = rs.getInt(i++);
+					String flightID = rs.getString(i++);
 					LocalDateTime depTime = rs.getTimestamp(i++).toInstant()
 						      .atZone(ZoneId.systemDefault())
 						      .toLocalDateTime();

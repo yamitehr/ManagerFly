@@ -15,7 +15,7 @@ WHERE (((FlightTbl.DepatureTime)>=$P{p1} And (FlightTbl.DepatureTime)<=$P{p2}) A
 GROUP BY FlightTbl.SerialNum, AirPortTbl.Country, AirPortTbl.City, AirPortTbl_1.Country, AirPortTbl_1.City, FlightTbl.DepatureTime, FlightTbl.LandingTime, FlightTbl.Status
 ORDER BY AirPortTbl_1.Country DESC , AirPortTbl_1.City DESC , FlightTbl.DepatureTime DESC , FlightTbl.LandingTime DESC;]]>
 	</queryString>
-	<field name="SerialNum" class="java.lang.Integer"/>
+	<field name="SerialNum" class="java.lang.String"/>
 	<field name="CountryFrom" class="java.lang.String"/>
 	<field name="CityFrom" class="java.lang.String"/>
 	<field name="CountryTo" class="java.lang.String"/>

@@ -94,7 +94,7 @@ public class FlightManagmentFrm {
     private Tooltip searchtooltip;
     
     private ObservableList<Flight> flightsList;
-    private HashMap<Integer,Flight> flightsById;
+    private HashMap<String,Flight> flightsById;
     private HashMap<Integer,AirPort> airPortsById;
     private  Flight currentFlight;
     private static Flight curreStatucntFlight;
@@ -121,7 +121,7 @@ public class FlightManagmentFrm {
     private void init(){
 		
     	airPortsById = new HashMap<Integer,AirPort>();
-    	flightsById = new HashMap<Integer,Flight>();
+    	flightsById = new HashMap<String,Flight>();
     	initPlanesItems();
     	initAirports();
     	initFlights();
@@ -139,7 +139,7 @@ public class FlightManagmentFrm {
     		flightsList = FXCollections.observableArrayList(flightArr);
     		FlightCmbBx.setItems(flightsList);
     		FlightCmbBx.setValue(flightArr.get(0));
-    		flightsById = new HashMap<Integer,Flight>();
+    		flightsById = new HashMap<String,Flight>();
     		for(Flight f: flightArr) {
     			flightsById.put(f.getFlightNum(), f);
     		}
@@ -188,10 +188,9 @@ public class FlightManagmentFrm {
     void LoadFlight(KeyEvent event) {
 
 		String s = IDFld.getText();
-		boolean ans = InputValidetions.validatePositiveIntegerOrZero(s);
-		if(ans == true && s != null && !s.isEmpty()) {
+		if(s != null && !s.isEmpty()) {
 			Flight f = null;
-			f = flightsById.get(Integer.parseInt(s));
+			f = flightsById.get(s);
 			if(f != null) {
 				currentFlight = FlightCmbBx.getValue();
 				currFlightIndex = flightArr.indexOf(f);

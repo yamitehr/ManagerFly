@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Flight {
 
-	private final int flightNum;			//Primary key
+	private final String flightNum;			//Primary key
 	private LocalDateTime depatureTime;				//departure time and date
 	private LocalDateTime landingTime;				//landing time and date
 	private String flightStatus;			//flight status {on time,  cancelled, delayed}
@@ -29,7 +29,7 @@ public class Flight {
 	 * @param cheifPilotID
 	 * @param coPilotID
 	 */
-	public Flight(int flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, AirPort depatureAirportID,
+	public Flight(String flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, AirPort depatureAirportID,
 			AirPort destinationAirportID, AirPlane airPlaneTailNum, String cheifPilotID, String coPilotID) {
 		
 		this.flightNum = flightNum;
@@ -47,7 +47,7 @@ public class Flight {
 	 * partial constructor
 	 * @param flightNum
 	 */
-	public Flight(int flightNum) {
+	public Flight(String flightNum) {
 		
 		this.flightNum = flightNum;
 	}
@@ -59,7 +59,7 @@ public class Flight {
 	 * @param landingTime
 	 * @param flightStatus
 	 */
-	public Flight(int flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, String flightStatus) {
+	public Flight(String flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, String flightStatus) {
 		
 		this.flightNum = flightNum;
 		this.depatureTime = depatureTime;
@@ -74,7 +74,7 @@ public class Flight {
 	 * @param landingTime
 	 * @param flightStatus
 	 */
-	public Flight(int flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, String flightStatus ,AirPlane airPlane , AirPort dep, AirPort dest) {
+	public Flight(String flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, String flightStatus ,AirPlane airPlane , AirPort dep, AirPort dest) {
 		
 		this.flightNum = flightNum;
 		this.depatureTime = depatureTime;
@@ -98,7 +98,7 @@ public class Flight {
 	 * @param coPilotID
 	 * @param orderStatus
 	 */
-	public Flight(int flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, String flightStatus,
+	public Flight(String flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, String flightStatus,
 			AirPort depatureAirportID, AirPort destinationAirportID, AirPlane airPlaneTailNum, String cheifPilotID,
 			String coPilotID) {
 		
@@ -193,25 +193,25 @@ public class Flight {
 		this.coPilotID = coPilotID;
 	}
 
-	public int getFlightNum() {
+	public String getFlightNum() {
 		
 		return flightNum;
 	}
 
-	//hash function
+	
+
+	
+
 	@Override
 	public int hashCode() {
-		
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + flightNum;
+		result = prime * result + ((flightNum == null) ? 0 : flightNum.hashCode());
 		return result;
 	}
 
-	//equals method
 	@Override
 	public boolean equals(Object obj) {
-		
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -219,12 +219,13 @@ public class Flight {
 		if (getClass() != obj.getClass())
 			return false;
 		Flight other = (Flight) obj;
-		if (flightNum != other.flightNum)
+		if (flightNum == null) {
+			if (other.flightNum != null)
+				return false;
+		} else if (!flightNum.equals(other.flightNum))
 			return false;
 		return true;
 	}
-
-	
 
 	public String fullToString() {
 		
