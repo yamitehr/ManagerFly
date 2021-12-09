@@ -6,9 +6,8 @@ import static util.LoadPane.LoadFXML;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import control.FlightsLogic;
 import control.Getters;
 import entity.AirPlane;
@@ -24,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
@@ -113,6 +113,23 @@ public class AddFlightFrm {
 		}
 		depMinute.setItems(FXCollections.observableArrayList(minuteList));
 		arrMinute.setItems(FXCollections.observableArrayList(minuteList));
+		
+		//a flight must be in two months from today at least
+		departureDate.setDayCellFactory(picker -> new DateCell() {
+			 public void updateItem(LocalDate date, boolean empty) {
+	                super.updateItem(date, empty);
+	                LocalDate twoMnthFromToday = LocalDate.now().plusMonths(2);
+	                setDisable(empty || date.compareTo(twoMnthFromToday) < 0 );
+	        }
+		});
+		
+		landingDate.setDayCellFactory(picker -> new DateCell() {
+			 public void updateItem(LocalDate date, boolean empty) {
+	                super.updateItem(date, empty);
+	                LocalDate twoMnthFromToday = LocalDate.now().plusMonths(2);
+	                setDisable(empty || date.compareTo(twoMnthFromToday) < 0 );
+	        }
+		});
 	}
 	
 	@FXML
@@ -202,9 +219,6 @@ public class AddFlightFrm {
 			}
 			if(departureDate.getValue().isAfter(landingDate.getValue())) {
 				throw new InvalidInputException("landing date should be after the departure date");
-			}
-			if(departureDate.getValue().isBefore(LocalDate.now().plusMonths(2))) {
-				throw new InvalidInputException("a new flight must be added 2 months before it's planned date");
 			}
 			if(depHour.getValue() == null) {
 				throw new InvalidInputException("Please select Depature Hour");
