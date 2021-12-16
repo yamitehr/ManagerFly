@@ -16,10 +16,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import util.InputValidetions;
@@ -67,6 +69,16 @@ public class AirportsFrm {
     private HashMap<Integer, AirPort> airportMap;		//contains all airports, uses their id as key help to search and
     													//display airport details when typing in the id field
     private Alert a = new Alert(AlertType.NONE);		//for displaying pop up messages for the user
+    
+    @FXML
+    private ChoiceBox<String> airPortStatusBox;
+
+    @FXML
+    private Button updateBtn;
+   
+    @FXML
+    private Pane airPortPane;
+    
     @FXML
     public void initialize() {
 		init();
@@ -97,6 +109,9 @@ public class AirportsFrm {
     	GMTValuesList = FXCollections.observableArrayList(GmtArr);
     	timeZoneFld.setItems(GMTValuesList);
     	currentAirPortIndex = 0;
+    	String[] statusArrs = new String[2];
+    	statusArrs[0] = "Open";statusArrs[1] = "Close";
+    	airPortStatusBox.getItems().addAll(statusArrs);
     	airportArrList = Getters.getInstance().getAirports();
     	if(airportArrList != null) {
     		airPortsList = FXCollections.observableArrayList(airportArrList);
@@ -190,8 +205,8 @@ public class AirportsFrm {
     void LoadPort(KeyEvent event) {
     	
     	String s = IDFld.getText();
-		boolean ans = InputValidetions.validatePositiveIntegerOrZero(s);
-		if(ans == true && s != null && !s.isEmpty()) {
+		//boolean ans = InputValidetions.validatePositiveIntegerOrZero(s);
+		if( s != null && !s.isEmpty()) {
 			AirPort ap = null;
 			ap = airportMap.get(Integer.parseInt(s));
 			if(ap != null) {
@@ -202,6 +217,9 @@ public class AirportsFrm {
 	    		countryFld.setText(currentAirPort.getCountry());
 	    		timeZoneFld.setValue(currentAirPort.getTimeZone());
 	    		currentAirPortIndex = airportArrList.indexOf(ap);
+	    		System.out.println(currentAirPort.isOpen());
+	    		String status = (currentAirPort.isOpen() == true)? "Open":"Close";
+	    		airPortStatusBox.setValue(status);
 	    		notInEdit();
 			}
 		}
@@ -218,6 +236,8 @@ public class AirportsFrm {
     		countryFld.setText(currentAirPort.getCountry());
     		timeZoneFld.setValue(currentAirPort.getTimeZone());
     		currentAirPortIndex = airportArrList.indexOf(currentAirPort);
+    		String status = (currentAirPort.isOpen() == true)? "Open":"Close";
+    		airPortStatusBox.setValue(status);
     		notInEdit();
     	}
     }
@@ -277,6 +297,7 @@ public class AirportsFrm {
 		saveAirPort.setDisable(true);
 		cityFld.setEditable(false);
 		countryFld.setEditable(false);
+		airPortPane.setVisible(true);
     }
     
     private void inEdit() {
@@ -287,6 +308,8 @@ public class AirportsFrm {
 		countryFld.setText(null);
 		IDFld.setText(null);
 		cityFld.setEditable(true);
+		countryFld.setEditable(true);
+		airPortPane.setVisible(false);
 		countryFld.setEditable(true);
     }
     
@@ -308,6 +331,30 @@ public class AirportsFrm {
 		pervBtn.setVisible(false);
 		nextBtn.setVisible(false);
 		loadEmptyFrmBtn.setVisible(false);
+		airPortPane.setVisible(false);
     }
+   
+   /**
+    * update air port status
+    * @param event
+    */
+   @FXML
+   void UpdateData(ActionEvent event) {
+	   
+	   if(inEditMode == false && airPortStatusBox.getValue() != null && currentAirPort != null) {
+		   boolean status = (airPortStatusBox.getValue().equals("Open"))? true: false;
+		   if(FlightsLogic.getInstance().editAirPortStatus(status, currentAirPort.getAirportCode())) {
+			   currentAirPort.setOpen(status);
+			   a.setAlertType(AlertType.INFORMATION);
+	    		a.setHeaderText("MESSAGE");
+	    		a.setTitle("SYSTEM MESSAGE");
+	    		a.setContentText("Updated succesfully");
+	    		a.show();
+		   }
+		   else {
+			   faildtoAddMsg();
+		   }
+	   }
+   }
 
 }

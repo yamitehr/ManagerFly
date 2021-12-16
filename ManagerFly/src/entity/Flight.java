@@ -4,6 +4,8 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import util.Consts;
+
 
 public class Flight {
 
@@ -16,7 +18,7 @@ public class Flight {
 	private  AirPlane airPlaneTail;		//Foreign key, airplane tail number of the flight
 	private String cheifPilotID;			//TODO: change to object pilot
 	private String coPilotID;				//TODO: change to object pilot
-	
+	private String orderStatus;         //flight order status {Init,Pre Sale, Regular Sale}
 	
 	/**
 	 * main constructor
@@ -30,7 +32,7 @@ public class Flight {
 	 * @param coPilotID
 	 */
 	public Flight(String flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, AirPort depatureAirportID,
-			AirPort destinationAirportID, AirPlane airPlaneTailNum, String cheifPilotID, String coPilotID) {
+			AirPort destinationAirportID, AirPlane airPlaneTailNum, String cheifPilotID, String coPilotID,String orderStatus) {
 		
 		this.flightNum = flightNum;
 		this.depatureTime = depatureTime;
@@ -41,6 +43,7 @@ public class Flight {
 		this.airPlaneTail = airPlaneTailNum;
 		this.cheifPilotID = cheifPilotID;
 		this.coPilotID = coPilotID;
+		this.orderStatus = orderStatus;
 	}
 	
 	/**
@@ -59,12 +62,13 @@ public class Flight {
 	 * @param landingTime
 	 * @param flightStatus
 	 */
-	public Flight(String flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, String flightStatus) {
+	public Flight(String flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, String flightStatus,String orderStatus) {
 		
 		this.flightNum = flightNum;
 		this.depatureTime = depatureTime;
 		this.landingTime = landingTime;
 		this.flightStatus = flightStatus;
+		this.orderStatus = orderStatus;
 	}
 	
 	/**
@@ -83,6 +87,7 @@ public class Flight {
 		this.airPlaneTail = airPlane;
 		this.depatureAirport = dep;
 		this.destinationAirport = dest;
+		
 	}
 	
 	/**
@@ -100,7 +105,7 @@ public class Flight {
 	 */
 	public Flight(String flightNum, LocalDateTime depatureTime, LocalDateTime landingTime, String flightStatus,
 			AirPort depatureAirportID, AirPort destinationAirportID, AirPlane airPlaneTailNum, String cheifPilotID,
-			String coPilotID) {
+			String coPilotID, String orderStatus) {
 		
 		this.flightNum = flightNum;
 		this.depatureTime = depatureTime;
@@ -111,6 +116,7 @@ public class Flight {
 		this.airPlaneTail = airPlaneTailNum;
 		this.cheifPilotID = cheifPilotID;
 		this.coPilotID = coPilotID;
+		this.orderStatus = orderStatus;
 	}
 
 	//getters and setters
@@ -198,9 +204,13 @@ public class Flight {
 		return flightNum;
 	}
 
-	
+	public String getOrderStatus() {
+		return orderStatus;
+	}
 
-	
+	public void setOrderStatus(String orderStatus) {
+		this.orderStatus = orderStatus;
+	}
 
 	@Override
 	public int hashCode() {

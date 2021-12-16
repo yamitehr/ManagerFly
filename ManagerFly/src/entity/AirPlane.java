@@ -1,18 +1,20 @@
 package entity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class AirPlane {
 
 	private final String tailNum;					//Primary key
 	private int attendantsNum;						//required number of air attendants for flight
-	private ArrayList<FlightSeat> seats;			//all the seats that belong to the plane
+	private HashMap<Integer,FlightSeat> seats;			//all the seats that belong to the plane
 	
 	//main constructor
 	public AirPlane(String tailNum, int attendantsNum) {
 		
 		this.tailNum = tailNum;
 		this.attendantsNum = attendantsNum;
+		seats = new HashMap<Integer,FlightSeat>();
 	}
 	
 	//partial constructor
@@ -22,7 +24,7 @@ public class AirPlane {
 	}
 	
 	//full constructor
-	public AirPlane(String tailNum, int attendantsNum, ArrayList<FlightSeat> seats) {
+	public AirPlane(String tailNum, int attendantsNum, HashMap<Integer,FlightSeat> seats) {
 		
 		this.tailNum = tailNum;
 		this.attendantsNum = attendantsNum;
@@ -45,12 +47,12 @@ public class AirPlane {
 		this.attendantsNum = attendantsNum;
 	}
 	
-	public ArrayList<FlightSeat> getSeats() {
+	public HashMap<Integer,FlightSeat> getSeats() {
 		
 		return seats;
 	}
 
-	public void setSeats(ArrayList<FlightSeat> seats) {
+	public void setSeats(HashMap<Integer,FlightSeat> seats) {
 		
 		this.seats = seats;
 	}

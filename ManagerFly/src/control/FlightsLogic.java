@@ -174,6 +174,7 @@ public class FlightsLogic {
 								stmt.setString(i++, flightStatus);
 							else
 								stmt.setNull(i++, java.sql.Types.VARCHAR);
+							stmt.setString(i++, "Init");
 							stmt.executeUpdate();
 							return true;
 							
@@ -213,6 +214,7 @@ public class FlightsLogic {
 					stmt.setString(i++, city);
 					stmt.setString(i++, country);
 					stmt.setInt(i++, GMT);
+					stmt.setBoolean(i++, true);
 					stmt.executeUpdate();
 					return true;
 					
@@ -316,5 +318,33 @@ public class FlightsLogic {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	/**
+	 * update airport status
+	 * @param isOpen
+	 * @param airPortId
+	 * @return
+	 */
+	public boolean editAirPortStatus(boolean isOpen, int airPortId) {
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+					CallableStatement stmt = conn.prepareCall(Consts.SQL_UPD_AIRPORT_STATUS)) {
+				int i = 1;
+
+				stmt.setBoolean(i++, isOpen);
+				stmt.setInt(i++, airPortId);
+				stmt.executeUpdate();
+				return true;
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return false;
+		
 	}
 }

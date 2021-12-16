@@ -51,7 +51,7 @@ public class Getters {
 					
 					
 					results.add(new Flight(flightID, depTime, arrTime, rs.getString(9), new AirPort(rs.getInt(i++)), new AirPort(rs.getInt(i++)),
-								new AirPlane(rs.getString(i++)), rs.getString(i++), rs.getString(i++)));
+								new AirPlane(rs.getString(i++)), rs.getString(i++), rs.getString(i++),rs.getString(10)));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -76,7 +76,7 @@ public class Getters {
 				while (rs.next()) {
 					int i = 1;
 					
-					results.add(new AirPort(rs.getInt(i++), rs.getString(i++), rs.getString(i++), rs.getInt(i++)));
+					results.add(new AirPort(rs.getInt(i++), rs.getString(i++), rs.getString(i++), rs.getInt(i++),rs.getBoolean(i++)));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();

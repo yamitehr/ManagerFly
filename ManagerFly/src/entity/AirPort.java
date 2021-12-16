@@ -6,7 +6,7 @@ public class AirPort {
 	private String city;					//city's airport
 	private String country;					//country's airport
 	private int timeZone;					//time zone in range of -12->12(int)
-	
+	private boolean isOpen;					//indicate if the air port is open due to Covid-19 pandemic 
 	//main constructor
 	public AirPort(int airportCode, String city, String country, int timeZone) {
 		
@@ -14,8 +14,18 @@ public class AirPort {
 		this.city = city;
 		this.country = country;
 		this.timeZone = timeZone;
+		
 	}
 	
+	//full constructor
+	public AirPort(int airportCode, String city, String country, int timeZone, boolean isOpen) {
+		
+		this.airportCode = airportCode;
+		this.city = city;
+		this.country = country;
+		this.timeZone = timeZone;
+		this.isOpen = isOpen;
+	}
 	//partial constructor
 	public AirPort(int airportCode) {
 		
@@ -65,6 +75,14 @@ public class AirPort {
 		return airportCode;
 	}
 
+	public boolean isOpen() {
+		return isOpen;
+	}
+
+	public void setOpen(boolean isOpen) {
+		this.isOpen = isOpen;
+	}
+
 	//hash function
 	@Override
 	public int hashCode() {
@@ -96,7 +114,7 @@ public class AirPort {
 	public String toString() {
 		
 		return " " + airportCode + " " + city + " " + country + ", GMT = "
-				+ timeZone + "";
+				+ timeZone + " open status: " + this.isOpen;
 	}
 	
 	

@@ -17,7 +17,11 @@ public class Consts {
 	/**flight status's {"on time", "delayed", "canclelled"}
 	 * 
 	 */
-	public static final String[] FLIGHT_STATUS = {"on time", "delayed", "canclelled"};		
+	public static final String[] FLIGHT_STATUS = {"on time", "delayed", "canclelled"};
+	/**
+	 * light tickets order status {Init,Pre Sale, Regular Sale}
+	 */
+	public static final String[] FLIGHT_ORDER_STATUS = {"Init","Pre Sale", "Regular Sale"};
 	/**order statu's for flight {"initialize", "pre-sale","regular-sale"}
 	 * 
 	 */
@@ -59,12 +63,13 @@ public class Consts {
 	/*----------------------------------------- FLIGHTS QUERIES -----------------------------------------*/
 	public static final String SQL_SEL_FLIGHT = "SELECT * FROM FlightTbl";
 	public static final String SQL_DEL_FLIGHT = "{ call qryDelFlight(?) }";
-	public static final String SQL_INS_FLIGHT = "{ call qryInsFlight(?,?,?,?,?,?,?,?,?) }";
+	public static final String SQL_INS_FLIGHT = "{ call qryInsFlight(?,?,?,?,?,?,?,?,?,?) }";
 	public static final String SQL_UPD_FLIGHT = "{ call qryUpdFlight(?,?,?,?) }";
 
 	/*----------------------------------------- AIRPORTS QUERIES -----------------------------------------*/
 	public static final String SQL_SEL_AIRPORT = "SELECT * FROM AirPortTbl";
-	public static final String SQL_INS_AIRPORT = "{ call qryInsAirPort(?,?,?,?) }";
+	public static final String SQL_INS_AIRPORT = "{ call qryInsAirPort(?,?,?,?,?) }";
+	public static final String SQL_UPD_AIRPORT_STATUS = "{ call qryUpdAirPortStatus(?,?) }";
 	
 	/*----------------------------------------- AIRPLANES QUERIES -----------------------------------------*/
 	public static final String SQL_SEL_AIRPLANE = "SELECT * FROM AirPlaneTbl";

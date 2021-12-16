@@ -102,6 +102,9 @@ public class FlightManagmentFrm {
     private ArrayList<Flight> flightArr;
     private Alert a = new Alert(AlertType.NONE);	
     private FlightsLogic flightsInstance = FlightsLogic.getInstance();
+    @FXML
+    private Label orderStatusLbl;
+
     
     
     public static Flight getCurrentFlight() {
@@ -288,7 +291,9 @@ public class FlightManagmentFrm {
 		AirPort destAp = airPortsById.get(currentFlight.getDestinationAirportID().getAirportCode());
 		AirPlane plane = currentFlight.getAirPlaneTailNum();
 		String fStatus = currentFlight.getFlightStatus();
+		String oStatus = currentFlight.getOrderStatus();
 		FlightStatusLbl.setText(fStatus);
+		orderStatusLbl.setText(oStatus);
 		if(fStatus.equals("on time")) {
 			FlightStatusLbl.setTextFill(Color.web("Green"));
 		}
@@ -297,6 +302,12 @@ public class FlightManagmentFrm {
 		}
 		else
 			FlightStatusLbl.setTextFill(Color.web("Blue"));
+		if(oStatus.equals("Init"))
+			orderStatusLbl.setTextFill(Color.web("Blue"));
+		else if(oStatus.equals("Pre Order"))
+			orderStatusLbl.setTextFill(Color.web("Yellow"));
+		else
+			orderStatusLbl.setTextFill(Color.web("Green"));
 		airPlanes.setValue(plane);
 		DepIDFld.setText(depAp.getAirportCode() + "");
 		DestIDFld.setText(destAp.getAirportCode() + "");

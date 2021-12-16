@@ -170,8 +170,11 @@ public class AirplanesFrm {
     			seatsMap.put(fs.getPlane().getTailNum(), sArr);
     		}
     		for(AirPlane ap: airplaneArrList) {
-    			ap.setSeats(seatsMap.get(ap.getTailNum()));
-    			airPlaneMap.put(ap.getTailNum(), ap);	
+    			ArrayList<FlightSeat> fs = seatsMap.get(ap.getTailNum());
+    			for(FlightSeat seat: fs) {
+    				ap.getSeats().put(seat.getSeatID(), seat);
+    			}
+    			airPlaneMap.put(ap.getTailNum(), ap);
     		}
     		loadPlaneByCmbo(new ActionEvent());
     	}
@@ -194,7 +197,7 @@ public class AirplanesFrm {
 	    		IDFld.setText(currentPlane.getTailNum() + "");
 	    		attNumcoboBox.setValue(currentPlane.getAttendantsNum());
 	    		currentAirPlaneIndex = airplaneArrList.indexOf(currentPlane);
-	    		flightSeatsList  = FXCollections.observableArrayList(currentPlane.getSeats());		
+	    		flightSeatsList  = FXCollections.observableArrayList(setSeatsInCombo(currentPlane.getSeats()));		
 	    		seatsTable.setItems(flightSeatsList);
 	    		notInEdit();
 			}
@@ -213,11 +216,16 @@ public class AirplanesFrm {
     		IDFld.setText(currentPlane.getTailNum() + "");
     		attNumcoboBox.setValue(currentPlane.getAttendantsNum());
     		currentAirPlaneIndex = airplaneArrList.indexOf(currentPlane);
-    		flightSeatsList  = FXCollections.observableArrayList(currentPlane.getSeats());		
+    		flightSeatsList  = FXCollections.observableArrayList(setSeatsInCombo(currentPlane.getSeats()));		
     		seatsTable.setItems(flightSeatsList);
     		notInEdit();
     	}
 
+    }
+    
+    private ArrayList<FlightSeat> setSeatsInCombo(HashMap<Integer,FlightSeat> seats){
+    	ArrayList<FlightSeat> seatsLists = new ArrayList<FlightSeat>(seats.values());
+    	return seatsLists;
     }
     
     /**
@@ -254,7 +262,7 @@ public class AirplanesFrm {
     				    		a.setContentText("Added succesfully");
     				    		a.show();
     				    		AirPlane newAP = new AirPlane(tailNum, attNum, null);
-    				    		ArrayList<FlightSeat> seats = createSeats(tailNum, totalColl, firstClassRows, BuissnessRows, toursitsRows, newAP);
+    				    		HashMap<Integer,FlightSeat> seats = createSeats(tailNum, totalColl, firstClassRows, BuissnessRows, toursitsRows, newAP);
     				    		newAP.setSeats(seats);
     				    		addtoDataStructures(newAP);
     				    		notInEdit();	
@@ -292,16 +300,16 @@ public class AirplanesFrm {
      * @param plane
      * @return
      */
-    private ArrayList<FlightSeat> createSeats(String tailNum, int totalCl, int firstClsRow, int buisRow, int tourRow, AirPlane plane) {
+    private HashMap<Integer,FlightSeat> createSeats(String tailNum, int totalCl, int firstClsRow, int buisRow, int tourRow, AirPlane plane) {
 		
-    	ArrayList<FlightSeat> seats = new ArrayList<FlightSeat>();
+    	HashMap<Integer,FlightSeat> seats = new HashMap<Integer,FlightSeat>();
     	String[] colls = {"A", "B", "C", "D", "E"};
     	int rowindex = 1;
     	int idBegin =  biggestSeatID + 1;
     	for(int i = 1; i <= firstClsRow; i++) {
     		for(int j = 0; j < totalCl; j++) {
 	    		FlightSeat fs = new FlightSeat(idBegin++, rowindex, colls[j], Consts.SEAT_TYPES[0], plane);
-	    		seats.add(fs);
+	    		seats.put(fs.getSeatID(),fs);
 	    		FlightsLogic.getInstance().addFlightSeat(idBegin, rowindex, colls[j], Consts.SEAT_TYPES[0], tailNum);
     		}
     		rowindex++;
@@ -309,7 +317,7 @@ public class AirplanesFrm {
     	for(int i = 1; i <= buisRow; i++) {
     		for(int j = 0; j < totalCl; j++) {
 	    		FlightSeat fs = new FlightSeat(idBegin++, rowindex, colls[j], Consts.SEAT_TYPES[1], plane);
-	    		seats.add(fs);
+	    		seats.put(fs.getSeatID(),fs);
 	    		FlightsLogic.getInstance().addFlightSeat(idBegin, rowindex, colls[j], Consts.SEAT_TYPES[1], tailNum);
     		}
     		rowindex++;
@@ -317,7 +325,7 @@ public class AirplanesFrm {
     	for(int i = 1; i <= tourRow; i++) {
     		for(int j = 0; j < totalCl; j++) {
 	    		FlightSeat fs = new FlightSeat(idBegin++, rowindex, colls[j], Consts.SEAT_TYPES[2], plane);
-	    		seats.add(fs);
+	    		seats.put(fs.getSeatID(),fs);
 	    		FlightsLogic.getInstance().addFlightSeat(idBegin, rowindex, colls[j], Consts.SEAT_TYPES[2], tailNum);
     		}
     		rowindex++;
@@ -405,11 +413,11 @@ public class AirplanesFrm {
 		currentPlane = ap;
 		airplaneArrList.add(ap);
 		currentAirPlaneIndex = airplaneArrList.size() - 1; 
-		seatsMap.put(ap.getTailNum(), ap.getSeats());
+		seatsMap.put(ap.getTailNum(), new ArrayList<FlightSeat>(ap.getSeats().values()));
 		planeCmbo.getItems().add(ap);
 		planeCmbo.setValue(ap);
-		flightSeatsArrList.addAll(ap.getSeats());
-		flightSeatsList.setAll(ap.getSeats());
+		flightSeatsArrList.addAll(ap.getSeats().values());
+		flightSeatsList.setAll(ap.getSeats().values());
 		seatsTable.setItems(flightSeatsList);
 	}
 	
