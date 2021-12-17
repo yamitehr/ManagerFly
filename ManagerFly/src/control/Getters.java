@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -152,8 +153,11 @@ public class Getters {
 					ResultSet rs = stmt.executeQuery()) {
 				while (rs.next()) {
 					int i = 1;
-					
-					results.add(new AirAttendant(rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getDate(i++).toLocalDate(),rs.getDate(i++).toLocalDate()));
+					java.sql.Date contractFinishDate =  rs.getDate(5);
+					LocalDate contractFinishLocalDate = null;
+					if(contractFinishDate != null)
+						contractFinishLocalDate = contractFinishDate.toLocalDate();
+					results.add(new AirAttendant(rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getDate(i++).toLocalDate(),contractFinishLocalDate));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -177,8 +181,11 @@ public class Getters {
 					ResultSet rs = stmt.executeQuery()) {
 				while (rs.next()) {
 					int i = 1;
-					
-					results.add(new GroundAttendant(rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getDate(i++).toLocalDate(),rs.getDate(i++).toLocalDate()));
+					java.sql.Date contractFinishDate =  rs.getDate(5);
+					LocalDate contractFinishLocalDate = null;
+					if(contractFinishDate != null)
+						contractFinishLocalDate = contractFinishDate.toLocalDate();
+					results.add(new GroundAttendant(rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getDate(i++).toLocalDate(),contractFinishLocalDate));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -202,8 +209,11 @@ public class Getters {
 					ResultSet rs = stmt.executeQuery()) {
 				while (rs.next()) {
 					int i = 1;
-					
-					results.add(new Pilot(rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getDate(i++).toLocalDate(),rs.getDate(i++).toLocalDate(),rs.getString(i++), rs.getDate(i++).toLocalDate()));
+					java.sql.Date contractFinishDate =  rs.getDate(5);
+					LocalDate contractFinishLocalDate = null;
+					if(contractFinishDate != null)
+						contractFinishLocalDate = contractFinishDate.toLocalDate();
+					results.add(new Pilot(rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getDate(i++).toLocalDate(),contractFinishLocalDate,rs.getString(6), rs.getDate(7).toLocalDate()));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();

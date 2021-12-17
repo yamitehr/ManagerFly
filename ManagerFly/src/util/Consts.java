@@ -84,6 +84,12 @@ public class Consts {
 	public static final String SQL_SEL_AIRATTENDANTS = "SELECT * FROM AirAttendantTbl";
 	public static final String SQL_SEL_GROUNDATTENDANTS = "SELECT * FROM GroundAttendantTbl";
 	public static final String SQL_SEL_PILOTS = "SELECT * FROM PilotTbl";
+	public static final String SQL_INS_AIRATTENDANT = "{ call qryInsAirAttendant(?,?,?,?,?) }";
+	public static final String SQL_INS_GROUNDATTENDANT = "{ call qryInsGroundAttendant(?,?,?,?,?) }";
+	public static final String SQL_INS_PILOT = "{ call qryInsPilot(?,?,?,?,?,?,?) }";
+	public static final String SQL_UPD_AIRATTENDANT = "{ call qryUpdAirAttendant(?,?,?,?) }";
+	public static final String SQL_UPD_GROUNDATTENDANT = "{ call qryUpdGroundAttendant(?,?,?,?) }";
+	public static final String SQL_UPD_PILOT = "{ call qryUpdPilot(?,?,?,?) }";
 	
 	/*------------------------------------------ASSIGN TO SHIFTS QUERIES ---------------------------------------*/
 	/**

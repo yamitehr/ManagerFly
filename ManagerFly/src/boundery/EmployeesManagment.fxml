@@ -20,7 +20,7 @@
                   <Image url="@media/background.jpg" />
                </image>
             </ImageView>
-      <Label fx:id="firmTitle" layoutX="-25.0" layoutY="5.0" prefHeight="28.0" prefWidth="261.0" styleClass="managerAllTitles" text="Employee Details:">
+      <Label fx:id="firmTitle" layoutX="-25.0" layoutY="5.0" prefHeight="36.0" prefWidth="325.0" styleClass="managerAllTitles" text="Employee Details:">
                <font>
                   <Font name="Microsoft Sans Serif" size="25.0" />
                </font></Label>
@@ -50,8 +50,8 @@
                         <Font name="Microsoft Sans Serif" size="19.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="fNameFld" editable="false" layoutX="114.0" layoutY="36.0" prefHeight="25.0" prefWidth="229.0" styleClass="fld" />
-                  <TextField fx:id="lNameFld" editable="false" layoutX="114.0" layoutY="64.0" prefHeight="25.0" prefWidth="229.0" styleClass="fld" />
+                  <TextField fx:id="fNameFld" layoutX="114.0" layoutY="36.0" prefHeight="25.0" prefWidth="229.0" styleClass="fld" />
+                  <TextField fx:id="lNameFld" layoutX="114.0" layoutY="64.0" prefHeight="25.0" prefWidth="229.0" styleClass="fld" />
                   <Label layoutX="17.0" layoutY="38.0" prefHeight="27.0" prefWidth="104.0" styleClass="managerAllText" text="First Name:">
                      <font>
                         <Font name="Microsoft Sans Serif" size="19.0" />
@@ -71,13 +71,13 @@
             </Pane>
             <Button fx:id="nextBtn" layoutX="328.0" layoutY="500.0" mnemonicParsing="false" onAction="#loadNextEmp" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="&gt;&gt;" />
             <Button fx:id="pervBtn" layoutX="207.0" layoutY="500.0" mnemonicParsing="false" onAction="#loadPervEmp" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="&lt;&lt;" />
-            <DatePicker fx:id="ContractStartDate" layoutX="135.0" layoutY="106.0" styleClass="fldInPane" />
+            <DatePicker fx:id="ContractStartDate" disable="true" editable="false" layoutX="135.0" layoutY="106.0" styleClass="fldInPane" />
             <Label layoutX="-26.0" layoutY="105.0" prefHeight="27.0" prefWidth="160.0" styleClass="managerAllText" text="Contract Start Date:">
                <font>
                   <Font name="Microsoft Sans Serif" size="19.0" />
                </font>
             </Label>
-            <ComboBox fx:id="EmpRoleCombo" layoutX="501.0" layoutY="427.0" prefHeight="25.0" prefWidth="106.0" styleClass="combo" />
+            <ComboBox fx:id="EmpRoleCombo" layoutX="501.0" layoutY="427.0" onAction="#changeAddMode" prefHeight="25.0" prefWidth="106.0" styleClass="combo" />
             <Label layoutX="456.0" layoutY="426.0" prefHeight="27.0" prefWidth="45.0" styleClass="managerAllText" text="Role:">
                <font>
                   <Font name="Microsoft Sans Serif" size="19.0" />
@@ -96,7 +96,7 @@
                      </font>
                   </Label>
                   <TextField fx:id="LicenceIDFld" editable="false" layoutX="103.0" layoutY="38.0" prefHeight="16.0" prefWidth="189.0" styleClass="fld" />
-                  <DatePicker fx:id="issuedDate" layoutX="111.0" layoutY="72.0" styleClass="fldInPane" />
+                  <DatePicker fx:id="issuedDate" disable="true" editable="false" layoutX="111.0" layoutY="72.0" styleClass="fldInPane" />
                </children>
             </Pane>
             <Button fx:id="loadEmptyFrmBtn" layoutX="501.0" layoutY="463.0" mnemonicParsing="false" onAction="#loadEmptyFrm" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="Add New" />
