@@ -176,10 +176,10 @@ public class AirportsFrm {
 	//displayed when the append failed
 	private void faildtoAddMsg() {
 		
-		a.setAlertType(AlertType.WARNING);
+		a.setAlertType(AlertType.ERROR);
 		a.setHeaderText("MESSAGE");
 		a.setTitle("SYSTEM MESSAGE");
-		a.setContentText("Faild to add");
+		a.setContentText("Operation Faild");
 		a.show();
 	}
 	
@@ -340,7 +340,7 @@ public class AirportsFrm {
     */
    @FXML
    void UpdateData(ActionEvent event) {
-	   
+	   Alert b = new Alert(AlertType.NONE);
 	   if(inEditMode == false && airPortStatusBox.getValue() != null && currentAirPort != null) {
 		   boolean status = (airPortStatusBox.getValue().equals("Open"))? true: false;
 		   if(FlightsLogic.getInstance().editAirPortStatus(status, currentAirPort.getAirportCode())) {
@@ -350,11 +350,28 @@ public class AirportsFrm {
 	    		a.setTitle("SYSTEM MESSAGE");
 	    		a.setContentText("Updated succesfully");
 	    		a.show();
+	    		if(updateFlightsStatus(status, currentAirPort.getAirportCode())) {
+	    			b.setAlertType(AlertType.INFORMATION);
+		    		b.setHeaderText("MESSAGE");
+		    		b.setTitle("SYSTEM MESSAGE");
+		    		b.setContentText("Updated Flights Status succesfully");
+		    		b.show();
+	    			 
+	    		}
+	    		else {
+	    			faildtoAddMsg();
+	    		}
 		   }
 		   else {
 			   faildtoAddMsg();
 		   }
 	   }
+   }
+   
+   private boolean updateFlightsStatus(boolean Status, int airportId) {
+	   
+	   String status = (Status == true) ? "on time" : "delayed";
+	   return FlightsLogic.getInstance().editFlightStatus(status, airportId);
    }
 
 }

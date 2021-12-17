@@ -63,8 +63,13 @@
                   <Image url="@media/searchIcon.png" />
                </image>
             </ImageView>
-            <Pane fx:id="airPortPane" layoutX="167.0" layoutY="240.0" prefHeight="110.0" prefWidth="459.0" style="-fx-background-color: #dadbd5;">
+            <Pane fx:id="airPortPane" blendMode="DARKEN" layoutX="167.0" layoutY="240.0" prefHeight="110.0" prefWidth="459.0" style="-fx-background-color: #dadbd5;">
                <children>
+                  <ImageView blendMode="DARKEN" fitHeight="48.0" fitWidth="45.0" layoutY="-22.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@media/EditIcn.png" />
+                     </image>
+                  </ImageView>
                   <Label layoutX="133.0" layoutY="14.0" styleClass="managerAllText" text="Status:">
                      <font>
                         <Font name="Microsoft Sans Serif" size="19.0" />

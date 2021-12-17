@@ -95,6 +95,11 @@
                      </font>
                   </Label>
                   <Button fx:id="updateBtn" layoutX="303.0" layoutY="176.0" mnemonicParsing="false" onAction="#UpdateData" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="Update" />
+                  <ImageView blendMode="DARKEN" fitHeight="48.0" fitWidth="45.0" layoutY="-22.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@media/EditIcn.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
             <Label layoutX="489.0" layoutY="120.0" prefHeight="28.0" prefWidth="149.0" styleClass="managerAllTitles" text="Flight Status">

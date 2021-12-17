@@ -9,10 +9,13 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 
+import entity.AirAttendant;
 import entity.AirPlane;
 import entity.AirPort;
 import entity.Flight;
 import entity.FlightSeat;
+import entity.GroundAttendant;
+import entity.Pilot;
 import util.Consts;
 
 public class Getters {
@@ -136,4 +139,78 @@ public class Getters {
 		return results;
 	}
 	
+	/**
+	 * fetches all air attendants from DB file.
+	 * @return ArrayList of air attendants.
+	 */
+	public ArrayList<AirAttendant> getAirAttendants() {
+		ArrayList<AirAttendant> results = new ArrayList<AirAttendant>();
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+					PreparedStatement stmt = conn.prepareStatement(Consts.SQL_SEL_AIRATTENDANTS);
+					ResultSet rs = stmt.executeQuery()) {
+				while (rs.next()) {
+					int i = 1;
+					
+					results.add(new AirAttendant(rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getDate(i++).toLocalDate(),rs.getDate(i++).toLocalDate()));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return results;
+	}
+	
+	/**
+	 * fetches all ground attendants from DB file.
+	 * @return ArrayList of ground attendants.
+	 */
+	public ArrayList<GroundAttendant> getGroundAttendants() {
+		ArrayList<GroundAttendant> results = new ArrayList<GroundAttendant>();
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+					PreparedStatement stmt = conn.prepareStatement(Consts.SQL_SEL_GROUNDATTENDANTS);
+					ResultSet rs = stmt.executeQuery()) {
+				while (rs.next()) {
+					int i = 1;
+					
+					results.add(new GroundAttendant(rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getDate(i++).toLocalDate(),rs.getDate(i++).toLocalDate()));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return results;
+	}
+	
+	/**
+	 * fetches all pilots from DB file.
+	 * @return ArrayList of pilots.
+	 */
+	public ArrayList<Pilot> getPilots() {
+		ArrayList<Pilot> results = new ArrayList<Pilot>();
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+					PreparedStatement stmt = conn.prepareStatement(Consts.SQL_SEL_PILOTS);
+					ResultSet rs = stmt.executeQuery()) {
+				while (rs.next()) {
+					int i = 1;
+					
+					results.add(new Pilot(rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getDate(i++).toLocalDate(),rs.getDate(i++).toLocalDate(),rs.getString(i++), rs.getDate(i++).toLocalDate()));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return results;
+	}
 }

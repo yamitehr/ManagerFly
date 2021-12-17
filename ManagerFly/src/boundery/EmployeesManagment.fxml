@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="742.0" prefWidth="1036.0" style="-fx-background-color: white;" stylesheets="@app.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundery.EmployeesManagmentFrm">
+   <children>
+      <AnchorPane fx:id="ManagmentPane" layoutX="109.0" layoutY="30.0" prefHeight="621.0" prefWidth="810.0">
+      <children>
+            <ImageView fitHeight="749.0" fitWidth="1179.0" layoutX="-142.0" layoutY="-38.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@media/background.jpg" />
+               </image>
+            </ImageView>
+      <Label fx:id="firmTitle" layoutX="-25.0" layoutY="5.0" prefHeight="28.0" prefWidth="261.0" styleClass="managerAllTitles" text="Employee Details:">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="25.0" />
+               </font></Label>
+            <ImageView blendMode="DARKEN" fitHeight="181.0" fitWidth="175.0" layoutX="615.0" layoutY="-19.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@media/Logo.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="-26.0" layoutY="66.0" styleClass="managerAllText" text="Employee ID:">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="19.0" />
+               </font>
+            </Label>
+            <TextField fx:id="IDFld" layoutX="127.0" layoutY="65.0" onKeyReleased="#LoadEmp" prefHeight="25.0" prefWidth="106.0" styleClass="fld" />
+            <ComboBox fx:id="EmpCmbBx" layoutX="241.0" layoutY="66.0" onAction="#loadEmpByCmb" prefWidth="150.0" styleClass="combo" />
+            <ImageView blendMode="DARKEN" fitHeight="103.0" fitWidth="28.0" layoutX="91.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@media/searchIcon.png" />
+               </image>
+            </ImageView>
+            <Pane blendMode="DARKEN" layoutX="-25.0" layoutY="174.0" prefHeight="226.0" prefWidth="438.0" style="-fx-background-color: #dadbd5;">
+               <children>
+                  <DatePicker fx:id="ContractFinishDate" layoutX="184.0" layoutY="101.0" styleClass="fldInPane" />
+                  <Button fx:id="updateBtn" layoutX="324.0" layoutY="183.0" mnemonicParsing="false" onAction="#UpdateData" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="Update" />
+                  <Label layoutX="17.0" layoutY="100.0" prefHeight="27.0" prefWidth="167.0" styleClass="managerAllText" text="Contract Finish Date:">
+                     <font>
+                        <Font name="Microsoft Sans Serif" size="19.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="fNameFld" editable="false" layoutX="114.0" layoutY="36.0" prefHeight="25.0" prefWidth="229.0" styleClass="fld" />
+                  <TextField fx:id="lNameFld" editable="false" layoutX="114.0" layoutY="64.0" prefHeight="25.0" prefWidth="229.0" styleClass="fld" />
+                  <Label layoutX="17.0" layoutY="38.0" prefHeight="27.0" prefWidth="104.0" styleClass="managerAllText" text="First Name:">
+                     <font>
+                        <Font name="Microsoft Sans Serif" size="19.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="16.0" layoutY="66.0" prefHeight="27.0" prefWidth="106.0" styleClass="managerAllText" text="Last Name:">
+                     <font>
+                        <Font name="Microsoft Sans Serif" size="19.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="48.0" fitWidth="45.0" layoutX="-2.0" layoutY="-23.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@media/EditIcn.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Button fx:id="nextBtn" layoutX="328.0" layoutY="500.0" mnemonicParsing="false" onAction="#loadNextEmp" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="&gt;&gt;" />
+            <Button fx:id="pervBtn" layoutX="207.0" layoutY="500.0" mnemonicParsing="false" onAction="#loadPervEmp" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="&lt;&lt;" />
+            <DatePicker fx:id="ContractStartDate" layoutX="135.0" layoutY="106.0" styleClass="fldInPane" />
+            <Label layoutX="-26.0" layoutY="105.0" prefHeight="27.0" prefWidth="160.0" styleClass="managerAllText" text="Contract Start Date:">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="19.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="EmpRoleCombo" layoutX="501.0" layoutY="427.0" prefHeight="25.0" prefWidth="106.0" styleClass="combo" />
+            <Label layoutX="456.0" layoutY="426.0" prefHeight="27.0" prefWidth="45.0" styleClass="managerAllText" text="Role:">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="19.0" />
+               </font>
+            </Label>
+            <Pane fx:id="PilotPane" blendMode="DARKEN" layoutX="413.0" layoutY="174.0" prefHeight="226.0" prefWidth="347.0" style="-fx-background-color: #dadbd5;">
+               <children>
+                  <Label layoutX="9.0" layoutY="44.0" prefHeight="27.0" prefWidth="94.0" styleClass="managerAllText" text="Licence ID:">
+                     <font>
+                        <Font name="Microsoft Sans Serif" size="19.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="71.0" prefHeight="27.0" prefWidth="104.0" styleClass="managerAllText" text="issued Date:">
+                     <font>
+                        <Font name="Microsoft Sans Serif" size="19.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="LicenceIDFld" editable="false" layoutX="103.0" layoutY="38.0" prefHeight="16.0" prefWidth="189.0" styleClass="fld" />
+                  <DatePicker fx:id="issuedDate" layoutX="111.0" layoutY="72.0" styleClass="fldInPane" />
+               </children>
+            </Pane>
+            <Button fx:id="loadEmptyFrmBtn" layoutX="501.0" layoutY="463.0" mnemonicParsing="false" onAction="#loadEmptyFrm" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="Add New" />
+            <Button fx:id="addBtn" layoutX="501.0" layoutY="500.0" mnemonicParsing="false" onAction="#addEmp" opacity="0.4" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="Save" />
+      </children>
+            </AnchorPane>
+   </children>
+</AnchorPane>

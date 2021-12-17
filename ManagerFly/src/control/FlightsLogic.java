@@ -347,4 +347,28 @@ public class FlightsLogic {
 		return false;
 		
 	}
+	
+	public boolean editFlightStatus(String status, int airportCode) {
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+					CallableStatement stmt = conn.prepareCall(Consts.SQL_UPD_FLIGHT_STATUS)) {
+				int i = 1;
+
+				stmt.setString(i++, status);
+				stmt.setInt(i++, airportCode);
+				stmt.setInt(i++, airportCode);
+				stmt.executeUpdate();
+				return true;
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return false;
+		
+		
+	}
 }

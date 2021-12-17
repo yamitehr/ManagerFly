@@ -65,6 +65,7 @@ public class Consts {
 	public static final String SQL_DEL_FLIGHT = "{ call qryDelFlight(?) }";
 	public static final String SQL_INS_FLIGHT = "{ call qryInsFlight(?,?,?,?,?,?,?,?,?,?) }";
 	public static final String SQL_UPD_FLIGHT = "{ call qryUpdFlight(?,?,?,?) }";
+	public static final String SQL_UPD_FLIGHT_STATUS = "{ call qryUpdFlightStatus(?,?,?) }";
 
 	/*----------------------------------------- AIRPORTS QUERIES -----------------------------------------*/
 	public static final String SQL_SEL_AIRPORT = "SELECT * FROM AirPortTbl";
@@ -79,8 +80,12 @@ public class Consts {
 	public static final String SQL_SEL_FLIGHTSEATS = "SELECT * FROM FlightSeatTbl";
 	public static final String SQL_INS_FLIGHTSEATS = "{ call qryInsFlightSeat(?,?,?,?,?) }";
 	
+	/*------------------------------------------EMPLOYEES QUERIES ---------------------------------------*/
+	public static final String SQL_SEL_AIRATTENDANTS = "SELECT * FROM AirAttendantTbl";
+	public static final String SQL_SEL_GROUNDATTENDANTS = "SELECT * FROM GroundAttendantTbl";
+	public static final String SQL_SEL_PILOTS = "SELECT * FROM PilotTbl";
 	
-	
+	/*------------------------------------------ASSIGN TO SHIFTS QUERIES ---------------------------------------*/
 	/**
 	 * find the correct path of the DB file
      * @return the path of the DB file (from eclipse or with runnable file)
