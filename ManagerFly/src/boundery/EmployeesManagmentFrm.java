@@ -1,8 +1,10 @@
 package boundery;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import control.AssignLogic;
 import control.Getters;
 import entity.AirAttendant;
 import entity.AirPort;
@@ -10,6 +12,7 @@ import entity.Employee;
 import entity.Flight;
 import entity.GroundAttendant;
 import entity.Pilot;
+import exceptions.InvalidInputException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,6 +28,9 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import util.Alerts;
+import util.Consts;
+import util.InputValidetions;
 
 public class EmployeesManagmentFrm {
 
@@ -151,11 +157,88 @@ public class EmployeesManagmentFrm {
     @FXML
     void UpdateData(ActionEvent event) {
 
+    	String id = IDFld.getText();
+    	LocalDate finish  = ContractFinishDate.getValue();
+    	String fName = fNameFld.getText();
+    	String lName = lNameFld.getText();
+    	String query = (EmpRoleCombo.getValue().equals("pilot")) ? 
+    			Consts.SQL_UPD_PILOT:
+    				(EmpRoleCombo.getValue().equals("Air Attendant")) 
+    				? Consts.SQL_UPD_AIRATTENDANT: Consts.SQL_UPD_GROUNDATTENDANT;
+	    try {	
+	    	if(id != null && !id.isEmpty() && empMap.containsKey(id) 
+		    			&& InputValidetions.validateName(fName) == true 
+		    			&& InputValidetions.validateName(lName) == true && fName != null && lName != null && !fName.isEmpty() && !lName.isEmpty()) {
+		    		if((finish != null && finish.isAfter(ContractStartDate.getValue())) || finish == null) {
+		    			if(AssignLogic.getInstance().editEmployee(id, fName, lName, finish, query)) {
+		    				a = Alerts.infoAlert("Updated successfully!");
+		    				a.show();
+		    				currentEmployee.setFirstName(fName);currentEmployee.setLastName(lName);currentEmployee.setContractFinish(finish);
+		    			}
+		    			else {
+		    				throw new Exception();
+		    			}
+		    		}
+		    		else {
+		    			throw new InvalidInputException("contract finish date must be after contract start date!");
+		    		}
+		    	}
+	    	else {
+	    		throw new InvalidInputException("Invalid input!");
+	    	}
+	    }catch(InvalidInputException inputE) {
+	    	a = Alerts.errorAlert(inputE.getMessage());
+    		a.show();
+	    }catch(Exception e) {
+	    	a = Alerts.errorAlert("Update Failed!");
+    		a.show();
+	    }
     }
 
     @FXML
     void addEmp(ActionEvent event) {
-
+    	
+    	String id = IDFld.getText();
+    	LocalDate start  = ContractStartDate.getValue();
+    	LocalDate finish  = ContractFinishDate.getValue();
+    	String fName = fNameFld.getText();
+    	String lName = lNameFld.getText();
+    	String issued = null;
+    	LocalDate issuedDate = null;
+    	int type = (EmpRoleCombo.getValue().equals("pilot")) ? 1:(EmpRoleCombo.getValue().equals("Air Attendant")) ? 2: 3;
+    	if(type == 1) {
+    		issued = LicenceIDFld.getText();
+    		issuedDate = this.issuedDate.getValue();
+    	}
+    	boolean ans = validateFields(id,start,finish,fName,lName,issued,issuedDate,type);
+    	if(ans == true) {
+    		if(type == 1) {
+    			ans = AssignLogic.getInstance().addPilot(id, fName, lName, start, finish, issued, issuedDate);
+    			Pilot p = new Pilot(id, fName, lName, start, finish, issued, issuedDate);
+    			addtoDataStructures(p);
+    		}
+    		else if(type == 2) {
+    			ans = AssignLogic.getInstance().addAirAttendant(id, fName, lName, start, finish);
+    			AirAttendant at = new AirAttendant(id, fName, lName, start, finish);
+    			addtoDataStructures(at);
+    		}
+    		else {
+    			ans = AssignLogic.getInstance().addGroundAttendant(id, fName, lName, start, finish);
+    			GroundAttendant ga = new GroundAttendant(id, fName, lName, start, finish);
+    			addtoDataStructures(ga);
+    		}
+    		if(ans == true) {
+    			a = Alerts.infoAlert("Added successfully!");
+    			a.show();
+    			notInEdit();
+        		EmpCmbBx.setValue(EmpCmbBx.getItems().get(empArrList.size() -1 ));
+        		loadEmpByCmb(new ActionEvent());
+    		}
+    		else {
+    			a = Alerts.errorAlert("Failed to add!");
+    			a.show();
+    		}
+    	}
     }
 
     @FXML
@@ -310,4 +393,50 @@ public class EmployeesManagmentFrm {
   		issuedDate.setEditable(false);
   		LicenceIDFld.setEditable(false);
     }
+  	
+  	private boolean validateFields(String id, LocalDate start, LocalDate finish, String fName, String lName, String issued, LocalDate issuedDate, int type) {
+  		try {
+    		if(id == null || id.isEmpty() || start == null || fName.isEmpty() || fName == null || lName.isEmpty() || lName == null)
+    			throw new InvalidInputException("empty fields");
+    		if(type == 1) {
+    			if(issued.isEmpty() || issued == null || issuedDate == null )
+    				throw new InvalidInputException("empty fields");
+    			if(issuedDate.isAfter(start))
+    				throw new InvalidInputException("Licence issued date must be before or equal to contract start date!");
+    			if(issued.length() > 12)
+    				throw new InvalidInputException("max field size of Licence ID  is 12!");
+    			if(InputValidetions.validatePositiveIntegerOrZero(issued) == false)
+    				throw new InvalidInputException("Licence ID  can contain digits only!");
+    		}
+    		if(InputValidetions.validateName(fName) == false || InputValidetions.validateName(lName) == false)
+    			throw new InvalidInputException("name must contain letters only!");
+    		if(finish != null &&(finish.isBefore(start)))
+    			throw new InvalidInputException("contract finish date must be after contract start date!");
+    		if(InputValidetions.validatePositiveIntegerOrZero(id) == false) {
+    			throw new InvalidInputException("Licence ID  can contain digits only!");
+    		}
+    		if(id.length() != 9) {
+    			throw new InvalidInputException("id must conatin 9 digits!");
+    		}
+    		
+    	}catch(InvalidInputException inputE) {
+    		a = Alerts.errorAlert(inputE.getMessage());
+    		a.show();
+    		return false;
+    	}catch(Exception e) {
+    		a = Alerts.errorAlert("error");
+    		a.show();
+    		return false;
+    	}
+  		return true;
+  	}
+  	
+  	private void addtoDataStructures(Employee emp) {
+  		
+  		if(emp != null) {
+	  		empMap.put(emp.getID(), emp);
+	  		empArrList.add(emp);
+	  		EmpCmbBx.getItems().add(emp);
+  		}
+  	}
 }
