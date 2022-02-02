@@ -7,14 +7,9 @@
 }
 
 .fld{
-	-fx-border-color:#00ccff;
-	-fx-border-width:0px 0px 2px 0px;
-	-fx-background-color: transparent;
 	}
+
 .combo{
-	-fx-text-fill:#000000;
-	-fx-background-radius:50;
-	-fx-background-color: #336799;
 }
 
 .btn{
@@ -27,14 +22,10 @@
 	-fx-background-color:#1603D3;
 }
 .managerAllText{
-	
-	-fx-font-family:sans-sharif;
-	-fx-font-size:18;
+	-fx-font-size:15px;
 }
 .managerAllTitles{
 	
-	-fx-font-family:sans-sharif;
-	-fx-font-size:25;
 }
 
 .selectedresult{

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<AnchorPane fx:id="MainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundery.MainMenuFrm">
+<AnchorPane fx:id="MainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundery.MainMenuFrm">
    <children>
       <BorderPane fx:id="pannelRoot" layoutY="57.0" prefHeight="725.0" prefWidth="1005.0" style="-fx-background-color: #d5f2f5;" />
       <MenuBar prefHeight="58.0" prefWidth="1005.0" style="-fx-background-color: #00ccff;" stylesheets="@app.css">
@@ -17,17 +17,19 @@
               <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Exit" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" onAction="#loadAddFlight" style="-fx-font-size: 25;" styleClass="Homebutton" text="NEW FLIGHT">
+            <Menu mnemonicParsing="false" onAction="#loadAddFlight" style="-fx-font-size: 25;" styleClass="Homebutton" text="FLIGHTS">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Add" />
+                  <MenuItem mnemonicParsing="false" onAction="#loadAddFlight" text="New Flight" />
+                  <MenuItem mnemonicParsing="false" onAction="#goFlights" text="All Flights" />
+                  <MenuItem mnemonicParsing="false" onAction="#goSetCrueToFlight" text="Assign Team" />
                </items>
             </Menu>
           <Menu mnemonicParsing="false" style="-fx-font-size: 25;" styleClass="Homebutton" text="MANAGMENT       ">
             <items>
-                  <MenuItem mnemonicParsing="false" onAction="#goFlights" text="Flights" />
                   <MenuItem mnemonicParsing="false" onAction="#goAirPorts" text="AirPorts" />
                   <MenuItem mnemonicParsing="false" onAction="#goPlanes" text="Planes" />
                   <MenuItem mnemonicParsing="false" onAction="#goEmployees" text="Employees" />
+                  <MenuItem mnemonicParsing="false" onAction="#goShifts" text="Shifts" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" style="-fx-font-size: 25;" styleClass="Homebutton" text="REPORTS">

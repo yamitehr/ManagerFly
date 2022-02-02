@@ -81,5 +81,19 @@ public class MainMenuFrm {
     	Pane root = LoadPane.LoadFXML(getClass(), "/boundery/EmployeesManagment.fxml");
     	pannelRoot.setCenter(root);
     }
+    
+    @FXML
+    void goSetCrueToFlight(ActionEvent event) throws IOException {
+
+    	Pane root = LoadPane.LoadFXML(getClass(), "/boundery/FlightCrueManagmentFrm.fxml");
+    	pannelRoot.setCenter(root);
+    }
+    
+    @FXML
+    void goShifts(ActionEvent event) throws IOException {
+
+    	Pane root = LoadPane.LoadFXML(getClass(), "/boundery/ShiftsManagemantFrm.fxml");
+    	pannelRoot.setCenter(root);
+    }
 
 }

@@ -83,6 +83,7 @@ public class Consts {
 	/*------------------------------------------EMPLOYEES QUERIES ---------------------------------------*/
 	public static final String SQL_SEL_AIRATTENDANTS = "SELECT * FROM AirAttendantTbl";
 	public static final String SQL_SEL_GROUNDATTENDANTS = "SELECT * FROM GroundAttendantTbl";
+	public static final String SQL_SEL_GROUNDATTENDANTS_SHIFT = "SELECT * FROM AttendantShift";
 	public static final String SQL_SEL_PILOTS = "SELECT * FROM PilotTbl";
 	public static final String SQL_INS_AIRATTENDANT = "{ call qryInsAirAttendant(?,?,?,?,?) }";
 	public static final String SQL_INS_GROUNDATTENDANT = "{ call qryInsGroundAttendant(?,?,?,?,?) }";
@@ -90,7 +91,13 @@ public class Consts {
 	public static final String SQL_UPD_AIRATTENDANT = "{ call qryUpdAirAttendant(?,?,?,?) }";
 	public static final String SQL_UPD_GROUNDATTENDANT = "{ call qryUpdGroundAttendant(?,?,?,?) }";
 	public static final String SQL_UPD_PILOT = "{ call qryUpdPilot(?,?,?,?) }";
-	
+	public static final String SQL_GET_AIRATTENDANT_BY_FLIGHT = "{ call qryGetFlightAttendantsByFlightID(?) }";
+	public static final String SQL_DELETE_AIRATTENDANT_BY_FLIGHT = "{ call qryDelAttendantsInFlight(?) }";
+	public static final String SQL_INSERT_AIR_ATTENDANT_FLIGHT = "INSERT INTO AttendantInFlightTbl VALUES(?,?);";
+	public static final String SQL_UPDATE_MAIN_PILOT = "Update FlightTbl Set CheifPilotID=? WHERE SerialNum=?;";
+	public static final String SQL_UPDATE_SECONDARY_PILOT = "Update FlightTbl Set CoPilotID=? WHERE SerialNum=?;";
+	public static final String SQL_INSERT_SHIFT = "INSERT INTO ShiftTbl VALUES(?,?);";
+	public static final String SQL_INSERT_GROUD_ATTENDANT_SHIFT = "INSERT INTO AttendantShift VALUES(?,?,?,?);";
 	/*------------------------------------------ASSIGN TO SHIFTS QUERIES ---------------------------------------*/
 	/**
 	 * find the correct path of the DB file

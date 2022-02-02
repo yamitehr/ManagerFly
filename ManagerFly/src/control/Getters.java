@@ -1,10 +1,12 @@
 package control;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -16,7 +18,9 @@ import entity.AirPort;
 import entity.Flight;
 import entity.FlightSeat;
 import entity.GroundAttendant;
+import entity.GroundAttendantInShift;
 import entity.Pilot;
+import entity.Shift;
 import util.Consts;
 
 public class Getters {
@@ -214,6 +218,73 @@ public class Getters {
 					if(contractFinishDate != null)
 						contractFinishLocalDate = contractFinishDate.toLocalDate();
 					results.add(new Pilot(rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getDate(i++).toLocalDate(),contractFinishLocalDate,rs.getString(6), rs.getDate(7).toLocalDate()));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return results;
+	}
+	
+	/**
+	 * fetches all air attendants by Flight from DB file.
+	 * @return ArrayList of air attendants.
+	 */
+	public ArrayList<AirAttendant> getAirAttendantsByFlight(Flight flight) {
+		ArrayList<AirAttendant> results = new ArrayList<AirAttendant>();
+		try {
+			Class.forName(Consts.JDBC_STR);
+			try (Connection conn = DriverManager.getConnection(util.Consts.CONN_STR);
+					CallableStatement callst = conn.prepareCall(Consts.SQL_GET_AIRATTENDANT_BY_FLIGHT))
+					{
+				int k=1;
+				callst.setString(k++, flight.getFlightNum());
+					ResultSet rs = callst.executeQuery();
+					while (rs.next()) 
+					{
+						int i = 1;
+						java.sql.Date contractFinishDate =  rs.getDate(5);
+						LocalDate contractFinishLocalDate = null;
+						if(contractFinishDate != null)
+							contractFinishLocalDate = contractFinishDate.toLocalDate();
+						results.add(new AirAttendant(rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getDate(i++).toLocalDate(),contractFinishLocalDate));
+					}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return results;	
+	}
+	
+	/**
+	 * fetches all ground attendants from DB file.
+	 * @return ArrayList of ground attendants.
+	 */
+	public ArrayList<GroundAttendantInShift> getGroundAttendantShifts() {
+		ArrayList<GroundAttendant> gal = getGroundAttendants();
+		ArrayList<GroundAttendantInShift> results = new ArrayList<GroundAttendantInShift>();
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+					PreparedStatement stmt = conn.prepareStatement(Consts.SQL_SEL_GROUNDATTENDANTS_SHIFT);
+					ResultSet rs = stmt.executeQuery()) {
+				while (rs.next()) {
+					int i = 1;
+					LocalDateTime depTime = rs.getTimestamp(1).toInstant()
+						      .atZone(ZoneId.systemDefault())
+						      .toLocalDateTime();
+					LocalDateTime arrTime = rs.getTimestamp(4).toInstant()
+						      .atZone(ZoneId.systemDefault())
+						      .toLocalDateTime();
+					Shift shift = new Shift(depTime, arrTime);
+					String gaid = rs.getString(2);
+					GroundAttendant ga = gal.stream().filter(g -> g.getID().equals(gaid)).toList().get(0);
+					results.add(new GroundAttendantInShift(shift, ga, rs.getString(3)));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();

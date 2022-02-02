@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="742.0" prefWidth="1036.0" style="-fx-background-color: white;" stylesheets="@app.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundery.FlightCrueManagmentFrm">
+   <children>
+      <AnchorPane fx:id="ManagmentPane" layoutX="109.0" layoutY="30.0" prefHeight="621.0" prefWidth="810.0">
+      <children>
+            <ImageView fitHeight="749.0" fitWidth="1179.0" layoutX="-142.0" layoutY="-38.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@media/background.jpg" />
+               </image>
+            </ImageView>
+            <ImageView blendMode="DARKEN" fitHeight="181.0" fitWidth="175.0" layoutX="615.0" layoutY="-19.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@media/Logo.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="11.0" layoutY="34.0" styleClass="managerAllText" text="Flight code:">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="19.0" />
+               </font>
+            </Label>
+            <TextField fx:id="IDFld" layoutX="164.0" layoutY="33.0" onKeyReleased="#LoadFlight" prefHeight="25.0" prefWidth="106.0" styleClass="fld" />
+            <ComboBox fx:id="FlightCmbBx" layoutX="278.0" layoutY="34.0" onAction="#loadFlightByCmb" prefWidth="150.0" styleClass="combo" />
+            <ImageView blendMode="DARKEN" fitHeight="103.0" fitWidth="28.0" layoutX="128.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@media/searchIcon.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="nextBtn" layoutX="300.0" layoutY="536.0" mnemonicParsing="false" onAction="#loadNextFlight" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="&gt;&gt;" />
+            <Button fx:id="pervBtn" layoutX="182.0" layoutY="536.0" mnemonicParsing="false" onAction="#loadPervFlight" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="&lt;&lt;" />
+            <Button fx:id="updateBtn" layoutX="233.0" layoutY="460.0" mnemonicParsing="false" onAction="#saveChanges" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="Save" />
+            <Label layoutX="11.0" layoutY="86.0" styleClass="managerAllText" text="Pilot:">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="19.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="pilotCmbx" layoutX="164.0" layoutY="84.0" prefWidth="150.0" styleClass="combo" />
+            <Label layoutX="11.0" layoutY="122.0" styleClass="managerAllText" text="Co-Pilot:">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="19.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="coPilotCmbx" layoutX="164.0" layoutY="120.0" prefWidth="150.0" styleClass="combo" />
+            <Label layoutX="15.0" layoutY="164.0" styleClass="managerAllText" text="Select Air Attendants:">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="19.0" />
+               </font>
+            </Label>
+            <ListView fx:id="airAttendantList" layoutX="15.0" layoutY="203.0" prefHeight="200.0" prefWidth="200.0" />
+            <Label layoutX="294.0" layoutY="164.0" styleClass="managerAllText" text="Current Attendants on The Flight:">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="19.0" />
+               </font>
+            </Label>
+            <ListView fx:id="currentAirAttendantList" layoutX="294.0" layoutY="203.0" prefHeight="200.0" prefWidth="200.0" />
+            <Button layoutX="233.0" layoutY="290.0" mnemonicParsing="false" onAction="#addAirAttendant" text="&gt;&gt;" />
+            <Label layoutX="294.0" layoutY="414.0" styleClass="managerAllText" text="Number Requiered:">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="19.0" />
+               </font>
+            </Label>
+            <Label fx:id="attenNumberLbl" layoutX="432.0" layoutY="416.0" prefHeight="18.0" prefWidth="33.0" />
+            <Button layoutX="233.0" layoutY="322.0" mnemonicParsing="false" onAction="#removeAirAttendant" text="&lt;&lt;" />
+      </children>
+            </AnchorPane>
+   </children>
+</AnchorPane>
