@@ -59,7 +59,6 @@ public class Consts {
 	 */
 	public static final int MAX_TAIL_NUM = 15;
 	
-	
 	/*----------------------------------------- FLIGHTS QUERIES -----------------------------------------*/
 	public static final String SQL_SEL_FLIGHT = "SELECT * FROM FlightTbl";
 	public static final String SQL_DEL_FLIGHT = "{ call qryDelFlight(?) }";

@@ -35,6 +35,7 @@
           <Menu mnemonicParsing="false" style="-fx-font-size: 25;" styleClass="Homebutton" text="REPORTS">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#goReports" text="Reports" />
+                  <MenuItem mnemonicParsing="false" onAction="#goPercReport" text="Flights By Departure Country" />
             </items>
           </Menu>
         </menus>
