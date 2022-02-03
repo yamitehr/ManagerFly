@@ -32,8 +32,7 @@ public class GroundAttendantInShift {
 	}
 	@Override
 	public String toString() {
-		return "GroundAttendantInShift [shift=" + shift + ", groundAttendant=" + groundAttendant + ", role=" + role
-				+ "]";
+		return shift.getStart() +"             " + shift.getEnd() +  "             " + role +  "                  " + groundAttendant.toString2();
 	}
 	
 	

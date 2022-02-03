@@ -99,5 +99,9 @@ public abstract class Employee {
 				+ contractStart + ", contract finish date = " + contractFinish;
 	}
 	
+	public String toString2() {
+		return ID + ", " + firstName + " " + lastName;
+	}
+	
 	
 }
