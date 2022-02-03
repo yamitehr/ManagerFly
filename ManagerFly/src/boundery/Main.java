@@ -35,9 +35,8 @@ public class Main extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		 
 		stg  = primaryStage;
-		Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
-		BorderPane bp = (BorderPane)root.getChildrenUnmodifiable().get(0);
-		bp.setCenter(LoadFXML(getClass(), "HomePage.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
+		
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("app.css").toExternalForm());	
 		primaryStage.setScene(scene);

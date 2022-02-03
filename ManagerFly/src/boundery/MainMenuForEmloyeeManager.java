@@ -14,7 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
-public class MainMenuFrm {
+public class MainMenuForEmloyeeManager {
 
     @FXML
      public  BorderPane pannelRoot;
