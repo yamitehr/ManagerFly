@@ -21,21 +21,18 @@
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#loadAddFlight" text="New Flight" />
                   <MenuItem mnemonicParsing="false" onAction="#goFlights" text="All Flights" />
-                  <MenuItem mnemonicParsing="false" onAction="#goSetCrueToFlight" text="Assign Team" />
                </items>
             </Menu>
           <Menu mnemonicParsing="false" style="-fx-font-size: 25;" styleClass="Homebutton" text="MANAGMENT       ">
             <items>
                   <MenuItem mnemonicParsing="false" onAction="#goAirPorts" text="AirPorts" />
                   <MenuItem mnemonicParsing="false" onAction="#goPlanes" text="Planes" />
-                  <MenuItem mnemonicParsing="false" onAction="#goEmployees" text="Employees" />
-                  <MenuItem mnemonicParsing="false" onAction="#goShifts" text="Shifts" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" style="-fx-font-size: 25;" styleClass="Homebutton" text="REPORTS">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#goReports" text="Reports" />
-                  <MenuItem mnemonicParsing="false" onAction="#goPercReport" text="Flights By Departure Country" />
+              <MenuItem mnemonicParsing="false" onAction="#goReports" text="Biggest Flights" />
+                  <MenuItem mnemonicParsing="false" onAction="#goPercReport" text="Flights Percentage" />
             </items>
           </Menu>
         </menus>
