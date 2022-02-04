@@ -37,11 +37,11 @@ public class LoginFrm {
     void login(ActionEvent event) throws IOException {
 boolean isExist = false;
     	
-    	if(txtUserName.getText().equals("flights manager") && txtPassword.getText().equals("manager")) {
+    	if(txtUserName.getText().equals("flights") && txtPassword.getText().equals("flights")) {
     		moveToScene("/boundery/MainMenu.fxml", (Stage)loginBtn.getScene().getWindow());
     		isExist = true;
     	}
-    	if(txtUserName.getText().equals("employees manager") && txtPassword.getText().equals("employee")) {
+    	if(txtUserName.getText().equals("employees") && txtPassword.getText().equals("employees")) {
     		moveToScene("/boundery/MainMenuForEmloyeesManager.fxml", (Stage)loginBtn.getScene().getWindow());
     		isExist = true;
     	}

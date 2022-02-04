@@ -109,5 +109,11 @@ public class MainMenuFrm {
     	Pane root = LoadPane.LoadFXML(getClass(), "/boundery/FligtByDestReprotFrm.fxml");
     	pannelRoot.setCenter(root);
     }
+    @FXML
+    void goXmlImport(ActionEvent event) throws IOException {
+
+    	Pane root = LoadPane.LoadFXML(getClass(), "/boundery/ImportFlightStatusFromXML.fxml");
+    	pannelRoot.setCenter(root);
+    }
 
 }

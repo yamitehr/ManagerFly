@@ -21,6 +21,7 @@
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#loadAddFlight" text="New Flight" />
                   <MenuItem mnemonicParsing="false" onAction="#goFlights" text="All Flights" />
+                  <MenuItem mnemonicParsing="false" onAction="#goXmlImport" text="Import Flights Status" />
                </items>
             </Menu>
           <Menu mnemonicParsing="false" style="-fx-font-size: 25;" styleClass="Homebutton" text="MANAGMENT       ">

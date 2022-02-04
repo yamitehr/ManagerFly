@@ -297,7 +297,7 @@ public class FlightManagmentFrm {
 		if(fStatus.equals("on time")) {
 			FlightStatusLbl.setTextFill(Color.web("Green"));
 		}
-		else if(fStatus.equals("canclelled")) {
+		else if(fStatus.equals("cancelled")) {
 			FlightStatusLbl.setTextFill(Color.web("Red"));
 		}
 		else

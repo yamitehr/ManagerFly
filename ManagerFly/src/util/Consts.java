@@ -14,10 +14,10 @@ public class Consts {
 	public static final String JDBC_STR = "net.ucanaccess.jdbc.UcanaccessDriver";
 	/*----------------------------------------- CONSTS VALUES -----------------------------------------*/
 	
-	/**flight status's {"on time", "delayed", "canclelled"}
+	/**flight status's {"on time", "delayed", "cancelled"}
 	 * 
 	 */
-	public static final String[] FLIGHT_STATUS = {"on time", "delayed", "canclelled"};
+	public static final String[] FLIGHT_STATUS = {"on time", "delayed", "cancelled"};
 	/**
 	 * light tickets order status {Init,Pre Sale, Regular Sale}
 	 */
@@ -65,6 +65,9 @@ public class Consts {
 	public static final String SQL_INS_FLIGHT = "{ call qryInsFlight(?,?,?,?,?,?,?,?,?,?) }";
 	public static final String SQL_UPD_FLIGHT = "{ call qryUpdFlight(?,?,?,?) }";
 	public static final String SQL_UPD_FLIGHT_STATUS = "{ call qryUpdFlightStatus(?,?,?) }";
+	public static final String SQL_CHECK_FLIGHT = "SELECT * FROM FlightTbl WHERE SerialNum=?;";
+	public static final String SQL_UPDATE_FLIGHT_STATUS = "Update FlightTbl Set Status=? WHERE SerialNum=?;";
+	public static final String SQL_CANCELES_FLIGHTS = "SELECT * FROM FlightTbl WHERE Status='cancelled';";
 
 	/*----------------------------------------- AIRPORTS QUERIES -----------------------------------------*/
 	public static final String SQL_SEL_AIRPORT = "SELECT * FROM AirPortTbl";
