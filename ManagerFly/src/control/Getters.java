@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import entity.AirAttendant;
 import entity.AirPlane;
@@ -283,7 +284,7 @@ public class Getters {
 						      .toLocalDateTime();
 					Shift shift = new Shift(depTime, arrTime);
 					String gaid = rs.getString(2);
-					GroundAttendant ga = gal.stream().filter(g -> g.getID().equals(gaid)).toList().get(0);
+					GroundAttendant ga = gal.stream().filter(g -> g.getID().equals(gaid)).collect(Collectors.toList()).get(0);
 					results.add(new GroundAttendantInShift(shift, ga, rs.getString(3)));
 				}
 			} catch (SQLException e) {
