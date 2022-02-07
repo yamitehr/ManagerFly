@@ -115,5 +115,12 @@ public class MainMenuFrm {
     	Pane root = LoadPane.LoadFXML(getClass(), "/boundery/ImportFlightStatusFromXML.fxml");
     	pannelRoot.setCenter(root);
     }
+    
+    @FXML
+    void goJsonExport(ActionEvent event) throws IOException {
+
+    	Pane root = LoadPane.LoadFXML(getClass(), "/boundery/ExportFlightsData.fxml");
+    	pannelRoot.setCenter(root);
+    }
 
 }

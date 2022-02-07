@@ -100,6 +100,15 @@ public class Consts {
 	public static final String SQL_UPDATE_SECONDARY_PILOT = "Update FlightTbl Set CoPilotID=? WHERE SerialNum=?;";
 	public static final String SQL_INSERT_SHIFT = "INSERT INTO ShiftTbl VALUES(?,?);";
 	public static final String SQL_INSERT_GROUD_ATTENDANT_SHIFT = "INSERT INTO AttendantShift VALUES(?,?,?,?);";
+	
+	
+	
+	public static final String SQL_EXPORT_DATA_TEST	 ="SELECT FlightTbl.SerialNum, FlightTbl.DepatureAirportID, FlightTbl.DepatureTime, "
+			+ "FlightTbl.DestinationAirportID, FlightTbl.LandingTime, FlightTbl.Status, FlightTbl.AirPlaneTailNum, AirPortTbl.Country, "
+			+ "AirPortTbl.City, AirPortTbl.Country, AirPortTbl.City\r\n"
+			+ "FROM AirPortTbl INNER JOIN FlightTbl ON (AirPortTbl.airportCode = FlightTbl.DepatureAirportID) AND "
+			+ "(AirPortTbl.airportCode = FlightTbl.DestinationAirportID)\r\n"
+			+ "WHERE (((FlightTbl.UpdateDate)=?));\r\n";
 	/*------------------------------------------ASSIGN TO SHIFTS QUERIES ---------------------------------------*/
 	/**
 	 * find the correct path of the DB file

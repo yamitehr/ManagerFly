@@ -16,7 +16,8 @@ public class AirPort {
 		this.timeZone = timeZone;
 		
 	}
-	
+
+
 	//full constructor
 	public AirPort(int airportCode, String city, String country, int timeZone, boolean isOpen) {
 		
