@@ -1,11 +1,5 @@
 <?xml version= "1.0"?>
 <flight_status>
-	<flight Id = "667A4F">
-		<status>delayed</status>
-	</flight>
-	<flight Id = "A454353">
-		<status>on time</status>
-	</flight>
 	<flight Id = "2343">
 		<status>on time</status>
 	</flight>
