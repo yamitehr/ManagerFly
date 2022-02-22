@@ -36,8 +36,8 @@
                   <Image url="@media/searchIcon.png" />
                </image>
             </ImageView>
-            <Button fx:id="nextBtn" layoutX="300.0" layoutY="536.0" mnemonicParsing="false" onAction="#loadNextFlight" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="&gt;&gt;" />
-            <Button fx:id="pervBtn" layoutX="182.0" layoutY="536.0" mnemonicParsing="false" onAction="#loadPervFlight" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="&lt;&lt;" />
+            <Button fx:id="nextBtn" layoutX="300.0" layoutY="510.0" mnemonicParsing="false" onAction="#loadNextFlight" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="&gt;&gt;" />
+            <Button fx:id="pervBtn" layoutX="182.0" layoutY="510.0" mnemonicParsing="false" onAction="#loadPervFlight" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="&lt;&lt;" />
             <Button fx:id="updateBtn" layoutX="233.0" layoutY="460.0" mnemonicParsing="false" onAction="#saveChanges" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="Save" />
             <Label layoutX="11.0" layoutY="86.0" styleClass="managerAllText" text="Pilot:">
                <font>

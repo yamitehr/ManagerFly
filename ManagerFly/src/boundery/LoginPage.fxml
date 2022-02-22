@@ -2,19 +2,19 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundery.LoginFrm">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundery.LoginFrm">
    <children>
       <Button fx:id="loginBtn" layoutX="275.0" layoutY="289.0" mnemonicParsing="false" onAction="#login" text="login">
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Button>
       <TextField fx:id="txtUserName" layoutX="285.0" layoutY="131.0" />
-      <TextField fx:id="txtPassword" layoutX="285.0" layoutY="187.0" />
       <Label layoutX="169.0" layoutY="131.0" text="user:">
          <font>
             <Font name="System Bold" size="16.0" />
@@ -29,5 +29,6 @@
             <Font name="System Bold" size="32.0" />
          </font>
       </Text>
+      <PasswordField fx:id="txtPassword" layoutX="286.0" layoutY="188.0" />
    </children>
 </AnchorPane>

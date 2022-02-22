@@ -69,7 +69,6 @@
                   <Font name="Microsoft Sans Serif" size="19.0" />
                </font>
             </Label>
-            <Button fx:id="updateBtn1" layoutX="12.0" layoutY="517.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" styleClass="btn" text="Edit Selected" />
             <Label layoutX="32.0" layoutY="272.0" styleClass="managerAllText" text="Start">
                <font>
                   <Font name="Microsoft Sans Serif" size="19.0" />
