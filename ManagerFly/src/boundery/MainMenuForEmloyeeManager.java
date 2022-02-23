@@ -10,9 +10,12 @@ import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class MainMenuForEmloyeeManager {
 
@@ -108,6 +111,16 @@ public class MainMenuForEmloyeeManager {
 
     	Pane root = LoadPane.LoadFXML(getClass(), "/boundery/FligtByDestReprotFrm.fxml");
     	pannelRoot.setCenter(root);
+    }
+    
+
+    @FXML
+    void logout(ActionEvent event) throws IOException {
+
+    	Parent newRoot = FXMLLoader.load(getClass().getResource("/boundery/LoginPage.fxml"));
+		Stage primaryStage = (Stage) MainPane.getScene().getWindow();
+		primaryStage.getScene().setRoot(newRoot);
+		primaryStage.show();
     }
 
 }

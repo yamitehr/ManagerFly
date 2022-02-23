@@ -15,6 +15,7 @@
             <items>
                   <MenuItem mnemonicParsing="false" onAction="#goHome" text="HOME" />
               <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Exit" />
+                  <MenuItem mnemonicParsing="false" onAction="#logout" text="Logout" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" style="-fx-font-size: 25;" styleClass="Homebutton" text="EMPLOYEES MANAGMENT       ">
